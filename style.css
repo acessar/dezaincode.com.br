@@ -314,7 +314,7 @@ nav ul li a:hover::after {
     text-align: center;
 }
 
-/* Imagem do Site PRO */
+/* Imagem do Site PRO - AJUSTADO PARA IMAGENS LADO A LADO */
 .pro-showcase {
     padding: 80px 0;
     background-color: var(--light-blue);
@@ -327,17 +327,26 @@ nav ul li a:hover::after {
 }
 
 .pro-img {
-    max-width: 300px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    max-width: 100%;
     margin: 0 auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
-    overflow: hidden;
 }
 
 .pro-img img {
-    width: 100%;
+    width: 300px;
     height: auto;
     display: block;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pro-img img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 }
 
 /* Imagens do Site PREMIUM */
@@ -758,6 +767,17 @@ footer::before {
     
     .premium-img {
         height: 360px;
+    }
+    
+    /* Responsividade para as imagens do Site PRO */
+    .pro-img {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .pro-img img {
+        width: 100%;
+        max-width: 300px;
     }
 }
 
