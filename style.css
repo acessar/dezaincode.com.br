@@ -1,15 +1,18 @@
 /* Variáveis e estilos gerais */
 :root {
-    --primary-blue: #0062ff;
-    --secondary-blue: #003caa;
-    --dark-blue: #001f5c;
-    --light-blue: #e6f0ff;
-    --accent-blue: #00d4ff;
-    --premium-purple: #3a0ca3;
+    --primary-blue: #0057e0;      /* Azul primário mais escuro para melhor contraste */
+    --secondary-blue: #003caa;    /* Mantido */
+    --dark-blue: #001f5c;         /* Mantido */
+    --light-blue: #e6f0ff;        /* Mantido para fundos claros */
+    --accent-blue: #0091ff;       /* Azul de destaque mais vibrante */
+    --premium-purple: #3a0ca3;    /* Mantido */
     --premium-gradient: linear-gradient(135deg, #3a0ca3, #4361ee);
-    --tech-gray: #1a1a2e;
-    --success-green: #25D366;
-    --warning-orange: #ff9500;
+    --tech-gray: #1a1a2e;         /* Mantido */
+    --success-green: #008f28;     /* Verde mais escuro para melhor contraste */
+    --warning-orange: #d97b00;    /* Laranja mais escuro para melhor contraste */
+    --text-dark: #d4cece;         /* Texto escuro - preto */
+    --text-light: #ffffff;        /* Texto claro - branco */
+    --text-medium: #080707;       /* Texto médio para conteúdos secundários */
 }
 
 * {
@@ -21,7 +24,7 @@
 
 body {
     background-color: #f0f8ff;
-    color: #333;
+    color: var(--text-dark);
     overflow-x: hidden;
 }
 
@@ -68,7 +71,7 @@ body {
     right: 20px;
     width: 60px;
     height: 60px;
-    background-color: #25D366;
+    background-color: #128C7E; /* WhatsApp verde mais escuro para contraste */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -86,7 +89,7 @@ body {
 
 .whatsapp-icon {
     font-size: 32px;
-    color: white;
+    color: var(--text-light);
 }
 
 /* Header */
@@ -95,7 +98,7 @@ header {
     top: 0;
     padding: 15px 0;
     z-index: 100;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 0.97); /* Mais opaco para melhor legibilidade */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -132,7 +135,7 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     color: var(--dark-blue);
-    font-weight: 500;
+    font-weight: 600; /* Aumentado para 600 para melhor legibilidade */
     font-size: 16px;
     transition: color 0.3s;
     position: relative;
@@ -162,7 +165,7 @@ nav ul li a:hover::after {
     padding: 120px 0;
     position: relative;
     z-index: 2;
-    color: white;
+    color: var(--text-light);
 }
 
 .hero-content {
@@ -176,15 +179,15 @@ nav ul li a:hover::after {
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 1.2;
-    background: linear-gradient(to right, white, var(--accent-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-light); /* Branco puro para contraste máximo */
+    /* Removido o gradiente para melhorar a legibilidade */
 }
 
 .hero p {
     font-size: 18px;
     margin-bottom: 30px;
     line-height: 1.6;
+    color: var(--text-light); /* Branco puro para contraste máximo */
 }
 
 .cta-container {
@@ -198,10 +201,10 @@ nav ul li a:hover::after {
     display: inline-block;
     padding: 12px 24px;
     background-color: var(--primary-blue);
-    color: white;
+    color: var(--text-light);
     text-decoration: none;
     border-radius: 4px;
-    font-weight: 600;
+    font-weight: 700; /* Aumentado para 700 para melhor contraste */
     transition: all 0.3s;
     border: none;
     cursor: pointer;
@@ -222,21 +225,21 @@ nav ul li a:hover::after {
 
 .btn-primary {
     background-color: var(--primary-blue);
-    color: white;
+    color: var(--text-light);
 }
 
 .btn-secondary {
-    background-color: #555;
-    color: white;
+    background-color: #333333; /* Escurecido para maior contraste */
+    color: var(--text-light);
 }
 
 .btn-secondary:hover {
-    background-color: #333;
+    background-color: #111111; /* Ainda mais escuro no hover */
 }
 
 .btn-premium {
     background: var(--premium-gradient);
-    color: white;
+    color: var(--text-light);
 }
 
 .btn-premium:hover {
@@ -246,22 +249,22 @@ nav ul li a:hover::after {
 
 .btn-outline {
     background-color: transparent;
-    border: 2px solid white;
-    color: white;
+    border: 2px solid var(--text-light);
+    color: var(--text-light);
 }
 
 .btn-outline:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
+    background-color: rgba(255, 255, 255, 0.2); /* Aumentado para melhor visibilidade */
+    color: var(--text-light);
 }
 
 .btn-whatsapp {
-    background-color: #25D366;
-    color: white;
+    background-color: #128C7E; /* WhatsApp verde mais escuro */
+    color: var(--text-light);
 }
 
 .btn-whatsapp:hover {
-    background-color: #128C7E;
+    background-color: #075E54; /* Verde ainda mais escuro no hover */
 }
 
 .btn-block {
@@ -290,24 +293,24 @@ nav ul li a:hover::after {
 .urgency-tag {
     display: inline-block;
     padding: 8px 16px;
-    background-color: rgba(255, 149, 0, 0.2);
+    background-color: rgba(217, 123, 0, 0.3); /* Fundo mais escuro */
     border-left: 3px solid var(--warning-orange);
     border-radius: 4px;
     font-size: 14px;
-    font-weight: 500;
-    color: white;
+    font-weight: 600; /* Aumentado para 600 */
+    color: var(--text-light);
     margin-top: 25px;
 }
 
 .urgency-tag i {
     margin-right: 6px;
-    color: var(--warning-orange);
+    color: #FFB700; /* Laranja mais claro para ícones */
 }
 
 /* Planos de Sites Section */
 .plans {
     padding: 100px 0;
-    background-color: white;
+    background-color: var(--text-light);
     position: relative;
 }
 
@@ -318,10 +321,11 @@ nav ul li a:hover::after {
 
 .section-title h2 {
     font-size: 36px;
-    color: var(--dark-blue);
+    color: var(--text-dark); /* Preto puro para contraste máximo */
     margin-bottom: 15px;
     position: relative;
     display: inline-block;
+    font-weight: 700; /* Garantindo peso máximo */
 }
 
 .section-title h2::after {
@@ -337,9 +341,10 @@ nav ul li a:hover::after {
 
 .section-title p {
     font-size: 18px;
-    color: #666;
+    color: var(--text-dark); /* Preto puro para contraste máximo */
     max-width: 700px;
     margin: 0 auto;
+    font-weight: 500; /* Peso médio para boa legibilidade */
 }
 
 .plans-container {
@@ -353,7 +358,7 @@ nav ul li a:hover::after {
     flex: 1;
     min-width: 280px;
     max-width: 380px;
-    background-color: white;
+    background-color: var(--text-light);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -372,10 +377,10 @@ nav ul li a:hover::after {
     top: 15px;
     right: 0;
     background-color: var(--warning-orange);
-    color: white;
+    color: var(--text-light);
     padding: 5px 15px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700; /* Aumentado para 700 */
     text-transform: uppercase;
     z-index: 2;
     border-radius: 3px 0 0 3px;
@@ -405,7 +410,7 @@ nav ul li a:hover::after {
 .plan-header {
     padding: 25px;
     background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-    color: white;
+    color: var(--text-light);
     text-align: center;
 }
 
@@ -422,19 +427,21 @@ nav ul li a:hover::after {
 
 .plan-subtitle {
     font-size: 16px;
-    opacity: 0.8;
+    opacity: 1; /* Aumentado para 1 para máxima legibilidade */
+    color: var(--text-light); /* Garantindo branco puro */
+    font-weight: 500; /* Peso médio para boa legibilidade */
 }
 
 .old-price {
     text-decoration: line-through;
-    opacity: 0.7;
+    opacity: 0.8; /* Aumentado para 0.8 */
     font-size: 18px;
 }
 
 .new-price {
     font-size: 28px;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-light);
 }
 
 .plan-features {
@@ -457,6 +464,13 @@ nav ul li a:hover::after {
 
 .feature-text {
     font-size: 16px;
+    color: var(--text-dark); /* Garantindo texto preto */
+    font-weight: 400; /* Peso normal para texto de conteúdo */
+}
+
+.feature-text strong {
+    font-weight: 700; /* Garantindo negrito forte */
+    color: var(--text-dark);
 }
 
 .plan-footer {
@@ -470,7 +484,7 @@ nav ul li a:hover::after {
     color: var(--primary-blue);
     text-decoration: none;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600; /* Aumentado para 600 */
 }
 
 .view-demo:hover {
@@ -498,15 +512,17 @@ nav ul li a:hover::after {
 
 .showcase-description h3 {
     font-size: 28px;
-    color: var(--dark-blue);
+    color: var(--text-dark); /* Preto puro */
     margin-bottom: 15px;
+    font-weight: 700; /* Garantindo peso máximo */
 }
 
 .showcase-description p {
     font-size: 16px;
     line-height: 1.6;
-    color: #555;
+    color: var(--text-dark); /* Preto puro */
     margin-bottom: 20px;
+    font-weight: 400; /* Peso normal para texto de conteúdo */
 }
 
 .showcase-features {
@@ -519,6 +535,7 @@ nav ul li a:hover::after {
     font-size: 16px;
     position: relative;
     margin-bottom: 8px;
+    color: var(--text-dark); /* Preto puro */
 }
 
 .showcase-features li i {
@@ -553,7 +570,7 @@ nav ul li a:hover::after {
 /* Premium Showcase Section */
 .premium-showcase {
     padding: 100px 0;
-    background-color: white;
+    background-color: var(--text-light);
 }
 
 .premium-showcase-description {
@@ -570,7 +587,7 @@ nav ul li a:hover::after {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgb(224, 28, 28);
     transition: transform 0.3s, box-shadow 0.3s;
     aspect-ratio: 9/16;
 }
@@ -593,7 +610,7 @@ nav ul li a:hover::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 60, 170, 0.8);
+    background-color: rgba(0, 60, 170, 0.9); /* Aumentado para 0.9 para melhor contraste */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -606,9 +623,9 @@ nav ul li a:hover::after {
 }
 
 .premium-caption {
-    color: white;
+    color: var(--text-light);
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 700; /* Aumentado para 700 */
     padding: 0 15px;
     text-align: center;
 }
@@ -633,15 +650,17 @@ nav ul li a:hover::after {
 
 .benefits-title {
     font-size: 32px;
-    color: var(--dark-blue);
+    color: var(--text-dark); /* Preto puro */
     margin-bottom: 20px;
+    font-weight: 700; /* Garantindo peso máximo */
 }
 
 .benefits-desc {
     font-size: 16px;
-    color: #555;
+    color: var(--text-dark); /* Preto puro */
     line-height: 1.6;
     margin-bottom: 30px;
+    font-weight: 400; /* Peso normal para texto de conteúdo */
 }
 
 .counter-container {
@@ -667,7 +686,8 @@ nav ul li a:hover::after {
 
 .counter-label {
     font-size: 16px;
-    color: #555;
+    color: var(--text-dark); /* Preto puro */
+    font-weight: 500; /* Peso médio para boa legibilidade */
 }
 
 .benefits-list {
@@ -694,26 +714,28 @@ nav ul li a:hover::after {
 }
 
 .benefit-icon i {
-    color: white;
+    color: var(--text-light);
     font-size: 24px;
 }
 
 .benefit-content h4 {
     font-size: 18px;
-    color: var(--dark-blue);
+    color: var(--text-dark); /* Preto puro */
     margin-bottom: 5px;
+    font-weight: 700; /* Garantindo peso máximo */
 }
 
 .benefit-content p {
     font-size: 16px;
-    color: #555;
+    color: var(--text-dark); /* Preto puro */
     line-height: 1.5;
+    font-weight: 400; /* Peso normal para texto de conteúdo */
 }
 
 /* Briefing Form Section */
 .briefing {
     padding: 100px 0;
-    background-color: white;
+    background-color: var(--text-light);
 }
 
 .briefing-container {
@@ -730,15 +752,17 @@ nav ul li a:hover::after {
 
 .briefing-info h3 {
     font-size: 28px;
-    color: var(--dark-blue);
+    color: var(--text-dark); /* Preto puro */
     margin-bottom: 15px;
+    font-weight: 700; /* Garantindo peso máximo */
 }
 
 .briefing-info p {
     font-size: 16px;
     line-height: 1.6;
-    color: #555;
+    color: var(--text-dark); /* Preto puro */
     margin-bottom: 30px;
+    font-weight: 400; /* Peso normal para texto de conteúdo */
 }
 
 .briefing-steps {
@@ -755,7 +779,7 @@ nav ul li a:hover::after {
     width: 36px;
     height: 36px;
     background-color: var(--primary-blue);
-    color: white;
+    color: var(--text-light);
     font-size: 18px;
     font-weight: 700;
     display: flex;
@@ -768,20 +792,22 @@ nav ul li a:hover::after {
 
 .step-content h4 {
     font-size: 18px;
-    color: var(--dark-blue);
+    color: var(--text-dark); /* Preto puro */
     margin-bottom: 5px;
+    font-weight: 700; /* Garantindo peso máximo */
 }
 
 .step-content p {
     font-size: 15px;
-    color: #555;
+    color: var(--text-dark); /* Preto puro */
     margin-bottom: 0;
+    font-weight: 400; /* Peso normal para texto de conteúdo */
 }
 
 .briefing-form {
     flex: 1;
     min-width: 350px;
-    background-color: #fff;
+    background-color: var(--dark-blue); /* Mantendo fundo escuro para o formulário */
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -794,37 +820,51 @@ nav ul li a:hover::after {
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    font-weight: 500;
-    color: var(--dark-blue);
+    font-weight: 600; /* Aumentado para 600 */
+    color: var(--text-light); /* Branco puro para bom contraste no fundo escuro */
     font-size: 15px;
 }
 
 .form-control {
     width: 100%;
     padding: 12px 15px;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Borda mais visível */
     border-radius: 4px;
     font-size: 16px;
     transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: rgba(255, 255, 255, 0.15); /* Fundo claro o suficiente para legibilidade */
+    color: var(--text-light); /* Garantindo texto branco */
 }
 
 .form-control:focus {
     outline: none;
-    border-color: var(--primary-blue);
-    box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.1);
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(0, 145, 255, 0.3); /* Brilho azul mais visível */
 }
 
 select.form-control {
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23ffffff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: calc(100% - 15px) center;
     padding-right: 35px;
+    background-color: rgba(0, 40, 100, 0.9); /* Fundo mais escuro para select */
+}
+
+select.form-control option {
+    background-color: var(--dark-blue);
+    color: var(--text-light);
+    padding: 10px;
+    font-weight: 500;
 }
 
 textarea.form-control {
     min-height: 120px;
     resize: vertical;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7); /* Placeholder mais visível */
 }
 
 /* Testimonials Section */
@@ -844,7 +884,7 @@ textarea.form-control {
     flex: 1;
     min-width: 280px;
     max-width: 350px;
-    background-color: white;
+    background-color: var(--text-light);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -863,18 +903,15 @@ textarea.form-control {
 
 /* Estrelas de avaliação em amarelo */
 .testimonial-rating i {
-    color: #FFD700;
-    font-size: 18px;
-    margin-right: 2px;
-    color: #FFD700; /* Amarelo ouro */
-    font-size: 20px; /* Tamanho maior */
+    color: #E6A700; /* Amarelo mais escuro para melhor contraste */
+    font-size: 20px;
     margin-right: 3px;
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.2); /* Sombra sutil para destacar */
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 
 /* Efeito de brilho para as estrelas */
 .testimonial-card:hover .testimonial-rating i {
-    color: #FFCC00; /* Amarelo um pouco mais intenso no hover */
+    color: #CC9100; /* Amarelo ainda mais escuro no hover para contraste */
     transform: scale(1.1);
     transition: transform 0.3s ease, color 0.3s ease;
 }
@@ -882,9 +919,10 @@ textarea.form-control {
 .testimonial-text {
     font-size: 16px;
     line-height: 1.6;
-    color: #555;
+    color: var(--text-dark); /* Preto puro */
     margin-bottom: 20px;
     font-style: italic;
+    font-weight: 400; /* Peso normal para texto de conteúdo */
 }
 
 .testimonial-author {
@@ -897,20 +935,21 @@ textarea.form-control {
 }
 
 .author-name {
-    font-weight: 600;
-    color: var(--dark-blue);
+    font-weight: 700; /* Aumentado para 700 */
+    color: var(--text-dark); /* Preto puro */
     font-size: 16px;
 }
 
 .author-business {
     font-size: 14px;
-    color: #666;
+    color: var(--text-dark); /* Mantido escuro para contraste */
+    font-weight: 500; /* Peso médio para boa legibilidade */
 }
 
 /* FAQ Section */
 .faq {
     padding: 100px 0;
-    background-color: white;
+    background-color: var(--text-light);
 }
 
 .faq-container {
@@ -1320,145 +1359,6 @@ footer::before {
         min-width: 100%;
     }
 }
-
-/* Keyframes e animações */
-@keyframes float {
-    0% {
-        transform: translateY(0) translateX(0) rotate(0deg);
-    }
-    25% {
-        transform: translateY(-30px) translateX(20px) rotate(90deg);
-    }
-    50% {
-        transform: translateY(-10px) translateX(40px) rotate(180deg);
-    }
-    75% {
-        transform: translateY(-40px) translateX(10px) rotate(270deg);
-    }
-    100% {
-        transform: translateY(0) translateX(0) rotate(360deg);
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideInFromLeft {
-    from {
-        transform: translateX(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideInFromRight {
-    from {
-        transform: translateX(50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideInFromBottom {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* Efeitos de hover aprimorados */
-.benefit-item:hover .benefit-icon {
-    transform: rotate(360deg);
-    transition: transform 0.5s ease;
-}
-
-.testimonial-card:hover .testimonial-rating i {
-    transform: scale(1.2);
-    transition: transform 0.3s ease;
-}
-
-/* Estilos adicionais para imagens do portfólio */
-.premium-gallery .premium-item:nth-child(even) {
-    animation-delay: 0.2s;
-}
-
-.premium-gallery .premium-item:nth-child(odd) {
-    animation-delay: 0.4s;
-}
-
-/* Melhorias de acessibilidade */
-:focus {
-    outline: 2px solid var(--primary-blue);
-    outline-offset: 2px;
-}
-
-.btn:focus, .social-link:focus {
-    box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.4);
-}
-
-/* Efeitos de sobra e destaque */
-.briefing-form, .testimonial-card, .faq-item {
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.briefing-form:hover, .testimonial-card:hover, .faq-item:hover {
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-}
-
-/* Estilos para botões de envio em formulários */
-button[type="submit"] {
-    position: relative;
-    overflow: hidden;
-}
-
-button[type="submit"]::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 5px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.5);
-    opacity: 0;
-    border-radius: 100%;
-    transform: scale(1, 1) translate(-50%);
-    transform-origin: 50% 50%;
-}
-
-button[type="submit"]:focus:not(:active)::after {
-    animation: ripple 1s ease-out;
-}
-
-@keyframes ripple {
-    0% {
-        transform: scale(0, 0);
-        opacity: 0.5;
-    }
-    20% {
-        transform: scale(25, 25);
-        opacity: 0.3;
-    }
-    100% {
-        opacity: 0;
-        transform: scale(40, 40);
-    }
-}
 /* Estilos para a seção de pagamento */
 .payment {
     padding: 100px 0;
@@ -1633,6 +1533,145 @@ button[type="submit"]:focus:not(:active)::after {
         display: none;
     }
 }
+/* Keyframes e animações */
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-30px) translateX(20px) rotate(90deg);
+    }
+    50% {
+        transform: translateY(-10px) translateX(40px) rotate(180deg);
+    }
+    75% {
+        transform: translateY(-40px) translateX(10px) rotate(270deg);
+    }
+    100% {
+        transform: translateY(0) translateX(0) rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromBottom {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Efeitos de hover aprimorados */
+.benefit-item:hover .benefit-icon {
+    transform: rotate(360deg);
+    transition: transform 0.5s ease;
+}
+
+.testimonial-card:hover .testimonial-rating i {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+
+/* Estilos adicionais para imagens do portfólio */
+.premium-gallery .premium-item:nth-child(even) {
+    animation-delay: 0.2s;
+}
+
+.premium-gallery .premium-item:nth-child(odd) {
+    animation-delay: 0.4s;
+}
+
+/* Melhorias de acessibilidade */
+:focus {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
+.btn:focus, .social-link:focus {
+    box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.4);
+}
+
+/* Efeitos de sobra e destaque */
+.briefing-form, .testimonial-card, .faq-item {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.briefing-form:hover, .testimonial-card:hover, .faq-item:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos para botões de envio em formulários */
+button[type="submit"] {
+    position: relative;
+    overflow: hidden;
+}
+
+button[type="submit"]::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+button[type="submit"]:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(25, 25);
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+                       
 /* Loading spinner para formulários */
 .spinner {
     display: inline-block;
