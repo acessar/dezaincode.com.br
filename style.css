@@ -861,10 +861,19 @@ textarea.form-control {
     margin-bottom: 15px;
 }
 
+/* Estrelas de avaliação em amarelo */
 .testimonial-rating i {
-    color: #FFD700;
-    font-size: 18px;
-    margin-right: 2px;
+    color: #FFD700; /* Amarelo ouro */
+    font-size: 20px; /* Tamanho maior */
+    margin-right: 3px;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.2); /* Sombra sutil para destacar */
+}
+
+/* Efeito de brilho para as estrelas */
+.testimonial-card:hover .testimonial-rating i {
+    color: #FFCC00; /* Amarelo um pouco mais intenso no hover */
+    transform: scale(1.1);
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .testimonial-text {
