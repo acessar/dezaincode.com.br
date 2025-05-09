@@ -1,739 +1,249 @@
-// Criação de partículas tecnológicas para efeito visual
-function createParticles() {
-    const techBgElements = document.querySelectorAll('.tech-bg');
-    
-    techBgElements.forEach(element => {
-        // Criar container de partículas
-        const particlesContainer = document.createElement('div');
-        particlesContainer.classList.add('particles-container');
-        element.prepend(particlesContainer);
-        
-        // Criar partículas
-        const numParticles = 20; // Aumentado para mais densidade
-        
-        for (let i = 0; i < numParticles; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            
-            // Tamanho aleatório
-            const size = Math.random() * 6 + 2; // Tamanhos variados
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            
-            // Posição aleatória
-            const posX = Math.random() * 100;
-            const posY = Math.random() * 100;
-            particle.style.left = `${posX}%`;
-            particle.style.top = `${posY}%`;
-            
-            // Cor aleatória em tons de azul
-            const blueHue = Math.floor(Math.random() * 40) + 200; // 200-240 (azuis)
-            const brightness = Math.floor(Math.random() * 40) + 60; // 60-100%
-            particle.style.backgroundColor = `hsla(${blueHue}, 100%, ${brightness}%, 0.6)`;
-            particle.style.boxShadow = `0 0 ${size * 2}px hsla(${blueHue}, 100%, ${brightness}%, 0.8)`;
-            
-            // Animação com delay aleatório
-            particle.style.animation = `float ${Math.random() * 25 + 15}s infinite linear`;
-            particle.style.animationDelay = `${Math.random() * 10}s`;
-            
-            // Opacidade aleatória
-            particle.style.opacity = Math.random() * 0.7 + 0.3;
-            
-            particlesContainer.appendChild(particle);
-        }
-    });
-}
-
-// FAQs accordion functionality
-function setupFaqAccordion() {
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        
-        question.addEventListener('click', () => {
-            const isActive = item.classList.contains('active');
-            
-            // Close all items
-            faqItems.forEach(faqItem => {
-                faqItem.classList.remove('active');
-                const answer = faqItem.querySelector('.faq-answer');
-                answer.style.maxHeight = null;
-            });
-            
-            // If it wasn't active, make it active
-            if (!isActive) {
-                item.classList.add('active');
-                const answer = item.querySelector('.faq-answer');
-                answer.style.maxHeight = answer.scrollHeight + "px";
-                
-                // Adiciona um efeito sutil de destaque
-                item.style.transform = 'translateY(-5px)';
-                item.style.boxShadow = '0 15px 40px rgba(0, 112, 243, 0.12)';
-                
-                // Remove o efeito após 300ms
-                setTimeout(() => {
-                    item.style.transform = '';
-                    item.style.boxShadow = '';
-                }, 300);
-            }
-        });
-    });
-}
-
-// Smooth scrolling para links âncora
-function setupSmoothScrolling() {
-    const links = document.querySelectorAll('a[href^="#"]');
-    
-    links.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            const targetId = link.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                // Adicionando efeito de highlight ao elemento alvo
-                const highlightElement = () => {
-                    const originalBackground = targetElement.style.backgroundColor;
-                    const originalTransition = targetElement.style.transition;
-                    
-                    targetElement.style.transition = 'background-color 1s ease';
-                    targetElement.style.backgroundColor = 'rgba(0, 194, 255, 0.1)';
-                    
-                    setTimeout(() => {
-                        targetElement.style.backgroundColor = originalBackground;
-                        setTimeout(() => {
-                            targetElement.style.transition = originalTransition;
-                        }, 1000);
-                    }, 1000);
-                };
-                
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-                
-                setTimeout(highlightElement, 800);
-            }
-        });
-    });
-}
-
-// Função para verificar e corrigir links do WhatsApp
-function fixWhatsAppLinks() {
-    // Seleciona todos os links de WhatsApp
-    const whatsAppLinks = document.querySelectorAll('a[href*="wa.me"]');
-    
-    // Verifica cada link e corrige se necessário
-    whatsAppLinks.forEach(link => {
-        // Garantir que o link tenha o formato correto e esteja funcionando
-        const currentHref = link.getAttribute('href');
-        
-        // Se o link não começar com https://, adicione-o
-        if (!currentHref.startsWith('https://')) {
-            const correctedHref = 'https://' + currentHref.replace(/^(http:\/\/|\/\/|)/, '');
-            link.setAttribute('href', correctedHref);
-        }
-        
-        // Certifique-se de que o link abre em uma nova janela
-        link.setAttribute('target', '_blank');
-        
-        // Adiciona efeito de tooltip
-        if (!link.getAttribute('title')) {
-            link.setAttribute('title', 'Enviar mensagem via WhatsApp');
-        }
-    });
-}
-
-// Iniciar contadores com animação
-function setupCounters() {
-    const counters = document.querySelectorAll('.counter-number');
-    
-    const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.2
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const counter = entry.target;
-                const target = counter.innerText;
-                const increment = target.includes('%') ? 1 : 1;
-                let currentCount = 0;
-                
-                const updateCount = () => {
-                    if (target.includes('+')) {
-                        // Para contadores com + no final (ex: 350+)
-                        const targetNum = parseInt(target.replace('+', ''));
-                        if (currentCount < targetNum) {
-                            currentCount += increment;
-                            counter.innerText = currentCount + '+';
-                            setTimeout(updateCount, 15); // Mais rápido
-                        }
-                    } else if (target.includes('.')) {
-                        // Para contadores com decimal (ex: 5.0)
-                        const parts = target.split('.');
-                        const targetWhole = parseInt(parts[0]);
-                        const targetDecimal = parseInt(parts[1]);
-                        
-                        if (currentCount < targetWhole * 10 + targetDecimal) {
-                            currentCount += increment;
-                            const whole = Math.floor(currentCount / 10);
-                            const decimal = currentCount % 10;
-                            counter.innerText = `${whole}.${decimal}`;
-                            setTimeout(updateCount, 80);
-                        }
-                    } else if (target.includes('%')) {
-                        // Para contadores com porcentagem (ex: 98%)
-                        const targetNum = parseInt(target.replace('%', ''));
-                        if (currentCount < targetNum) {
-                            currentCount += increment;
-                            counter.innerText = currentCount + '%';
-                            setTimeout(updateCount, 20);
-                        }
-                    } else {
-                        // Para contadores numéricos simples
-                        const targetNum = parseInt(target);
-                        if (currentCount < targetNum) {
-                            currentCount += increment;
-                            counter.innerText = currentCount;
-                            setTimeout(updateCount, 15); // Mais rápido
-                        }
-                    }
-                };
-                
-                // Adiciona efeito de pulso ao completar
-                const addPulseEffect = () => {
-                    counter.classList.add('counter-completed');
-                    counter.style.transform = 'scale(1.1)';
-                    counter.style.transition = 'transform 0.3s ease';
-                    
-                    setTimeout(() => {
-                        counter.style.transform = 'scale(1)';
-                        setTimeout(() => {
-                            counter.classList.remove('counter-completed');
-                        }, 300);
-                    }, 300);
-                };
-                
-                updateCount();
-                setTimeout(addPulseEffect, 1500);
-                observer.unobserve(counter);
-            }
-        });
-    }, options);
-    
-    counters.forEach(counter => {
-        observer.observe(counter);
-    });
-}
-
-// Configuração do formulário com envio para WhatsApp
-function setupBriefingForm() {
-    const form = document.getElementById('briefingForm');
-    
-    if (form) {
-        // Adiciona validação de campos
-        const inputs = form.querySelectorAll('input, select, textarea');
-        
-        inputs.forEach(input => {
-            input.addEventListener('focus', () => {
-                input.parentElement.classList.add('focused');
-            });
-            
-            input.addEventListener('blur', () => {
-                input.parentElement.classList.remove('focused');
-                if (input.value.trim() !== '') {
-                    input.parentElement.classList.add('filled');
-                } else {
-                    input.parentElement.classList.remove('filled');
-                }
-            });
-        });
-        
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Validação antes do envio
-            let isValid = true;
-            inputs.forEach(input => {
-                if (input.hasAttribute('required') && input.value.trim() === '') {
-                    isValid = false;
-                    input.parentElement.classList.add('error');
-                } else {
-                    input.parentElement.classList.remove('error');
-                }
-            });
-            
-            if (!isValid) {
-                // Mostrar mensagem de erro
-                const errorMessage = document.createElement('div');
-                errorMessage.className = 'form-error-message';
-                errorMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Por favor, preencha todos os campos obrigatórios.';
-                
-                // Remover mensagem anterior se existir
-                const oldError = form.querySelector('.form-error-message');
-                if (oldError) {
-                    oldError.remove();
-                }
-                
-                form.prepend(errorMessage);
-                
-                // Animar entrada da mensagem
-                errorMessage.style.opacity = '0';
-                errorMessage.style.transform = 'translateY(-10px)';
-                
-                setTimeout(() => {
-                    errorMessage.style.transition = 'all 0.3s ease';
-                    errorMessage.style.opacity = '1';
-                    errorMessage.style.transform = 'translateY(0)';
-                }, 10);
-                
-                // Remover após 5 segundos
-                setTimeout(() => {
-                    errorMessage.style.opacity = '0';
-                    errorMessage.style.transform = 'translateY(-10px)';
-                    setTimeout(() => {
-                        errorMessage.remove();
-                    }, 300);
-                }, 5000);
-                
-                return;
-            }
-            
-            // Coletar dados do formulário
-            const formData = new FormData(form);
-            const data = {};
-            
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-            
-            // Desabilitar o botão de envio durante o processo
-            const submitButton = form.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.innerHTML;
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Enviando...';
-            
-            // Formatar a mensagem para o WhatsApp
-            let whatsappMessage = `*🔵 NOVO BRIEFING DEZAIN CODE*\n\n`;
-            whatsappMessage += `*Nome:* ${data.name}\n`;
-            whatsappMessage += `*E-mail:* ${data.email}\n`;
-            whatsappMessage += `*WhatsApp:* ${data.phone}\n`;
-            whatsappMessage += `*Negócio:* ${data.business}\n`;
-            whatsappMessage += `*Segmento:* ${data.segment}\n`;
-            whatsappMessage += `*Objetivo do site:* ${data.objective}\n`;
-            whatsappMessage += `*Plano de interesse:* ${data.plan}\n`;
-            
-            if (data.message && data.message.trim() !== '') {
-                whatsappMessage += `*Informações adicionais:* ${data.message}\n`;
-            }
-            
-            // Codificar a mensagem para URL
-            const encodedMessage = encodeURIComponent(whatsappMessage);
-            
-            // Criar o link do WhatsApp
-            const whatsappLink = `https://wa.me/5583991816152?text=${encodedMessage}`;
-            
-            // Após breve delay, redirecionar para o WhatsApp
-            setTimeout(() => {
-                // Resetar o formulário
-                form.reset();
-                
-                // Criar mensagem de sucesso
-                const successMessage = document.createElement('div');
-                successMessage.className = 'success-message';
-                successMessage.innerHTML = `
-                    <div class="success-icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <div class="success-text">
-                        <h3>Formulário enviado com sucesso!</h3>
-                        <p>Você será redirecionado para o WhatsApp para finalizar o envio.</p>
-                    </div>
-                `;
-                
-                // Inserir a mensagem no lugar do formulário
-                form.style.display = 'none';
-                form.parentNode.appendChild(successMessage);
-                
-                // Animar entrada da mensagem
-                successMessage.style.opacity = '0';
-                successMessage.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    successMessage.style.transition = 'all 0.5s ease';
-                    successMessage.style.opacity = '1';
-                    successMessage.style.transform = 'translateY(0)';
-                }, 10);
-                
-                // Restaurar o botão
-                submitButton.disabled = false;
-                submitButton.innerHTML = originalButtonText;
-                
-                // Abrir o WhatsApp em uma nova aba
-                window.open(whatsappLink, '_blank');
-            }, 1500);
-        });
-    }
-}
-
-// Animar elementos na visualização
-function setupScrollAnimations() {
-    const elements = document.querySelectorAll(
-        '.plan-card, .benefit-item, .payment-feature, .testimonial-card, .briefing-step, .portfolio-img img, .process-step'
-    );
-    
-    const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Atraso baseado na posição do elemento para criar um efeito cascata
-                const delay = Array.from(elements).indexOf(entry.target) % 4 * 100;
-                
-                setTimeout(() => {
-                    entry.target.classList.add('animate-in');
-                }, delay);
-                
-                observer.unobserve(entry.target);
-            }
-        });
-    }, options);
-    
-    elements.forEach(element => {
-        element.classList.add('animate-prepare');
-        observer.observe(element);
-    });
-}
-
-// Header fixo com mudança de estilo no scroll
-function setupStickyHeader() {
-    const header = document.querySelector('header');
-    
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-            header.classList.add('header-scrolled');
-        } else {
-            header.classList.remove('header-scrolled');
-        }
-    });
-}
-
-// Mostrar/esconder botão voltar ao topo
-function setupBackToTop() {
-    // Criar o botão
-    const backToTopBtn = document.createElement('a');
-    backToTopBtn.classList.add('back-to-top');
-    backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    document.body.appendChild(backToTopBtn);
-    
-    // Controlar visibilidade com base no scroll
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTopBtn.classList.add('visible');
-        } else {
-            backToTopBtn.classList.remove('visible');
-        }
-    });
-    
-    // Adicionar funcionalidade de voltar ao topo
-    backToTopBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Animar o scroll suavemente
-        const scrollToTop = () => {
-            const c = document.documentElement.scrollTop || document.body.scrollTop;
-            if (c > 0) {
-                window.requestAnimationFrame(scrollToTop);
-                window.scrollTo(0, c - c / 8);
-            }
-        };
-        
-        scrollToTop();
-    });
-}
-
-// Adicionar estilos de animação CSS
-function addAnimationStyles() {
-    const styleElement = document.createElement('style');
-    styleElement.textContent = `
-        /* Estilos tech para animações */
-        .animate-prepare {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1), 
-                        transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
-        }
-        
-        .animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .header-scrolled {
-            padding: 10px 0;
-            background-color: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 5px 20px rgba(0, 112, 243, 0.15);
-        }
-        
-        .form-group.focused .form-control {
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px rgba(0, 194, 255, 0.2);
-            background-color: rgba(255, 255, 255, 0.07);
-        }
-        
-        .form-group.error .form-control {
-            border-color: #ff3b30;
-            box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.2);
-        }
-        
-        .form-error-message {
-            background-color: rgba(255, 59, 48, 0.1);
-            color: #ff3b30;
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            border-left: 3px solid #ff3b30;
-        }
-        
-        .form-error-message i {
-            margin-right: 10px;
-            font-size: 16px;
-        }
-        
-        .counter-completed {
-            color: var(--accent-blue);
-        }
-        
-        /* Animações para partículas tech */
-        @keyframes techPulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(0, 194, 255, 0.7);
-                background-color: rgba(0, 194, 255, 0.7);
-            }
-            50% {
-                box-shadow: 0 0 20px 10px rgba(0, 194, 255, 0);
-                background-color: rgba(0, 194, 255, 0.3);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(0, 194, 255, 0);
-                background-color: rgba(0, 194, 255, 0.7);
-            }
-        }
-        
-        /* Portfolio gallery modal */
-        .portfolio-modal {
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        
-        .portfolio-modal img {
-            transform: scale(0.9);
-            transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
-        }
-    `;
-    document.head.appendChild(styleElement);
-}
-
-// Função especial para a galeria de imagens no Portfolio
-function setupPortfolioGallery() {
-    const portfolioImgs = document.querySelectorAll('.portfolio-img img');
-    
-    portfolioImgs.forEach(img => {
-        img.addEventListener('click', () => {
-            // Cria modal para visualização ampliada
-            const modal = document.createElement('div');
-            modal.classList.add('portfolio-modal');
-            
-            const modalImg = document.createElement('img');
-            modalImg.src = img.src;
-            modalImg.alt = img.alt;
-            
-            const closeBtn = document.createElement('span');
-            closeBtn.classList.add('portfolio-modal-close');
-            closeBtn.innerHTML = '&times;';
-            
-            modal.appendChild(closeBtn);
-            modal.appendChild(modalImg);
-            document.body.appendChild(modal);
-            
-            // Animação de entrada
-            modal.style.opacity = '0';
-            modalImg.style.transform = 'scale(0.9)';
-            
-            setTimeout(() => {
-                modal.style.opacity = '1';
-                modalImg.style.transform = 'scale(1)';
-            }, 10);
-            
-            // Adiciona eventos
-            const closeModal = () => {
-                modal.style.opacity = '0';
-                modalImg.style.transform = 'scale(0.9)';
-                setTimeout(() => {
-                    document.body.removeChild(modal);
-                }, 400);
-            };
-            
-            modal.addEventListener('click', closeModal);
-            closeBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                closeModal();
-            });
-            
-            // Permitir fechar com ESC
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closeModal();
-                }
-            });
-            
-            // Efeito de zoom no hover
-            modalImg.addEventListener('mouseenter', () => {
-                modalImg.style.transform = 'scale(1.02)';
-            });
-            
-            modalImg.addEventListener('mouseleave', () => {
-                modalImg.style.transform = 'scale(1)';
-            });
-        });
-        
-        // Adiciona indicador de clique
-        img.style.cursor = 'pointer';
-        
-        // Adiciona efeito de hover
-        img.addEventListener('mouseenter', () => {
-            const overlay = document.createElement('div');
-            overlay.classList.add('portfolio-img-overlay');
-            overlay.innerHTML = '<i class="fas fa-search-plus"></i>';
-            overlay.style.position = 'absolute';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.backgroundColor = 'rgba(0, 112, 243, 0.3)';
-            overlay.style.display = 'flex';
-            overlay.style.alignItems = 'center';
-            overlay.style.justifyContent = 'center';
-            overlay.style.color = 'white';
-            overlay.style.fontSize = '24px';
-            overlay.style.opacity = '0';
-            overlay.style.transition = 'opacity 0.3s ease';
-            overlay.style.borderRadius = '12px';
-            
-            img.parentElement.style.position = 'relative';
-            img.parentElement.appendChild(overlay);
-            
-            setTimeout(() => {
-                overlay.style.opacity = '1';
-            }, 10);
-        });
-        
-        img.addEventListener('mouseleave', () => {
-            const overlay = img.parentElement.querySelector('.portfolio-img-overlay');
-            if (overlay) {
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    img.parentElement.removeChild(overlay);
-                }, 300);
-            }
-        });
-    });
-}
-
-// Efeito de digitação para o título principal
-function setupTypingEffect() {
-    const heroTitle = document.querySelector('.hero h1');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        heroTitle.textContent = '';
-        
-        const typingSpeed = 50; // ms por caractere
-        let i = 0;
-        
-        const typeWriter = () => {
-            if (i < originalText.length) {
-                heroTitle.textContent += originalText.charAt(i);
-                i++;
-                setTimeout(typeWriter, typingSpeed);
-            } else {
-                // Adicionar cursor piscante no final
-                heroTitle.innerHTML += '<span class="typing-cursor">|</span>';
-                
-                // Configurar animação do cursor
-                const cursor = document.querySelector('.typing-cursor');
-                cursor.style.animation = 'blink-cursor 0.7s infinite';
-                
-                // Adicionar estilo para o cursor
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes blink-cursor {
-                        0%, 100% { opacity: 1; }
-                        50% { opacity: 0; }
-                    }
-                `;
-                document.head.appendChild(style);
-                
-                // Remover cursor após 3 segundos
-                setTimeout(() => {
-                    cursor.style.opacity = '0';
-                    cursor.style.transition = 'opacity 0.7s ease';
-                }, 3000);
-            }
-        };
-        
-        setTimeout(typeWriter, 500);
-    }
-}
-
-// Inicialização
-document.addEventListener('DOMContentLoaded', () => {
-    createParticles();
-    setupFaqAccordion();
-    setupSmoothScrolling();
-    fixWhatsAppLinks();
-    setupCounters();
-    setupBriefingForm();
-    addAnimationStyles();
-    setupScrollAnimations();
-    setupStickyHeader();
-    setupBackToTop();
-    setupPortfolioGallery();
-    setupTypingEffect();
-    
-    // Inicializar o primeiro item do FAQ como aberto
-    const firstFaqItem = document.querySelector('.faq-item');
-    if (firstFaqItem) {
-        const firstAnswer = firstFaqItem.querySelector('.faq-answer');
-        if (firstAnswer) {
-            firstAnswer.style.maxHeight = firstAnswer.scrollHeight + "px";
+// JavaScript para a loja Belle Rose
+document.addEventListener('DOMContentLoaded', function() {
+    // Remover qualquer fundo ou efeito da logo, garantindo transparência
+    const logoPlaceholder = document.querySelector('.logo-placeholder');
+    if (logoPlaceholder) {
+        logoPlaceholder.style.backgroundColor = 'transparent';
+        // Remover qualquer efeito de brilho existente
+        const glossyEffect = logoPlaceholder.querySelector('.glossy-effect');
+        if (glossyEffect) {
+            glossyEffect.remove();
         }
     }
     
-    // Adiciona feedback visual nos botões
-    const buttons = document.querySelectorAll('.btn');
-    buttons.forEach(btn => {
-        btn.addEventListener('mousedown', () => {
-            btn.style.transform = 'scale(0.98)';
-        });
-        
-        btn.addEventListener('mouseup', () => {
-            btn.style.transform = '';
-        });
-        
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = '';
-        });
-    });
+    // Verificar o status da loja no carregamento inicial
+    checkStoreStatus();
+    
+    // Adicionar efeitos hover nos itens sociais
+    addSocialItemsHoverEffect();
+    
+    // Adicionar efeitos de brilho nos links
+    addShimmerEffects();
+    
+    // Configurar a funcionalidade para copiar o texto de localização
+    setupLocationCopy();
+    
+    // Atualizar o status a cada minuto
+    setInterval(checkStoreStatus, 60000);
 });
+
+// Função para verificar se a loja está aberta ou fechada
+function checkStoreStatus() {
+    const now = new Date();
+    const day = now.getDay(); // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    const currentTime = hour * 60 + minute;
+    
+    // Definição dos horários de funcionamento
+    const openTime = 9 * 60; // 09:00
+    const closeTimeWeekday = 18 * 60; // 18:00
+    const closeTimeSaturday = 13 * 60; // 13:00
+    
+    let isOpen = false;
+    
+    // Verifica se está dentro do horário de funcionamento
+    if (day >= 1 && day <= 5) { // Segunda a Sexta
+        isOpen = currentTime >= openTime && currentTime < closeTimeWeekday;
+    } else if (day === 6) { // Sábado
+        isOpen = currentTime >= openTime && currentTime < closeTimeSaturday;
+    }
+    
+    // Atualiza o indicador de status
+    const statusEl = document.getElementById('status');
+    if (statusEl) {
+        if (isOpen) {
+            statusEl.innerHTML = '<div class="status-dot"></div><span>Loja Aberta</span>';
+            statusEl.className = 'status-indicator status-open';
+        } else {
+            statusEl.innerHTML = '<div class="status-dot"></div><span>Loja Fechada</span>';
+            statusEl.className = 'status-indicator status-closed';
+        }
+    }
+}
+
+// Efeito de hover nos itens de redes sociais
+function addSocialItemsHoverEffect() {
+    const socialItems = document.querySelectorAll('.social-item');
+    socialItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            item.style.transform = 'translateX(10px)';
+        });
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = 'translateX(0)';
+        });
+    });
+}
+
+// Adicionar efeito de brilho nos links sociais
+function addShimmerEffects() {
+    document.querySelectorAll('.social-link').forEach(link => {
+        // Adicionar efeito de brilho apenas aos links que ainda não o têm
+        if (!link.querySelector('.shimmer-effect')) {
+            const shimmerEffect = document.createElement('div');
+            shimmerEffect.className = 'shimmer-effect';
+            shimmerEffect.style.position = 'absolute';
+            shimmerEffect.style.top = '0';
+            shimmerEffect.style.left = '0';
+            shimmerEffect.style.right = '0';
+            shimmerEffect.style.bottom = '0';
+            shimmerEffect.style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%)';
+            shimmerEffect.style.backgroundSize = '200% 200%';
+            shimmerEffect.style.animation = 'linkShimmerDiagonal 4s ease-in-out infinite';
+            shimmerEffect.style.pointerEvents = 'none';
+            shimmerEffect.style.zIndex = '1';
+            shimmerEffect.style.opacity = '0';
+            
+            link.style.position = 'relative';
+            link.style.overflow = 'hidden';
+            link.appendChild(shimmerEffect);
+            
+            // Adicionar efeito de hover para mostrar o brilho
+            link.addEventListener('mouseenter', () => {
+                shimmerEffect.style.opacity = '1';
+            });
+            
+            link.addEventListener('mouseleave', () => {
+                shimmerEffect.style.opacity = '0';
+            });
+        }
+    });
+    
+    // Adicionar a animação de brilho ao CSS se ainda não existir
+    if (!document.querySelector('style#dynamic-styles')) {
+        const style = document.createElement('style');
+        style.id = 'dynamic-styles';
+        style.textContent = `
+            @keyframes linkShimmerDiagonal {
+                0% { background-position: 200% -100%; }
+                100% { background-position: -100% 200%; }
+            }
+            
+            @keyframes glossyDiagonal {
+                0% { background-position: 200% -100%; opacity: 0; }
+                50% { opacity: 0.7; }
+                100% { background-position: -100% 200%; opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// Configurar funcionalidade para facilitar a cópia do texto de localização
+function setupLocationCopy() {
+    const locationDiv = document.querySelector('.location-div');
+    const locationText = document.querySelector('.copyable-location');
+    const copyIcon = document.querySelector('.location-copy-icon');
+    
+    if (locationDiv && locationText) {
+        // Adicionar classe de animação pulsante para chamar atenção
+        locationDiv.classList.add('location-pulse');
+        
+        // Adicionar feedback visual ao clicar no texto ou no ícone
+        const handleCopyClick = () => {
+            // Tenta copiar o texto para a área de transferência usando a API Clipboard moderna
+            const textToCopy = locationText.textContent;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                // Para navegadores modernos em contextos seguros
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => {
+                        showCopyFeedback(locationDiv, locationText, textToCopy);
+                    })
+                    .catch(err => {
+                        console.error('Erro ao copiar com Clipboard API: ', err);
+                        fallbackCopy();
+                    });
+            } else {
+                // Fallback para método mais antigo
+                fallbackCopy();
+            }
+            
+            function fallbackCopy() {
+                // Seleciona todo o texto quando clicado
+                const range = document.createRange();
+                range.selectNodeContents(locationText);
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
+                
+                // Tenta copiar o texto
+                try {
+                    document.execCommand('copy');
+                    showCopyFeedback(locationDiv, locationText, textToCopy);
+                } catch (err) {
+                    console.error('Erro ao copiar o texto: ', err);
+                    alert('Não foi possível copiar automaticamente. Por favor, selecione o texto manualmente e copie (Ctrl+C / Cmd+C).');
+                }
+            }
+        };
+        
+        // Adicionar evento de clique tanto no div quanto no ícone
+        locationDiv.addEventListener('click', handleCopyClick);
+        if (copyIcon) {
+            copyIcon.addEventListener('click', (e) => {
+                e.stopPropagation(); // Previne o disparo duplo do evento
+                handleCopyClick();
+            });
+        }
+        
+        // Remover a pulsação após 5 segundos (para não ser muito intrusivo)
+        setTimeout(() => {
+            locationDiv.classList.remove('location-pulse');
+        }, 5000);
+    }
+}
+
+// Função para mostrar feedback visual ao copiar
+function showCopyFeedback(element, textElement, originalText) {
+    // Armazenar o texto original
+    const originalContent = textElement.innerHTML;
+    
+    // Criar div de confirmação animada
+    const confirmDiv = document.createElement('div');
+    confirmDiv.innerHTML = '✓ Endereço copiado!';
+    confirmDiv.style.position = 'absolute';
+    confirmDiv.style.top = '50%';
+    confirmDiv.style.left = '50%';
+    confirmDiv.style.transform = 'translate(-50%, -50%)';
+    confirmDiv.style.backgroundColor = 'rgba(46, 204, 113, 0.9)';
+    confirmDiv.style.color = 'white';
+    confirmDiv.style.padding = '10px 15px';
+    confirmDiv.style.borderRadius = '4px';
+    confirmDiv.style.fontSize = '14px';
+    confirmDiv.style.fontWeight = 'bold';
+    confirmDiv.style.zIndex = '100';
+    confirmDiv.style.opacity = '0';
+    confirmDiv.style.transition = 'all 0.3s ease';
+    
+    // Adicionar glow ao redor do elemento
+    element.style.boxShadow = '0 0 15px rgba(46, 204, 113, 0.8)';
+    element.style.borderColor = '#2ecc71';
+    
+    // Adicionar confirmação ao elemento
+    element.style.position = 'relative';
+    element.appendChild(confirmDiv);
+    
+    // Esconder o texto original
+    textElement.style.opacity = '0';
+    
+    // Mostrar confirmação com animação
+    setTimeout(() => {
+        confirmDiv.style.opacity = '1';
+    }, 10);
+    
+    // Limpar a seleção
+    window.getSelection().removeAllRanges();
+    
+    // Restaurar o elemento ao estado original após 2 segundos
+    setTimeout(() => {
+        textElement.style.opacity = '1';
+        element.style.boxShadow = '';
+        element.style.borderColor = '';
+        confirmDiv.style.opacity = '0';
+        
+        setTimeout(() => {
+            element.removeChild(confirmDiv);
+        }, 300);
+    }, 2000);
+}
