@@ -1,88 +1,659 @@
-<!DOCTYPE html> 
-<html lang="pt-BR"> 
-<head>     
-    <meta charset="UTF-8">     
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">     
-    <title>Icarus | Moveis Exclusivos</title>          
-    <link rel="stylesheet" type="text/css" href="index.css">     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">     
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"> 
-</head> 
-<body>     
-    <!-- Header com logo e mensagem de boas-vindas -->     
-    <header class="header">         
-        <div class="logo-container">             
-            <div class="logo-placeholder">                 
-                <img src="https://i.postimg.cc/Gp5FkQQ8/Icarus.jpg" alt="Logo da Loja">             
-            </div>             
-            <h1 class="store-name">ICARUS</h1>             
-            <p class="welcome-message">ELEGÂNCIA EM CADA DETALHE</p>         
-        </div>     
-    </header>          
-    <!-- Conteúdo principal -->     
-    <div class="container">         
-        <!-- Status de funcionamento -->         
-        <div class="store-status">             
-            <div>                 
-                <h2 class="hours-title">Horário de Atendimento</h2>                 
-                <div class="hours">                     
-                    <p><span>Segunda a Sexta:</span> 09:00 - 18:00</p>                     
-                    <p><span>Sábado:</span> 09:00 - 13:00</p>                 
-                </div>             
-            </div>             
-            <div class="status-indicator" id="status">                 
-                <!-- Será atualizado via JavaScript -->             
-            </div>         
-        </div>                  
-        <!-- Redes sociais -->         
-        <div class="social-links">             
-            <h2 class="social-title">Nossas Redes</h2>             
-            <ul class="social-list">                 
-                <li class="social-item">                     
-                    <a href="https://www.instagram.com/arthur.fellp/" class="social-link" target="_blank">                         
-                        <div class="social-icon instagram">                             
-                            <i class="fab fa-instagram"></i>                         
-                        </div>                         
-                        <span class="social-text">Conheça nosso Instagram</span>                     
-                    </a>                 
-                </li>                 
-                <li class="social-item">                     
-                    <a href="https://wa.me/+5583991816152" class="social-link" target="_blank">                         
-                        <div class="social-icon whatsapp">                             
-                            <i class="fab fa-whatsapp"></i>                         
-                        </div>                         
-                        <span class="social-text">Atendimento Exclusivo via WhatsApp</span>                     
-                    </a>                 
-                </li>                 
-                <li class="social-item">                     
-                    <a href="https://www.tiktok.com/@arthsntt" class="social-link" target="_blank">                         
-                        <div class="social-icon tiktok">                             
-                            <i class="fab fa-tiktok"></i>                         
-                        </div>                         
-                        <span class="social-text">Tendências no nosso TikTok</span>                     
-                    </a>                 
-                </li>                 
-                <li class="social-item">                     
-                    <div class="social-link location-div">                         
-                        <div class="social-icon location">                             
-                            <i class="fas fa-map-marker-alt"></i>                         
-                        </div>                         
-                        <div class="location-content">
-                            <span class="social-text copyable-location">Rua Exemplo, 123 - Bairro, Cidade - CEP: 12345-678</span>
-                            <div class="location-copy-icon" title="Clique para copiar">
-                                <i class="fas fa-copy"></i>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dezain Code - Desenvolvimento de Sites</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</head>
+<body>
+    <!-- Botão do WhatsApp Fixo -->
+    <a href="https://wa.me/5583991816152?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20seus%20servi%C3%A7os%20de%20desenvolvimento%20web!" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp whatsapp-icon"></i>
+    </a>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-code logo-icon"></i>
+                <span>Dezain Code</span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#plans">Planos</a></li>
+                    <li><a href="#showcase">Portfolio</a></li>
+                    <li><a href="#benefits">Benefícios</a></li>
+                    <li><a href="#briefing">Briefing</a></li>
+                    <li><a href="#faq">Dúvidas</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="tech-bg hero">
+        <div class="tech-grid"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Serviço de Desenvolvimento de Sites</h1>
+                <p>Transforme sua visão em resultados com sites que funcionam 24/7</p>
+                <div class="cta-container">
+                    <a href="#plans" class="btn btn-primary pulse-animation">QUERO VENDER MAIS <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://wa.me/5583991816152?text=Ol%C3%A1%2C%20preciso%20de%20um%20site%20que%20venda%20para%20meu%20neg%C3%B3cio!" class="btn btn-outline" target="_blank">FALAR COM ESPECIALISTA</a>
+                </div>
+                <div class="urgency-tag">
+                    <i class="fas fa-bolt"></i> Promoção por tempo limitado: 60% OFF nos planos contratados até 15/05
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos Section -->
+    <section id="plans" class="plans">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Planos</h2>
+                <p>Escolha o plano ideal para o seu negócio e comece a destacar sua marca no mundo digital.</p>
+            </div>
+            <div class="plans-container">
+                <!-- Plano PRO -->
+                <div class="plan-card">
+                    <div class="popular-tag">Mais Vendido</div>
+                    <div class="plan-header">
+                        <div class="plan-title">One-Page</div>
+                        <div class="plan-price">De <span class="old-price">R$1.000</span> por <span class="new-price">R$400</span> <span class="payment-info">em até 12x</span></div>
+                        <div class="plan-subtitle">Solução completa para presença digital</div>
+                    </div>
+                    <div class="plan-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <div class="feature-text"><strong>Logo:</strong> Ícone para logo com mensagem de boas-vindas</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <div class="feature-text"><strong>Links:</strong> Instagram, TikTok, localização</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <div class="feature-text"><strong>Design:</strong> Design exclusivo que combina com o estilo do seu negócio</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <div class="feature-text">Formulário de perguntas com direcionamento ao WhatsApp</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <div class="feature-text">Layout responsivo para todos dispositivos</div>
+                        </div>
+                    </div>
+                    <div class="plan-footer">
+                        <a href="https://wa.me/5583991816152?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20uma%20proposta%20para%20o%20Site%20PRO!" class="btn btn-primary" target="_blank">QUERO ESTE PLANO <i class="fas fa-arrow-right"></i></a>
+                        <a href="#showcase" class="view-demo">Ver demonstração</a>
+                    </div>
+                </div>
+
+                <!-- Plano PORTFOLIO -->
+                <div class="plan-card portfolio-card">
+                    <div class="plan-header" style="background: linear-gradient(135deg, #ff7700, #ff9500);">
+                        <div class="plan-title">Portfolio</div>
+                        <div class="plan-price">De <span class="old-price">4000</span> por <span class="new-price">R$1600</span> <span class="payment-info">em até 12x</span></div>
+                        <div class="plan-subtitle">Solução completa para exibir seus trabalhos</div>
+                    </div>
+                    <div class="plan-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <div class="feature-text"><strong>Tudo do plano One-Page</strong> + recursos avançados</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <div class="feature-text"><strong>Biografia:</strong> Seção personalizada sobre sua loja/marca</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <div class="feature-text"><strong>Galeria:</strong> Exibição de fotos dos produtos/trabalhos realizados</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <div class="feature-text"><strong>SEO:</strong> Estratégias para melhorar seu posicionamento nas buscas</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <div class="feature-text"><strong>Design:</strong> Layout estratégico para destacar seus melhores trabalhos</div>
+                        </div>
+                    </div>
+                    <div class="plan-footer">
+                        <a href="https://wa.me/5583991816152?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20uma%20proposta%20para%20o%20Site%20Portfolio!" class="btn btn-portfolio" target="_blank">QUERO ESTE PLANO <i class="fas fa-arrow-right"></i></a>
+                        <a href="#portfolio-showcase" class="view-demo">Ver demonstração</a>
+                    </div>
+                    
+                </div>
+
+                <!-- Plano CURRÍCULO -->
+                <div class="plan-card curriculum-card">
+                    <div class="plan-header" style="background: linear-gradient(135deg, #3a0ca3, #4361ee);">
+                        <div class="plan-title">Site Currículo</div>
+                        <div class="plan-price">De <span class="old-price">R$2.250</span> por <span class="new-price">R$900</span> <span class="payment-info">em até 12x</span></div>
+                        <div class="plan-subtitle">Seu currículo profissional online</div>
+                    </div>
+                    <div class="plan-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <div class="feature-text"><strong>Tudo do plano One-Page</strong> + recursos avançados</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <div class="feature-text"><strong>Perfil:</strong> Apresentação profissional completa e experiências</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <div class="feature-text"><strong>Habilidades:</strong> Exibição visual de suas competências profissionais</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <div class="feature-text"><strong>Portfolio:</strong> Seção para expor seus projetos e realizações</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <div class="feature-text"><strong>Contato:</strong> Formulário intuitivo para receber mensagens</div>
+                        </div>
+                    </div>
+                    <div class="plan-footer">
+                        <a href="https://wa.me/5583991816152?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20uma%20proposta%20para%20o%20Site%20Currículo!" class="btn btn-curriculum" target="_blank">QUERO ESTE PLANO <i class="fas fa-arrow-right"></i></a>
+                        <a href="#curriculum-showcase" class="view-demo">Ver demonstração</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Site PRO Showcase -->
+    <section id="showcase" class="pro-showcase">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nosso Site Padrão One-Page</h2>
+                <p>Conheça a interface elegante e funcional do nosso modelo PRO.</p>
+            </div>
+            <div class="pro-container">
+                <div class="showcase-description">
+                    <h3>Design moderno e eficiente</h3>
+                    <p>Nosso modelo One-Pgae foi desenvolvido para proporcionar uma excelente experiência ao usuário com foco em conversão. Veja abaixo como seu site pode ficar.</p>
+                    <ul class="showcase-features">
+                        <li><i class="fas fa-mobile-alt"></i> Layout 100% responsivo</li>
+                        <li><i class="fas fa-tachometer-alt"></i> Carregamento ultrarrápido</li>
+                        <li><i class="fas fa-thumbs-up"></i> Fácil de navegar</li>
+                    </ul>
+                    <a href="https://dezaincody.github.io/padr-odois2/" class="btn btn-secondary" target="_blank">VER PROTÓTIPO COMPLETO</a>
+                </div>
+                <div class="pro-img">
+                    <img src="https://i.postimg.cc/tRSjhydk/IMG-9705.jpg" alt="Site Pro - Exemplo" loading="lazy"> 
+                    <img src="https://i.postimg.cc/QMxPRmFk/IMG-9703.jpg" alt="Site Pro - Exemplo" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Site PORTFOLIO Showcase -->
+    <section id="portfolio-showcase" class="portfolio-showcase">
+        <div class="container">
+            <div class="section-title">
+                <h2>Site Padrão Portfolio</h2>
+                <p>Apresente seus trabalhos e conquiste novos clientes com um site profissional.</p>
+            </div>
+            <div class="showcase-container">
+                <div class="showcase-description portfolio-showcase-description">
+                    <h3>Destaque seu talento e conquistas</h3>
+                    <p>O modelo Portfolio é perfeito para profissionais e empresas que desejam exibir seus melhores trabalhos. Ideal para designers, arquitetos, fotógrafos, móveis planejados e qualquer negócio que precise mostrar a qualidade de seus produtos ou serviços.</p>
+                    <ul class="showcase-features">
+                        <li><i class="fas fa-building"></i> Seção de biografia da empresa/profissional</li>
+                        <li><i class="fas fa-images"></i> Galeria de fotos e projetos</li>
+                        <li><i class="fas fa-search"></i> SEO otimizado para atrair mais clientes</li>
+                        <li><i class="fas fa-paper-plane"></i> Formulário de contato integrado ao WhatsApp</li>
+                    </ul>
+                    <div class="prototype-link-container">
+                        <a href="https://lipdzy.github.io/portf-liodois/" class="btn btn-portfolio" target="_blank">VER PROTÓTIPO COMPLETO</a>
+                        <p class="prototype-description">Clique no botão acima para visualizar o site portfolio em funcionamento</p>
+                    </div>
+                </div>
+                <div class="portfolio-img">
+                    <img src="https://i.postimg.cc/mkPd2DvR/IMG-9742.png" alt="Site Portfolio - Exemplo Mobile" loading="lazy">
+                    <img src="https://i.postimg.cc/QCnd16Y1/IMG-9743.png" alt="Site Portfolio - Exemplo Desktop" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Site CURRÍCULO Showcase (substituindo E-Commerce) -->
+    <section id="curriculum-showcase" class="curriculum-showcase">
+        <div class="container">
+            <div class="section-title">
+                <h2>Site Padrão Currículo</h2>
+                <p>A solução ideal para profissionais que desejam destacar sua trajetória e competências no ambiente digital.</p>
+            </div>
+                            <div class="showcase-container">
+                <div class="showcase-description curriculum-showcase-description">
+                    <h3>Apresente sua trajetória profissional com elegância</h3>
+                    <p>O modelo Currículo é perfeito para profissionais que desejam ter uma presença online mais sofisticada. Ideal para freelancers, consultores, desenvolvedores, designers e qualquer profissional que queira destacar suas competências e experiências.</p>
+                    <ul class="showcase-features">
+                        <li><i class="fas fa-user-tie"></i> Perfil profissional completo e atraente</li>
+                        <li><i class="fas fa-chart-bar"></i> Visualização gráfica de habilidades e competências</li>
+                        <li><i class="fas fa-briefcase"></i> Detalhamento de experiências profissionais</li>
+                        <li><i class="fas fa-graduation-cap"></i> Seção de formação acadêmica e certificações</li>
+                        <li><i class="fas fa-comments"></i> Formulário de contato profissional</li>
+                    </ul>
+                    <div class="prototype-link-container">
+                        <a href="https://dezaincody.github.io/sitecurriculo/" class="btn btn-curriculum" target="_blank">VER PROTÓTIPO COMPLETO</a>
+                        <p class="prototype-description">Clique no botão acima para visualizar o site currículo em funcionamento</p>
+                    </div>
+                </div>
+                <div class="curriculum-img">
+                    <img src="https://i.postimg.cc/bvf93MJG/curriculo-mobile.jpg" alt="Site Currículo - Exemplo Mobile" loading="lazy">
+                    <img src="https://i.postimg.cc/NF0M3gQW/curriculo-desktop.jpg" alt="Site Currículo - Exemplo Desktop" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="benefits">
+        <div class="container">
+            <div class="section-title">
+                <h2>Por que ser nosso parceiro?</h2>
+                <p>Conheça os benefícios de ter um site desenvolvido pela Dezain Code.</p>
+            </div>
+            <div class="benefits-container">
+                <div class="benefits-text">
+                    <h3 class="benefits-title">Sites que geram resultados, não apenas visual</h3>
+                    <p class="benefits-desc">Ter um site hoje não é mais um diferencial — é essencial. </p>
+                    <p class="benefits-desc">Ao investir nos nossos serviços, você não contrata apenas um site bonito. Você adquire uma ferramenta de vendas que trabalha por você 24 horas por dia, 7 dias por semana.</p>
+                    <div class="counter-container">
+                        <div class="counter">
+                            <div class="counter-number">98%</div>
+                            <div class="counter-label">Clientes satisfeitos</div>
+                        </div>
+                        <div class="counter">
+                            <div class="counter-number">20+</div>
+                            <div class="counter-label">Projetos entregues</div>
+                        </div>
+                        <div class="counter">
+                            <div class="counter-number">5.0</div>
+                            <div class="counter-label">Avaliação média</div>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5583991816152?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20benef%C3%ADcios!" class="btn btn-primary" target="_blank">FALAR COM CONSULTOR <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Aumento das vendas</h4>
+                            <p>Interfaces intuitivas e fluxos de navegação pensados para aumentar as conversões e fazer sua empresa vender mais, mesmo quando você está dormindo.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>100% Responsivo</h4>
+                            <p>Sites que funcionam perfeitamente em qualquer dispositivo, desde smartphones até desktops, garantindo a melhor experiência para seus clientes.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Suporte técnico</h4>
+                            <p>Equipe disponível para resolver qualquer problema e garantir que seu site esteja sempre funcionando perfeitamente.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Design exclusivo</h4>
+                            <p>Visual moderno e profissional que transmite confiança e valoriza sua marca no mercado, criado especificamente para o seu negócio.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Seção de Pagamento -->
+<section id="payment" class="payment">
+    <div class="container">
+        <div class="section-title">
+            <h2>Pagamento</h2>
+            <p>Métodos flexíveis e seguros para a contratação dos nossos serviços.</p>
+        </div>
+        <div class="payment-container">
+            <div class="payment-info">
+                <h3>Vantagens exclusivas</h3>
+                <div class="payment-features">
+                    <div class="payment-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Pague apenas após aprovação</h4>
+                            <p>Pagamento somente após o site ser completamente testado e aprovado por você, garantindo total satisfação com o resultado final.</p>
+                        </div>
+                    </div>
+                    <div class="payment-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Métodos flexíveis</h4>
+                            <p>Aceitamos pagamentos via PIX ou cartão de crédito em até 12x, proporcionando facilidade e segurança em todas as transações.</p>
+                        </div>
+                    </div>
+                    <div class="payment-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Direitos autorais garantidos</h4>
+                            <p>Após a conclusão e pagamento, o cliente recebe todos os direitos autorais do site, incluindo o código fonte HTML e CSS completo.</p>
+                        </div>
+                    </div>
+                    <div class="payment-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Segurança garantida</h4>
+                            <p>Utilizamos sistemas de pagamento com criptografia avançada, garantindo total proteção dos seus dados financeiros.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="payment-process">
+                <h3>Como funciona o processo</h3>
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Aprovação do projeto</h4>
+                            <p>Após a conclusão do desenvolvimento, você recebe o link para testar todas as funcionalidades do site.</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Confirmação e pagamento</h4>
+                            <p>Depois de aprovar o projeto, você receberá as instruções para realizar o pagamento através do método escolhido.</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Entrega completa</h4>
+                            <p>Com o pagamento confirmado, você recebe todo o código-fonte e os direitos autorais do site são transferidos para você.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="payment-cta">
+                    <a href="https://wa.me/5583991816152?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20formas%20de%20pagamento!" class="btn btn-primary" target="_blank">FALAR SOBRE PAGAMENTO <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Briefing Form Section -->
+    <section id="briefing" class="briefing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Vamos começar seu projeto?</h2>
+                <p>Preencha o formulário abaixo para que possamos entender melhor as necessidades do seu negócio.</p>
+            </div>
+            <div class="briefing-container">
+                <div class="briefing-info">
+                    <h3>Informações importantes</h3>
+                    <p>Para desenvolvermos o site ideal para o seu negócio, precisamos entender melhor suas necessidades e objetivos. Preencha o formulário e envie diretamente para nosso WhatsApp para iniciarmos seu projeto.</p>
+                    <div class="briefing-steps">
+                        <div class="briefing-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Preencha o formulário</h4>
+                                <p>Responda as perguntas sobre seu negócio e objetivos</p>
                             </div>
-                        </div>                    
-                    </div>                 
-                </li>             
-            </ul>         
-        </div>     
-    </div>          
-    <!-- Footer -->     
-    <footer class="footer">         
-        <p>&copy; 2025 ICARUS - Todos os direitos reservados</p>     
-    </footer>      
-    <!-- Linkando o JavaScript -->     
-    <script src="script.js"></script> 
-</body> 
+                        </div>
+                        <div class="briefing-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Envie pelo WhatsApp</h4>
+                                <p>Você será redirecionado para finalizar o envio</p>
+                            </div>
+                        </div>
+                        <div class="briefing-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Receba sua proposta</h4>
+                                <p>Responderemos com uma proposta personalizada em até 24h</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="briefing-cta">
+                        <div class="urgency-tag">
+                            <i class="fas fa-clock"></i> Preencha agora e ganhe 10% de desconto adicional!
+                        </div>
+                    </div>
+                </div>
+                <div class="briefing-form">
+                    <form id="briefingForm" action="#" method="post">
+                        <div class="form-group">
+                            <label for="name">Nome completo*</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail*</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">WhatsApp*</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="business">Nome do negócio*</label>
+                            <input type="text" id="business" name="business" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="segment">Segmento/Nicho*</label>
+                            <input type="text" id="segment" name="segment" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="objective">Objetivo principal do site*</label>
+                            <select id="objective" name="objective" class="form-control" required>
+                                <option value="">Selecione...</option>
+                                <option value="Vender produtos/serviços">Vender produtos/serviços</option>
+                                <option value="Captar leads/contatos">Captar leads/contatos</option>
+                                <option value="Apenas informativo">Apenas informativo</option>
+                                <option value="Site institucional">Site institucional</option>
+                                <option value="Currículo profissional">Currículo profissional</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="plan">Qual plano tem interesse?*</label>
+                            <select id="plan" name="plan" class="form-control" required>
+                                <option value="">Selecione...</option>
+                                <option value="Site Padrão PRO">One-Page</option>
+                                <option value="Site Padrão PORTFOLIO">Portfolio</option>
+                                <option value="Site Padrão CURRÍCULO">Site Currículo</option>
+                                <option value="Projeto Personalizado">Projeto Personalizado</option>
+                                <option value="Não sei ainda">Não sei ainda</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Informações adicionais</label>
+                            <textarea id="message" name="message" class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">ENVIAR PARA WHATSAPP <i class="fab fa-whatsapp"></i></button>
+                        </div>
+                        <div class="form-notice">
+                            <i class="fas fa-shield-alt"></i> Seus dados estão seguros e serão usados apenas para contato.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section Completa com Três Novas Perguntas -->
+<section id="faq" class="faq">
+    <div class="container">
+        <div class="section-title">
+            <h2>Dúvidas Frequentes</h2>
+            <p>Respostas para as perguntas mais comuns sobre nossos serviços.</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item active">
+                <div class="faq-question">
+                    Como editar o catálogo?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer" style="max-height: 300px;">
+                    <div class="faq-answer-content">
+                        Nós enviamos um tutorial rápido de como editar pelo computador ou celular. O processo é simples e intuitivo, permitindo que você atualize seu catálogo quando necessário, sem depender de nossa equipe para pequenas alterações.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    O layout do meu site vai ser idêntico ao de outras lojas?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Não! Cada empresa tem um visual exclusivo. Graças a nossa equipe de desenvolvedores que nos entrega um novo visual semanalmente, garantimos que seu site será único e personalizado de acordo com a identidade da sua marca.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Quanto tempo leva para desenvolver um site?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        O tempo de desenvolvimento varia conforme a complexidade do projeto. Sites PRO geralmente ficam prontos em 7 a 14 dias, enquanto sites Portfolio e Currículo podem levar de 14 a 21 dias, dependendo das personalizações necessárias.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    O site funcionará bem em dispositivos móveis?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Sim! Todos os nossos sites são desenvolvidos com design responsivo, garantindo uma experiência perfeita em smartphones, tablets e computadores. Na era mobile, isso é essencial para o sucesso do seu negócio online.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Eu tenho mais de uma atendente, eu preciso pagar para adicionar mais um link de WhatsApp?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Não precisa! Você pode escolher a quantidade de redes sociais que você quiser, incluindo WhatsApp, Instagram, Facebook e localização. Adicionamos quantos links de WhatsApp você precisar para cada atendente sem custos adicionais.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Eu preciso fazer pagamentos de forma recorrente?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Não, ao comprar o site ele se torna 100% autoral. Fazemos apenas um pagamento único e, após a aprovação e finalização, você se torna o proprietário completo do site, sem mensalidades ou taxas recorrentes.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Se eu precisar atualizar informações do site depois de alguns meses, isso tem custo adicional?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Não! Realizamos alterações em números de contato, horários de funcionamento, cores e outras informações básicas sem nenhum custo adicional além do pagamento inicial. Nosso compromisso é garantir que seu site permaneça atualizado conforme as necessidades do seu negócio.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    No Site Currículo posso personalizar as seções conforme minha área profissional?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Sim! Nosso Site Currículo é totalmente adaptável às diferentes áreas profissionais. Podemos personalizar as seções de acordo com sua formação, destacar habilidades específicas do seu setor e adaptar o design para transmitir a identidade profissional ideal para sua área de atuação.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="faq-cta">
+            <p>Tem mais dúvidas? Fale diretamente com nossa equipe!</p>
+            <a href="https://wa.me/5583991816152?text=Ol%C3%A1%2C%20tenho%20algumas%20d%C3%BAvidas%20sobre%20seus%20servi%C3%A7os!" class="btn btn-primary" target="_blank">FALAR COM ESPECIALISTA <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-col">
+                <h3>Dezain Code</h3>
+                <p>Transformando visões em resultados digitais com sites modernos, responsivos e otimizados para vendas.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/arthur.fellp/" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/5583991816152" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Serviços</h3>
+                <ul class="footer-links">
+                    <li><a href="#plans">Site One-Page</a></li>
+                    <li><a href="#plans">Site Portfolio</a></li>
+                    <li><a href="#plans">Site Currículo</a></li>
+                    <li><a href="#briefing">Projetos Personalizados</a></li>
+                    <li><a href="#briefing">Consultoria Web</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Links Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#showcase">Portfolio</a></li>
+                    <li><a href="#benefits">Benefícios</a></li>
+                    <li><a href="#faq">Dúvidas Frequentes</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <p><i class="fas fa-map-marker-alt"></i> João Pessoa - Paraíba</p>
+                <p><i class="fas fa-phone"></i> <a href="tel:+5583993690482">(83) 99369-0482</a></p>
+                <p><a href="https://wa.me/5583993690482" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Dezain Code. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
 </html>
