@@ -82,7 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.style.transform = '';
         });
     });
-});// Criação de partículas tecnológicas para efeito visual
+});
+
+// Criação de partículas tecnológicas para efeito visual
 function createParticles() {
     const techBgElements = document.querySelectorAll('.tech-bg');
     
@@ -468,7 +470,7 @@ function setupBriefingForm() {
 // Animar elementos na visualização
 function setupScrollAnimations() {
     const elements = document.querySelectorAll(
-        '.plan-card, .benefit-item, .payment-feature, .testimonial-card, .briefing-step, .portfolio-img img, .curriculum-img img, .process-step'
+        '.plan-card, .benefit-item, .payment-feature, .briefing-step, .portfolio-img img, .process-step'
     );
     
     const options = {
@@ -626,13 +628,30 @@ function addAnimationStyles() {
             transform: scale(0.9);
             transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
         }
+        
+        /* Estilo para partículas */
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(1px);
+        }
     `;
     document.head.appendChild(styleElement);
 }
 
-// Função especial para a galeria de imagens no Portfolio e Currículo
+// Função especial para a galeria de imagens
 function setupImageGallery() {
-    const galleryImages = document.querySelectorAll('.portfolio-img img, .curriculum-img img');
+    const galleryImages = document.querySelectorAll('.portfolio-img img, .pro-img img');
     
     galleryImages.forEach(img => {
         img.addEventListener('click', () => {
