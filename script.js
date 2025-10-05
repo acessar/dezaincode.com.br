@@ -56,21 +56,21 @@ function createParticles() {
         particle.classList.add('particle');
         
         const size = Math.random() * 8 + 3;
-        particle.style.width = ${size}px;
-        particle.style.height = ${size}px;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
         
         const posX = Math.random() * 100;
         const posY = Math.random() * 100;
-        particle.style.left = ${posX}%;
-        particle.style.top = ${posY}%;
+        particle.style.left = `${posX}%`;
+        particle.style.top = `${posY}%`;
         
         const blueHue = Math.floor(Math.random() * 40) + 200;
         const brightness = Math.floor(Math.random() * 40) + 60;
-        particle.style.backgroundColor = hsla(${blueHue}, 100%, ${brightness}%, 0.7);
-        particle.style.boxShadow = 0 0 ${size * 3}px hsla(${blueHue}, 100%, ${brightness}%, 0.9);
+        particle.style.backgroundColor = `hsla(${blueHue}, 100%, ${brightness}%, 0.7)`;
+        particle.style.boxShadow = `0 0 ${size * 3}px hsla(${blueHue}, 100%, ${brightness}%, 0.9)`;
         
-        particle.style.animationDelay = ${Math.random() * 10}s;
-        particle.style.animationDuration = ${15 + Math.random() * 10}s;
+        particle.style.animationDelay = `${Math.random() * 10}s`;
+        particle.style.animationDuration = `${15 + Math.random() * 10}s`;
         particle.style.opacity = Math.random() * 0.8 + 0.3;
         
         container.appendChild(particle);
@@ -103,7 +103,7 @@ function revealOnScroll() {
         const yPos = -(diff * speed);
         
         if (rect.top < windowHeight && rect.bottom > 0) {
-            img.style.transform = translateY(${yPos}px);
+            img.style.transform = `translateY(${yPos}px)`;
         }
     });
     
@@ -118,7 +118,7 @@ function revealOnScroll() {
             const translateY = scrollPercentage * 20 * speed;
             
             if (card.classList.contains('visible')) {
-                card.style.transform = translateY(calc(-16px + ${translateY}px));
+                card.style.transform = `translateY(calc(-16px + ${translateY}px))`;
             }
         }
     });
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             
             const formData = new FormData(this);
-            let message = '🔵 NOVO BRIEFING DEZAIN CODE\n\n';
+            let message = '*🔵 NOVO BRIEFING DEZAIN CODE*\n\n';
             
             const labels = {
                 name: '👤 Nome',
@@ -214,13 +214,13 @@ document.addEventListener('DOMContentLoaded', function() {
             
             formData.forEach((value, key) => {
                 if (value && labels[key]) {
-                    message += *${labels[key]}:* ${value}\n;
+                    message += `*${labels[key]}:* ${value}\n`;
                 }
             });
             
             message += '\n_Enviado através do site Dezain Code_';
             
-            const whatsappUrl = https://wa.me/5583991816152?text=${encodeURIComponent(message)};
+            const whatsappUrl = `https://wa.me/5583991816152?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             
             // Success animation
