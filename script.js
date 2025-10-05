@@ -1,756 +1,804 @@
-// Efeito de digitação para o título principal
-function setupTypingEffect() {
-    const heroTitle = document.querySelector('.hero h1');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        heroTitle.textContent = '';
-        
-        const typingSpeed = 50; // ms por caractere
-        let i = 0;
-        
-        const typeWriter = () => {
-            if (i < originalText.length) {
-                heroTitle.textContent += originalText.charAt(i);
-                i++;
-                setTimeout(typeWriter, typingSpeed);
-            } else {
-                // Adicionar cursor piscante no final
-                heroTitle.innerHTML += '<span class="typing-cursor">|</span>';
-                
-                // Configurar animação do cursor
-                const cursor = document.querySelector('.typing-cursor');
-                cursor.style.animation = 'blink-cursor 0.7s infinite';
-                
-                // Adicionar estilo para o cursor
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes blink-cursor {
-                        0%, 100% { opacity: 1; }
-                        50% { opacity: 0; }
-                    }
-                `;
-                document.head.appendChild(style);
-                
-                // Remover cursor após 3 segundos
-                setTimeout(() => {
-                    cursor.style.opacity = '0';
-                    cursor.style.transition = 'opacity 0.7s ease';
-                }, 3000);
-            }
-        };
-        
-        setTimeout(typeWriter, 500);
-    }
-}
-
-// Inicialização
-document.addEventListener('DOMContentLoaded', () => {
-    createParticles();
-    setupFaqAccordion();
-    setupSmoothScrolling();
-    fixWhatsAppLinks();
-    setupCounters();
-    setupBriefingForm();
-    addAnimationStyles();
-    setupScrollAnimations();
-    setupStickyHeader();
-    setupBackToTop();
-    setupImageGallery();
-    setupTypingEffect();
+// EFEITO DE DIGITAÇÃO NO TÍTULO PRINCIPAL COM DUAS CORES - AJUSTADO
+function typeWriter() {
+    const blueElement = document.querySelector('#typing-title .title-blue');
+    const whiteElement = document.querySelector('#typing-title .title-white');
+    const textBlue = 'Soluções Web ';
+    const textWhite = 'Profissionais Para Seu Negócio';
+    let indexBlue = 0;
+    let indexWhite = 0;
     
-    // Inicializar o primeiro item do FAQ como aberto
-    const firstFaqItem = document.querySelector('.faq-item');
-    if (firstFaqItem) {
-        const firstAnswer = firstFaqItem.querySelector('.faq-answer');
-        if (firstAnswer) {
-            firstAnswer.style.maxHeight = firstAnswer.scrollHeight + "px";
+    function typeBlue() {
+        if (indexBlue < textBlue.length) {
+            blueElement.textContent = textBlue.substring(0, indexBlue + 1);
+            indexBlue++;
+            setTimeout(typeBlue, 80);
+        } else {
+            setTimeout(typeWhite, 200);
         }
     }
     
-    // Adiciona feedback visual nos botões
-    const buttons = document.querySelectorAll('.btn');
-    buttons.forEach(btn => {
-        btn.addEventListener('mousedown', () => {
-            btn.style.transform = 'scale(0.98)';
+    function typeWhite() {
+        if (indexWhite < textWhite.length) {
+            whiteElement.textContent = textWhite.substring(0, indexWhite + 1);
+            indexWhite++;
+            setTimeout(typeWhite, 80);
+        }
+    }
+    
+    setTimeout(typeBlue, 500);
+}
+
+// ANIMAÇÕES DE DESLIZE PARA TÍTULOS E TEXTOS
+function initSlideAnimations() {
+    const slideElements = document.querySelectorAll('.slide-title, .slide-text, .slide-btn');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    slideElements.forEach(element => observer.observe(element));
+}
+
+// Create particles with enhanced animation
+function createParticles() {
+    const container = document.getElementById('particles');
+    const numParticles = 25;
+    
+    for (let i = 0; i < numParticles; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        const size = Math.random() * 8 + 3;
+        particle.style.width = ${size}px;
+        particle.style.height = ${size}px;
+        
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        particle.style.left = ${posX}%;
+        particle.style.top = ${posY}%;
+        
+        const blueHue = Math.floor(Math.random() * 40) + 200;
+        const brightness = Math.floor(Math.random() * 40) + 60;
+        particle.style.backgroundColor = hsla(${blueHue}, 100%, ${brightness}%, 0.7);
+        particle.style.boxShadow = 0 0 ${size * 3}px hsla(${blueHue}, 100%, ${brightness}%, 0.9);
+        
+        particle.style.animationDelay = ${Math.random() * 10}s;
+        particle.style.animationDuration = ${15 + Math.random() * 10}s;
+        particle.style.opacity = Math.random() * 0.8 + 0.3;
+        
+        container.appendChild(particle);
+    }
+}
+
+// Enhanced Scroll Reveal Animation with Parallax
+function revealOnScroll() {
+    const elements = document.querySelectorAll('.fade-in, .slide-left, .slide-right, .scale-in');
+    const windowHeight = window.innerHeight;
+    
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementBottom = element.getBoundingClientRect().bottom;
+        
+        // Trigger animation when element is 15% into viewport
+        if (elementTop < windowHeight * 0.85 && elementBottom > 0) {
+            element.classList.add('visible');
+        }
+    });
+    
+    // Parallax effect for images
+    const parallaxImages = document.querySelectorAll('.parallax-img');
+    parallaxImages.forEach(img => {
+        const speed = 0.05;
+        const rect = img.getBoundingClientRect();
+        const scrolled = window.pageYOffset;
+        const offset = rect.top + scrolled;
+        const diff = scrolled - offset;
+        const yPos = -(diff * speed);
+        
+        if (rect.top < windowHeight && rect.bottom > 0) {
+            img.style.transform = translateY(${yPos}px);
+        }
+    });
+    
+    // Smooth parallax for service cards
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach((card, index) => {
+        const speed = 0.02 + (index * 0.01);
+        const rect = card.getBoundingClientRect();
+        
+        if (rect.top < windowHeight && rect.bottom > 0) {
+            const scrollPercentage = (windowHeight - rect.top) / windowHeight;
+            const translateY = scrollPercentage * 20 * speed;
+            
+            if (card.classList.contains('visible')) {
+                card.style.transform = translateY(calc(-16px + ${translateY}px));
+            }
+        }
+    });
+}
+
+// Counter Animation with enhanced easing
+function animateCounters() {
+    const counters = document.querySelectorAll('.counter-number');
+    
+    counters.forEach(counter => {
+        if (counter.classList.contains('animated')) return;
+        
+        const target = parseInt(counter.getAttribute('data-target'));
+        const duration = 2500;
+        const windowHeight = window.innerHeight;
+        const counterTop = counter.getBoundingClientRect().top;
+        
+        if (counterTop < windowHeight * 0.8) {
+            counter.classList.add('animated');
+            
+            const startTime = performance.now();
+            
+            function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Easing function for smooth animation
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                
+                const current = Math.floor(target * easeOutQuart);
+                counter.textContent = current;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target;
+                }
+            }
+            
+            requestAnimationFrame(updateCounter);
+        }
+    });
+}
+
+// FAQ Toggle with smooth animation
+function toggleFaq(element) {
+    const faqItem = element.parentElement;
+    const allItems = document.querySelectorAll('.faq-item');
+    const isActive = faqItem.classList.contains('active');
+    
+    // Close all items with animation
+    allItems.forEach(item => {
+        if (item !== faqItem) {
+            item.classList.remove('active');
+        }
+    });
+    
+    // Toggle current item
+    if (!isActive) {
+        faqItem.classList.add('active');
+    } else {
+        faqItem.classList.remove('active');
+    }
+}
+
+// Enhanced Briefing Form Submission
+document.addEventListener('DOMContentLoaded', function() {
+    // Iniciar efeito de digitação
+    typeWriter();
+    
+    // Iniciar animações de deslize
+    initSlideAnimations();
+    
+    const briefingForm = document.getElementById('briefingForm');
+    
+    if (briefingForm) {
+        briefingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            let message = '🔵 NOVO BRIEFING DEZAIN CODE\n\n';
+            
+            const labels = {
+                name: '👤 Nome',
+                email: '📧 E-mail',
+                phone: '📱 WhatsApp',
+                business: '🏢 Negócio',
+                segment: '🎯 Segmento',
+                objective: '🎪 Objetivo do site',
+                plan: '💎 Plano de interesse',
+                message: '📝 Informações adicionais'
+            };
+            
+            formData.forEach((value, key) => {
+                if (value && labels[key]) {
+                    message += *${labels[key]}:* ${value}\n;
+                }
+            });
+            
+            message += '\n_Enviado através do site Dezain Code_';
+            
+            const whatsappUrl = https://wa.me/5583991816152?text=${encodeURIComponent(message)};
+            window.open(whatsappUrl, '_blank');
+            
+            // Success animation
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> ENVIADO COM SUCESSO!';
+            submitBtn.style.background = 'linear-gradient(135deg, #00d084, #00a86b)';
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.background = '';
+                this.reset();
+            }, 3000);
         });
         
-        btn.addEventListener('mouseup', () => {
-            btn.style.transform = '';
+        // Enhanced form field animations
+        const formControls = briefingForm.querySelectorAll('.form-control');
+        formControls.forEach(control => {
+            control.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+                this.parentElement.style.transition = 'transform 0.3s ease';
+            });
+            
+            control.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    }
+});
+
+// Smooth Scroll with offset for sticky header
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const target = document.querySelector(targetId);
+        
+        if (target) {
+            const headerOffset = 80;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Enhanced Header Scroll Effect
+let lastScroll = 0;
+const header = document.querySelector('header');
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 100) {
+        header.style.padding = '15px 0';
+        header.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.3)';
+    } else {
+        header.style.padding = '20px 0';
+        header.style.boxShadow = 'none';
+    }
+    
+    lastScroll = currentScroll;
+});
+
+// Enhanced Service Cards Hover Effect with Tilt
+document.addEventListener('DOMContentLoaded', function() {
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    serviceCards.forEach(card => {
+        card.addEventListener('mousemove', function(e) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 15;
+            const rotateY = (centerX - x) / 15;
+            
+            card.style.transform = `
+                translateY(-16px) 
+                scale(1.02) 
+                perspective(1000px) 
+                rotateX(${rotateX}deg) 
+                rotateY(${rotateY}deg)
+            `;
         });
         
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = '';
+        card.addEventListener('mouseleave', function() {
+            card.style.transform = '';
         });
     });
 });
 
-// Criação de partículas tecnológicas para efeito visual
-function createParticles() {
-    const techBgElements = document.querySelectorAll('.tech-bg');
+// Plan Cards Enhanced Animation
+document.addEventListener('DOMContentLoaded', function() {
+    const planCards = document.querySelectorAll('.plan-card');
     
-    techBgElements.forEach(element => {
-        // Criar container de partículas
-        const particlesContainer = document.createElement('div');
-        particlesContainer.classList.add('particles-container');
-        element.prepend(particlesContainer);
-        
-        // Criar partículas
-        const numParticles = 20; // Aumentado para mais densidade
-        
-        for (let i = 0; i < numParticles; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            
-            // Tamanho aleatório
-            const size = Math.random() * 6 + 2; // Tamanhos variados
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            
-            // Posição aleatória
-            const posX = Math.random() * 100;
-            const posY = Math.random() * 100;
-            particle.style.left = `${posX}%`;
-            particle.style.top = `${posY}%`;
-            
-            // Cor aleatória em tons de azul
-            const blueHue = Math.floor(Math.random() * 40) + 200; // 200-240 (azuis)
-            const brightness = Math.floor(Math.random() * 40) + 60; // 60-100%
-            particle.style.backgroundColor = `hsla(${blueHue}, 100%, ${brightness}%, 0.6)`;
-            particle.style.boxShadow = `0 0 ${size * 2}px hsla(${blueHue}, 100%, ${brightness}%, 0.8)`;
-            
-            // Animação com delay aleatório
-            particle.style.animation = `float ${Math.random() * 25 + 15}s infinite linear`;
-            particle.style.animationDelay = `${Math.random() * 10}s`;
-            
-            // Opacidade aleatória
-            particle.style.opacity = Math.random() * 0.7 + 0.3;
-            
-            particlesContainer.appendChild(particle);
-        }
-    });
-}
-
-// FAQs accordion functionality
-function setupFaqAccordion() {
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        
-        question.addEventListener('click', () => {
-            const isActive = item.classList.contains('active');
-            
-            // Close all items
-            faqItems.forEach(faqItem => {
-                faqItem.classList.remove('active');
-                const answer = faqItem.querySelector('.faq-answer');
-                answer.style.maxHeight = null;
+    planCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            planCards.forEach(otherCard => {
+                if (otherCard !== card && !otherCard.classList.contains('featured')) {
+                    otherCard.style.opacity = '0.6';
+                    otherCard.style.transform = 'scale(0.95)';
+                }
             });
-            
-            // If it wasn't active, make it active
-            if (!isActive) {
-                item.classList.add('active');
-                const answer = item.querySelector('.faq-answer');
-                answer.style.maxHeight = answer.scrollHeight + "px";
-                
-                // Adiciona um efeito sutil de destaque
-                item.style.transform = 'translateY(-5px)';
-                item.style.boxShadow = '0 15px 40px rgba(0, 112, 243, 0.12)';
-                
-                // Remove o efeito após 300ms
-                setTimeout(() => {
-                    item.style.transform = '';
-                    item.style.boxShadow = '';
-                }, 300);
-            }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            planCards.forEach(otherCard => {
+                otherCard.style.opacity = '1';
+                otherCard.style.transform = '';
+            });
         });
     });
-}
+});
 
-// Smooth scrolling para links âncora
-function setupSmoothScrolling() {
-    const links = document.querySelectorAll('a[href^="#"]');
+// Benefit Items Stagger Animation
+function animateBenefitItems() {
+    const benefitItems = document.querySelectorAll('.benefit-item');
+    const windowHeight = window.innerHeight;
     
-    links.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            const targetId = link.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                // Adicionando efeito de highlight ao elemento alvo
-                const highlightElement = () => {
-                    const originalBackground = targetElement.style.backgroundColor;
-                    const originalTransition = targetElement.style.transition;
-                    
-                    targetElement.style.transition = 'background-color 1s ease';
-                    targetElement.style.backgroundColor = 'rgba(0, 194, 255, 0.1)';
-                    
-                    setTimeout(() => {
-                        targetElement.style.backgroundColor = originalBackground;
-                        setTimeout(() => {
-                            targetElement.style.transition = originalTransition;
-                        }, 1000);
-                    }, 1000);
-                };
-                
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-                
-                setTimeout(highlightElement, 800);
-            }
-        });
-    });
-}
-
-// Função para verificar e corrigir links do WhatsApp
-function fixWhatsAppLinks() {
-    // Seleciona todos os links de WhatsApp
-    const whatsAppLinks = document.querySelectorAll('a[href*="wa.me"]');
-    
-    // Verifica cada link e corrige se necessário
-    whatsAppLinks.forEach(link => {
-        // Garantir que o link tenha o formato correto e esteja funcionando
-        const currentHref = link.getAttribute('href');
+    benefitItems.forEach((item, index) => {
+        const itemTop = item.getBoundingClientRect().top;
         
-        // Se o link não começar com https://, adicione-o
-        if (!currentHref.startsWith('https://')) {
-            const correctedHref = 'https://' + currentHref.replace(/^(http:\/\/|\/\/|)/, '');
-            link.setAttribute('href', correctedHref);
-        }
-        
-        // Certifique-se de que o link abre em uma nova janela
-        link.setAttribute('target', '_blank');
-        
-        // Adiciona efeito de tooltip
-        if (!link.getAttribute('title')) {
-            link.setAttribute('title', 'Enviar mensagem via WhatsApp');
+        if (itemTop < windowHeight * 0.85) {
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateX(0) scale(1)';
+            }, index * 100);
         }
     });
 }
 
-// Iniciar contadores com animação
-function setupCounters() {
-    const counters = document.querySelectorAll('.counter-number');
+// WhatsApp Button Enhanced Animation
+document.addEventListener('DOMContentLoaded', function() {
+    const whatsappBtn = document.querySelector('.whatsapp-btn');
     
-    const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.2
+    if (whatsappBtn) {
+        let isHovering = false;
+        
+        whatsappBtn.addEventListener('mouseenter', function() {
+            isHovering = true;
+            this.style.animation = 'none';
+        });
+        
+        whatsappBtn.addEventListener('mouseleave', function() {
+            isHovering = false;
+            this.style.animation = 'pulse-whatsapp 2s infinite';
+        });
+    }
+});
+
+// Image Lazy Loading Effect
+function lazyLoadImages() {
+    const images = document.querySelectorAll('img[data-src]');
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                observer.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+}
+
+// Initialize Intersection Observer for advanced animations
+function initIntersectionObserver() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -10% 0px'
     };
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const counter = entry.target;
-                const target = counter.innerText;
-                const increment = target.includes('%') ? 1 : 1;
-                let currentCount = 0;
-                
-                const updateCount = () => {
-                    if (target.includes('+')) {
-                        // Para contadores com + no final (ex: 350+)
-                        const targetNum = parseInt(target.replace('+', ''));
-                        if (currentCount < targetNum) {
-                            currentCount += increment;
-                            counter.innerText = currentCount + '+';
-                            setTimeout(updateCount, 15); // Mais rápido
-                        }
-                    } else if (target.includes('.')) {
-                        // Para contadores com decimal (ex: 5.0)
-                        const parts = target.split('.');
-                        const targetWhole = parseInt(parts[0]);
-                        const targetDecimal = parseInt(parts[1]);
-                        
-                        if (currentCount < targetWhole * 10 + targetDecimal) {
-                            currentCount += increment;
-                            const whole = Math.floor(currentCount / 10);
-                            const decimal = currentCount % 10;
-                            counter.innerText = `${whole}.${decimal}`;
-                            setTimeout(updateCount, 80);
-                        }
-                    } else if (target.includes('%')) {
-                        // Para contadores com porcentagem (ex: 98%)
-                        const targetNum = parseInt(target.replace('%', ''));
-                        if (currentCount < targetNum) {
-                            currentCount += increment;
-                            counter.innerText = currentCount + '%';
-                            setTimeout(updateCount, 20);
-                        }
-                    } else {
-                        // Para contadores numéricos simples
-                        const targetNum = parseInt(target);
-                        if (currentCount < targetNum) {
-                            currentCount += increment;
-                            counter.innerText = currentCount;
-                            setTimeout(updateCount, 15); // Mais rápido
-                        }
-                    }
-                };
-                
-                // Adiciona efeito de pulso ao completar
-                const addPulseEffect = () => {
-                    counter.classList.add('counter-completed');
-                    counter.style.transform = 'scale(1.1)';
-                    counter.style.transition = 'transform 0.3s ease';
-                    
-                    setTimeout(() => {
-                        counter.style.transform = 'scale(1)';
-                        setTimeout(() => {
-                            counter.classList.remove('counter-completed');
-                        }, 300);
-                    }, 300);
-                };
-                
-                updateCount();
-                setTimeout(addPulseEffect, 1500);
-                observer.unobserve(counter);
+                entry.target.classList.add('visible');
             }
         });
-    }, options);
+    }, observerOptions);
     
-    counters.forEach(counter => {
-        observer.observe(counter);
+    // Observe all animated elements
+    const animatedElements = document.querySelectorAll('.fade-in, .slide-left, .slide-right, .scale-in');
+    animatedElements.forEach(el => observer.observe(el));
+}
+
+// Text Animation on Scroll
+function animateTextOnScroll() {
+    const textElements = document.querySelectorAll('h1, h2, h3, p');
+    const windowHeight = window.innerHeight;
+    
+    textElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        
+        if (elementTop < windowHeight * 0.9 && !element.classList.contains('text-animated')) {
+            element.classList.add('text-animated');
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+        }
     });
 }
 
-// Configuração do formulário com envio para WhatsApp
-function setupBriefingForm() {
-    const form = document.getElementById('briefingForm');
+// Main Event Listeners
+window.addEventListener('scroll', () => {
+    revealOnScroll();
+    animateCounters();
+    animateBenefitItems();
+    animateTextOnScroll();
+});
+
+// Throttle scroll events for better performance
+let ticking = false;
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            revealOnScroll();
+            animateCounters();
+            ticking = false;
+        });
+        ticking = true;
+    }
+});
+
+// Initialize on DOM Load
+document.addEventListener('DOMContentLoaded', () => {
+    createParticles();
+    revealOnScroll();
+    initIntersectionObserver();
+    lazyLoadImages();
     
-    if (form) {
-        // Adiciona validação de campos
-        const inputs = form.querySelectorAll('input, select, textarea');
+    // Add entrance animation to hero
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+        setTimeout(() => {
+            heroContent.style.opacity = '1';
+            heroContent.style.transform = 'translateY(0)';
+        }, 300);
+    }
+});
+
+// Page Load Animation
+window.addEventListener('load', () => {
+    document.body.style.opacity = '1';
+    revealOnScroll();
+    animateCounters();
+});
+
+// Prevent layout shift
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        if (!img.complete) {
+            img.style.opacity = '0';
+            img.addEventListener('load', function() {
+                this.style.transition = 'opacity 0.5s ease';
+                this.style.opacity = '1';
+            });
+        }
+    });
+});
+
+// SVG Icon Animations Enhancement
+document.addEventListener('DOMContentLoaded', function() {
+    // Adicionar animações interativas extras para os ícones SVG
+    const animatedIcons = document.querySelectorAll('.animated-icon');
+    
+    animatedIcons.forEach(icon => {
+        const card = icon.closest('.service-card, .benefit-item');
         
-        inputs.forEach(input => {
-            input.addEventListener('focus', () => {
-                input.parentElement.classList.add('focused');
+        if (card) {
+            card.addEventListener('mouseenter', function() {
+                icon.style.filter = 'drop-shadow(0 15px 30px rgba(0, 191, 165, 0.8))';
             });
             
-            input.addEventListener('blur', () => {
-                input.parentElement.classList.remove('focused');
-                if (input.value.trim() !== '') {
-                    input.parentElement.classList.add('filled');
-                } else {
-                    input.parentElement.classList.remove('filled');
+            card.addEventListener('mouseleave', function() {
+                icon.style.filter = 'drop-shadow(0 10px 20px rgba(0, 191, 165, 0.4))';
+            });
+        }
+    });
+    
+    // Animações específicas para o ícone de chatbot - SIMPLIFICADO
+    const chatbotIcon = document.querySelector('.chatbot-icon');
+    if (chatbotIcon) {
+        const card = chatbotIcon.closest('.service-card');
+        if (card) {
+            card.addEventListener('mouseenter', function() {
+                const dots = chatbotIcon.querySelectorAll('.typing-dot-1, .typing-dot-2, .typing-dot-3');
+                const signal = chatbotIcon.querySelector('.bot-signal');
+                
+                dots.forEach((dot, index) => {
+                    setTimeout(() => {
+                        dot.style.animation = 'typingBounce 0.5s ease-in-out 2';
+                    }, index * 100);
+                });
+                
+                if (signal) {
+                    signal.style.animation = 'signalPulse 0.5s ease-in-out 3';
                 }
             });
+        }
+    }
+    
+    // Animações específicas para o ícone de personalização
+    const customIcon = document.querySelector('.custom-icon');
+    if (customIcon) {
+        const card = customIcon.closest('.service-card');
+        if (card) {
+            card.addEventListener('mouseenter', function() {
+                const colors = customIcon.querySelectorAll('[class^="color-circle"]');
+                colors.forEach((color, index) => {
+                    setTimeout(() => {
+                        color.style.animation = 'colorPulseCustom 0.5s ease-in-out';
+                    }, index * 100);
+                });
+            });
+        }
+    }
+    
+    // Animações específicas para o ícone de manutenção - SIMPLIFICADO
+    const maintenanceIcon = document.querySelector('.maintenance-icon');
+    if (maintenanceIcon) {
+        const card = maintenanceIcon.closest('.service-card');
+        if (card) {
+            card.addEventListener('mouseenter', function() {
+                const gear = maintenanceIcon.querySelector('.setting-gear');
+                const wrench = maintenanceIcon.querySelector('.wrench-tool');
+                const bolt = maintenanceIcon.querySelector('.bolt-head');
+                
+                if (gear) {
+                    gear.style.animation = 'gearRotate 1s linear infinite';
+                }
+                if (wrench) {
+                    wrench.style.animation = 'wrenchSwing 0.5s ease-in-out 3';
+                }
+                if (bolt) {
+                    bolt.style.animation = 'boltTighten 0.5s ease-in-out 2';
+                }
+            });
+        }
+    }
+    
+    // Animações específicas para o ícone de design (pintura)
+    const paintDesignIcon = document.querySelector('.paint-design-icon');
+    if (paintDesignIcon) {
+        const card = paintDesignIcon.closest('.benefit-item');
+        if (card) {
+            card.addEventListener('mouseenter', function() {
+                const strokes = paintDesignIcon.querySelectorAll('[class^="paint-stroke"]');
+                const stars = paintDesignIcon.querySelectorAll('[class^="creative-star"]');
+                
+                strokes.forEach((stroke, index) => {
+                    setTimeout(() => {
+                        stroke.style.animation = 'strokeDraw 1s ease-in-out';
+                    }, index * 200);
+                });
+                
+                stars.forEach(star => {
+                    star.style.animation = 'starSparkle 0.5s ease-in-out 2';
+                });
+            });
+        }
+    }
+    
+    // Animações específicas para o ícone de vendas
+    const salesIcon = document.querySelector('.sales-icon');
+    if (salesIcon) {
+        const chartLine = salesIcon.querySelector('.chart-line');
+        const dots = salesIcon.querySelectorAll('[class^="chart-dot"]');
+        
+        const card = salesIcon.closest('.benefit-item');
+        if (card) {
+            card.addEventListener('mouseenter', function() {
+                if (chartLine) {
+                    chartLine.style.animation = 'chartGrow 1s ease-in-out forwards';
+                }
+                dots.forEach((dot, index) => {
+                    setTimeout(() => {
+                        dot.style.animation = 'dotPulse 0.5s ease-in-out';
+                    }, index * 100);
+                });
+            });
+        }
+    }
+    
+    // Animações específicas para o ícone de handshake
+    const handshakeIcon = document.querySelector('.handshake-icon');
+    if (handshakeIcon) {
+        const card = handshakeIcon.closest('.benefit-item');
+        if (card) {
+            card.addEventListener('mouseenter', function() {
+                const hands = handshakeIcon.querySelectorAll('.hand-left, .hand-right');
+                hands.forEach(hand => {
+                    hand.style.animation = 'handShake 0.5s ease-in-out 3';
+                });
+            });
+        }
+    }
+    
+    // Animações específicas para o ícone de dinheiro
+    const moneyIcon = document.querySelector('.money-icon');
+    if (moneyIcon) {
+        const card = moneyIcon.closest('.benefit-item');
+        if (card) {
+            card.addEventListener('mouseenter', function() {
+                const coins = moneyIcon.querySelectorAll('.coin-1, .coin-2');
+                coins.forEach(coin => {
+                    coin.style.animation = 'coinSpin 1s ease-in-out';
+                });
+            });
+        }
+    }
+    
+    // Animações específicas para o ícone de entrega
+    const deliveryIcon = document.querySelector('.delivery-icon');
+    if (deliveryIcon) {
+        const card = deliveryIcon.closest('.benefit-item');
+        if (card) {
+            card.addEventListener('mouseenter', function() {
+                const check = deliveryIcon.querySelector('.check-delivery');
+                if (check) {
+                    check.style.animation = 'checkDraw 1s ease-in-out';
+                }
+            });
+        }
+    }
+    
+    // Animações específicas para o ícone de escudo
+    const shieldIcon = document.querySelector('.shield-icon');
+    if (shieldIcon) {
+        const card = shieldIcon.closest('.benefit-item');
+        if (card) {
+            card.addEventListener('mouseenter', function() {
+                const glows = shieldIcon.querySelectorAll('.shield-glow-1, .shield-glow-2');
+                glows.forEach(glow => {
+                    glow.style.animation = 'glowExpand 1s ease-in-out';
+                });
+            });
+        }
+    }
+});
+
+// Check Icon Animations Enhancement
+document.addEventListener('DOMContentLoaded', function() {
+    const checkIcons = document.querySelectorAll('.check-icon, .check-icon-small');
+    
+    checkIcons.forEach(icon => {
+        const item = icon.closest('.plan-feature, .showcase-features li');
+        
+        if (item) {
+            item.addEventListener('mouseenter', function() {
+                const circle = icon.querySelector('.check-circle');
+                const mark = icon.querySelector('.check-mark');
+                
+                if (circle && mark) {
+                    circle.style.animation = 'checkCirclePulse 0.5s ease-in-out';
+                    mark.style.animation = 'checkMarkDraw 0.5s ease-in-out';
+                    
+                    setTimeout(() => {
+                        circle.style.animation = '';
+                        mark.style.animation = '';
+                    }, 500);
+                }
+            });
+        }
+    });
+});
+
+// FAQ Icon Animation Enhancement
+document.addEventListener('DOMContentLoaded', function() {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
+        question.addEventListener('mouseenter', function() {
+            const icon = this.querySelector('.faq-icon');
+            if (icon) {
+                icon.style.transform = 'scale(1.2)';
+                icon.style.transition = 'transform 0.3s ease';
+            }
         });
         
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Validação antes do envio
+        question.addEventListener('mouseleave', function() {
+            const icon = this.querySelector('.faq-icon');
+            const faqItem = this.closest('.faq-item');
+            if (icon && !faqItem.classList.contains('active')) {
+                icon.style.transform = 'scale(1)';
+            }
+        });
+    });
+});
+
+// Add smooth transitions to all interactive elements
+document.addEventListener('DOMContentLoaded', function() {
+    const interactiveElements = document.querySelectorAll('button, a, .btn, .service-card, .plan-card, .benefit-item');
+    
+    interactiveElements.forEach(element => {
+        element.style.transition = 'all 0.3s ease';
+    });
+});
+
+// Performance optimization: Pause animations when tab is not visible
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        // Pause heavy animations
+        document.querySelectorAll('.animated-icon').forEach(icon => {
+            icon.style.animationPlayState = 'paused';
+        });
+    } else {
+        // Resume animations
+        document.querySelectorAll('.animated-icon').forEach(icon => {
+            icon.style.animationPlayState = 'running';
+        });
+    }
+});
+
+// Add error handling for form submission
+document.addEventListener('DOMContentLoaded', function() {
+    const forms = document.querySelectorAll('form');
+    
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            const requiredFields = this.querySelectorAll('[required]');
             let isValid = true;
-            inputs.forEach(input => {
-                if (input.hasAttribute('required') && input.value.trim() === '') {
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
                     isValid = false;
-                    input.parentElement.classList.add('error');
-                } else {
-                    input.parentElement.classList.remove('error');
+                    field.style.borderColor = '#ff3b30';
+                    setTimeout(() => {
+                        field.style.borderColor = '';
+                    }, 2000);
                 }
             });
             
             if (!isValid) {
-                // Mostrar mensagem de erro
-                const errorMessage = document.createElement('div');
-                errorMessage.className = 'form-error-message';
-                errorMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Por favor, preencha todos os campos obrigatórios.';
-                
-                // Remover mensagem anterior se existir
-                const oldError = form.querySelector('.form-error-message');
-                if (oldError) {
-                    oldError.remove();
-                }
-                
-                form.prepend(errorMessage);
-                
-                // Animar entrada da mensagem
-                errorMessage.style.opacity = '0';
-                errorMessage.style.transform = 'translateY(-10px)';
-                
-                setTimeout(() => {
-                    errorMessage.style.transition = 'all 0.3s ease';
-                    errorMessage.style.opacity = '1';
-                    errorMessage.style.transform = 'translateY(0)';
-                }, 10);
-                
-                // Remover após 5 segundos
-                setTimeout(() => {
-                    errorMessage.style.opacity = '0';
-                    errorMessage.style.transform = 'translateY(-10px)';
-                    setTimeout(() => {
-                        errorMessage.remove();
-                    }, 300);
-                }, 5000);
-                
-                return;
-            }
-            
-            // Coletar dados do formulário
-            const formData = new FormData(form);
-            const data = {};
-            
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-            
-            // Desabilitar o botão de envio durante o processo
-            const submitButton = form.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.innerHTML;
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Enviando...';
-            
-            // Formatar a mensagem para o WhatsApp
-            let whatsappMessage = `*🔵 NOVO BRIEFING DEZAIN CODE*\n\n`;
-            whatsappMessage += `*Nome:* ${data.name}\n`;
-            whatsappMessage += `*E-mail:* ${data.email}\n`;
-            whatsappMessage += `*WhatsApp:* ${data.phone}\n`;
-            whatsappMessage += `*Negócio:* ${data.business}\n`;
-            whatsappMessage += `*Segmento:* ${data.segment}\n`;
-            whatsappMessage += `*Objetivo do site:* ${data.objective}\n`;
-            whatsappMessage += `*Plano de interesse:* ${data.plan}\n`;
-            
-            if (data.message && data.message.trim() !== '') {
-                whatsappMessage += `*Informações adicionais:* ${data.message}\n`;
-            }
-            
-            // Codificar a mensagem para URL
-            const encodedMessage = encodeURIComponent(whatsappMessage);
-            
-            // Criar o link do WhatsApp
-            const whatsappLink = `https://wa.me/5583991816152?text=${encodedMessage}`;
-            
-            // Após breve delay, redirecionar para o WhatsApp
-            setTimeout(() => {
-                // Resetar o formulário
-                form.reset();
-                
-                // Criar mensagem de sucesso
-                const successMessage = document.createElement('div');
-                successMessage.className = 'success-message';
-                successMessage.innerHTML = `
-                    <div class="success-icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <div class="success-text">
-                        <h3>Formulário enviado com sucesso!</h3>
-                        <p>Você será redirecionado para o WhatsApp para finalizar o envio.</p>
-                    </div>
-                `;
-                
-                // Inserir a mensagem no lugar do formulário
-                form.style.display = 'none';
-                form.parentNode.appendChild(successMessage);
-                
-                // Animar entrada da mensagem
-                successMessage.style.opacity = '0';
-                successMessage.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    successMessage.style.transition = 'all 0.5s ease';
-                    successMessage.style.opacity = '1';
-                    successMessage.style.transform = 'translateY(0)';
-                }, 10);
-                
-                // Restaurar o botão
-                submitButton.disabled = false;
-                submitButton.innerHTML = originalButtonText;
-                
-                // Abrir o WhatsApp em uma nova aba
-                window.open(whatsappLink, '_blank');
-            }, 1500);
-        });
-    }
-}
-
-// Animar elementos na visualização
-function setupScrollAnimations() {
-    const elements = document.querySelectorAll(
-        '.plan-card, .benefit-item, .payment-feature, .briefing-step, .portfolio-img img, .process-step'
-    );
-    
-    const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Atraso baseado na posição do elemento para criar um efeito cascata
-                const delay = Array.from(elements).indexOf(entry.target) % 4 * 100;
-                
-                setTimeout(() => {
-                    entry.target.classList.add('animate-in');
-                }, delay);
-                
-                observer.unobserve(entry.target);
-            }
-        });
-    }, options);
-    
-    elements.forEach(element => {
-        element.classList.add('animate-prepare');
-        observer.observe(element);
-    });
-}
-
-// Header fixo com mudança de estilo no scroll
-function setupStickyHeader() {
-    const header = document.querySelector('header');
-    
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-            header.classList.add('header-scrolled');
-        } else {
-            header.classList.remove('header-scrolled');
-        }
-    });
-}
-
-// Mostrar/esconder botão voltar ao topo
-function setupBackToTop() {
-    // Criar o botão
-    const backToTopBtn = document.createElement('a');
-    backToTopBtn.classList.add('back-to-top');
-    backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    document.body.appendChild(backToTopBtn);
-    
-    // Controlar visibilidade com base no scroll
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTopBtn.classList.add('visible');
-        } else {
-            backToTopBtn.classList.remove('visible');
-        }
-    });
-    
-    // Adicionar funcionalidade de voltar ao topo
-    backToTopBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Animar o scroll suavemente
-        const scrollToTop = () => {
-            const c = document.documentElement.scrollTop || document.body.scrollTop;
-            if (c > 0) {
-                window.requestAnimationFrame(scrollToTop);
-                window.scrollTo(0, c - c / 8);
-            }
-        };
-        
-        scrollToTop();
-    });
-}
-
-// Adicionar estilos de animação CSS
-function addAnimationStyles() {
-    const styleElement = document.createElement('style');
-    styleElement.textContent = `
-        /* Estilos tech para animações */
-        .animate-prepare {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1), 
-                        transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
-        }
-        
-        .animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .header-scrolled {
-            padding: 10px 0;
-            background-color: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 5px 20px rgba(0, 112, 243, 0.15);
-        }
-        
-        .form-group.focused .form-control {
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px rgba(0, 194, 255, 0.2);
-            background-color: rgba(255, 255, 255, 0.07);
-        }
-        
-        .form-group.error .form-control {
-            border-color: #ff3b30;
-            box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.2);
-        }
-        
-        .form-error-message {
-            background-color: rgba(255, 59, 48, 0.1);
-            color: #ff3b30;
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            border-left: 3px solid #ff3b30;
-        }
-        
-        .form-error-message i {
-            margin-right: 10px;
-            font-size: 16px;
-        }
-        
-        .counter-completed {
-            color: var(--accent-blue);
-        }
-        
-        /* Animações para partículas tech */
-        @keyframes techPulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(0, 194, 255, 0.7);
-                background-color: rgba(0, 194, 255, 0.7);
-            }
-            50% {
-                box-shadow: 0 0 20px 10px rgba(0, 194, 255, 0);
-                background-color: rgba(0, 194, 255, 0.3);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(0, 194, 255, 0);
-                background-color: rgba(0, 194, 255, 0.7);
-            }
-        }
-        
-        /* Portfolio gallery modal */
-        .portfolio-modal {
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        
-        .portfolio-modal img {
-            transform: scale(0.9);
-            transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
-        }
-        
-        /* Estilo para partículas */
-        .particles-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(1px);
-        }
-    `;
-    document.head.appendChild(styleElement);
-}
-
-// Função especial para a galeria de imagens
-function setupImageGallery() {
-    const galleryImages = document.querySelectorAll('.portfolio-img img, .pro-img img');
-    
-    galleryImages.forEach(img => {
-        img.addEventListener('click', () => {
-            // Cria modal para visualização ampliada
-            const modal = document.createElement('div');
-            modal.classList.add('portfolio-modal');
-            
-            const modalImg = document.createElement('img');
-            modalImg.src = img.src;
-            modalImg.alt = img.alt;
-            
-            const closeBtn = document.createElement('span');
-            closeBtn.classList.add('portfolio-modal-close');
-            closeBtn.innerHTML = '&times;';
-            
-            modal.appendChild(closeBtn);
-            modal.appendChild(modalImg);
-            document.body.appendChild(modal);
-            
-            // Animação de entrada
-            modal.style.opacity = '0';
-            modalImg.style.transform = 'scale(0.9)';
-            
-            setTimeout(() => {
-                modal.style.opacity = '1';
-                modalImg.style.transform = 'scale(1)';
-            }, 10);
-            
-            // Adiciona eventos
-            const closeModal = () => {
-                modal.style.opacity = '0';
-                modalImg.style.transform = 'scale(0.9)';
-                setTimeout(() => {
-                    document.body.removeChild(modal);
-                }, 400);
-            };
-            
-            modal.addEventListener('click', closeModal);
-            closeBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                closeModal();
-            });
-            
-            // Permitir fechar com ESC
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closeModal();
-                }
-            });
-            
-            // Efeito de zoom no hover
-            modalImg.addEventListener('mouseenter', () => {
-                modalImg.style.transform = 'scale(1.02)';
-            });
-            
-            modalImg.addEventListener('mouseleave', () => {
-                modalImg.style.transform = 'scale(1)';
-            });
-        });
-        
-        // Adiciona indicador de clique
-        img.style.cursor = 'pointer';
-        
-        // Adiciona efeito de hover
-        img.addEventListener('mouseenter', () => {
-            const overlay = document.createElement('div');
-            overlay.classList.add('portfolio-img-overlay');
-            overlay.innerHTML = '<i class="fas fa-search-plus"></i>';
-            overlay.style.position = 'absolute';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.backgroundColor = 'rgba(0, 112, 243, 0.3)';
-            overlay.style.display = 'flex';
-            overlay.style.alignItems = 'center';
-            overlay.style.justifyContent = 'center';
-            overlay.style.color = 'white';
-            overlay.style.fontSize = '24px';
-            overlay.style.opacity = '0';
-            overlay.style.transition = 'opacity 0.3s ease';
-            overlay.style.borderRadius = '12px';
-            
-            img.parentElement.style.position = 'relative';
-            img.parentElement.appendChild(overlay);
-            
-            setTimeout(() => {
-                overlay.style.opacity = '1';
-            }, 10);
-        });
-        
-        img.addEventListener('mouseleave', () => {
-            const overlay = img.parentElement.querySelector('.portfolio-img-overlay');
-            if (overlay) {
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    img.parentElement.removeChild(overlay);
-                }, 300);
+                e.preventDefault();
+                alert('Por favor, preencha todos os campos obrigatórios.');
             }
         });
     });
+});
+
+// Add smooth fade-in for page load
+window.addEventListener('load', function() {
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.5s ease';
+    
+    setTimeout(() => {
+        document.body.style.opacity = '1';
+    }, 100);
+});
+
+// Mobile touch optimization
+if ('ontouchstart' in window) {
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.service-card, .plan-card, .benefit-item');
+        
+        cards.forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            
+            card.addEventListener('touchend', function() {
+                this.style.transform = '';
+            });
+        });
+    });
 }
+
+// Console message for developers
+console.log('%c🚀 Dezain Code - Site desenvolvido com excelência', 'color: #00bfa5; font-size: 16px; font-weight: bold;');
+console.log('%cTodos os direitos reservados © 2025', 'color: #667eea; font-size: 12px;');
