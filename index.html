@@ -3,296 +3,619 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desenvolvimento de Sites Profissionais</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Dezain Code - Desenvolvimento Web Profissional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Botão do WhatsApp Fixo -->
-    <a href="https://wa.me/5583991816152?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20seus%20servi%C3%A7os%20de%20desenvolvimento%20web!" class="whatsapp-btn" target="_blank">
-        <i class="fab fa-whatsapp whatsapp-icon"></i>
+    <div class="bg-pattern"></div>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/5583991816152" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- Header -->
     <header>
-        <div class="container header-container">
-            <div class="logo">
-                <i class="fas fa-code logo-icon"></i>
-                <span>Dezain Cody</span>
+        <div class="container">
+            <div class="header-container">
+                <div class="logo">
+                    <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#grad1)">
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#00bfa5;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                    </svg>
+                    Dezain Code
+                </div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#services">Serviços</a></li>
+                        <li><a href="#benefits">Benefícios</a></li>
+                        <li><a href="#plans">Planos</a></li>
+                        <li><a href="#showcase">Portfolio</a></li>
+                        <li><a href="#briefing">Briefing</a></li>
+                        <li><a href="#partner">Parceria</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </nav>
             </div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#home">Início</a></li>
-                    <li><a href="#plans">Planos</a></li>
-                    <li><a href="#showcase">Portfolio</a></li>
-                    <li><a href="#benefits">Benefícios</a></li>
-                    <li><a href="#briefing">Briefing</a></li>
-                    <li><a href="#faq">Dúvidas</a></li>
-                </ul>
-            </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="tech-bg hero">
+    <section id="home" class="hero">
+        <div class="hero-carousel">
+            <div class="hero-carousel-slide" style="background-image: url('https://i.postimg.cc/HWB3X0G6/IMG-1053.jpg');"></div>
+            <div class="hero-carousel-slide" style="background-image: url('https://i.postimg.cc/9QG7tV4n/IMG-1055.jpg');"></div>
+            <div class="hero-carousel-slide" style="background-image: url('https://i.postimg.cc/NG5dcNPM/IMG-1056.jpg');"></div>
+        </div>
+        <div class="hero-overlay"></div>
         <div class="tech-grid"></div>
-        <div class="container">
+        <div class="particles-container" id="particles"></div>
+        <div class="container hero-container">
             <div class="hero-content">
-                <h1>Soluções Web Profissionais Para Seu Negócio</h1>
+                <h1 id="typing-title"><span class="title-blue"></span><span class="title-white"></span></h1>
                 <p>Sites otimizados para conversão que funcionam 24/7 aumentando suas vendas e atraindo novos clientes</p>
-                <div class="cta-container">
-                    <a href="#plans" class="btn btn-primary pulse-animation">ALAVANCAR MEU NEGÓCIO <i class="fas fa-arrow-right"></i></a>
+                <div class="cta-group">
+                    <a href="#services" class="btn btn-primary">
+                        <span>ALAVANCAR MEU NEGÓCIO</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                     <a href="https://wa.me/5583991816152?text=Ol%C3%A1%2C%20preciso%20de%20um%20site%20que%20venda%20para%20meu%20neg%C3%B3cio!" class="btn btn-outline" target="_blank">FALAR COM ESPECIALISTA</a>
                 </div>
-            
+                <div class="urgency-badge">
+                    <i class="fas fa-fire"></i>
+                    <span>Promoção por tempo limitado: 60% OFF até 30/05</span>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title fade-in slide-title">Nossos Serviços</h2>
+                <p class="section-subtitle fade-in slide-text">Soluções tecnológicas completas para impulsionar seu negócio no digital</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in stagger-1">
+                    <div class="service-icon-wrapper">
+                        <svg class="animated-icon laptop-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Laptop screen -->
+                            <rect class="laptop-screen" x="45" y="35" width="110" height="75" rx="4" fill="none" stroke="url(#grad-laptop)" stroke-width="2.5"/>
+                            <!-- Screen content - code lines -->
+                            <line class="code-line-1" x1="60" y1="55" x2="110" y2="55" stroke="#667eea" stroke-width="2" opacity="0.7"/>
+                            <line class="code-line-2" x1="60" y1="70" x2="130" y2="70" stroke="#00bfa5" stroke-width="2" opacity="0.7"/>
+                            <line class="code-line-3" x1="60" y1="85" x2="95" y2="85" stroke="#667eea" stroke-width="2" opacity="0.7"/>
+                            <!-- Laptop base -->
+                            <path class="laptop-base" d="M 30 110 L 170 110 L 165 125 L 35 125 Z" fill="none" stroke="url(#grad-laptop)" stroke-width="2.5"/>
+                            <!-- Cursor -->
+                            <rect class="cursor-blink" x="132" y="68" width="2" height="6" fill="#00bfa5"/>
+                            <defs>
+                                <linearGradient id="grad-laptop" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#667eea"/>
+                                    <stop offset="100%" style="stop-color:#00bfa5"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="highlight-badge">MAIS VENDIDO</div>
+                    <h3>Desenvolvimento de Sites</h3>
+                    <p>Criação de sites modernos, rápidos e responsivos — prontos para vender.</p>
+                    <ul class="service-features">
+                        <li>Sites Institucionais</li>
+                        <li>Cartão de Visitas Digital</li>
+                        <li>E-commerce completo</li>
+                        <li>Blog corporativo</li>
+                        <li>Venda de ingressos online</li>
+                    </ul>
+                    <a href="https://wa.me/5583991816152?text=Quero%20saber%20mais%20sobre%20desenvolvimento%20de%20sites" class="btn btn-outline" target="_blank">Saiba mais</a>
+                </div>
+
+                <div class="service-card fade-in stagger-2">
+                    <div class="service-icon-wrapper">
+                        <svg class="animated-icon chatbot-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Chat bubble -->
+                            <path class="chat-bubble" d="M 50 50 L 150 50 L 150 110 L 95 110 L 80 130 L 80 110 L 50 110 Z" fill="none" stroke="url(#grad-chat)" stroke-width="2.5"/>
+                            <!-- Dots -->
+                            <circle class="chat-dot-1" cx="80" cy="80" r="5" fill="#667eea"/>
+                            <circle class="chat-dot-2" cx="100" cy="80" r="5" fill="#00bfa5"/>
+                            <circle class="chat-dot-3" cx="120" cy="80" r="5" fill="#667eea"/>
+                            <!-- Bot icon -->
+                            <circle class="bot-icon" cx="100" cy="60" r="8" fill="none" stroke="#00bfa5" stroke-width="2"/>
+                            <line class="bot-antenna" x1="100" y1="52" x2="100" y2="45" stroke="#00bfa5" stroke-width="2"/>
+                            <circle class="bot-signal" cx="100" cy="42" r="3" fill="#00bfa5"/>
+                            <defs>
+                                <linearGradient id="grad-chat" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#667eea"/>
+                                    <stop offset="100%" style="stop-color:#00bfa5"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Chatbot Inteligente</h3>
+                    <p>Atendimento automático que trabalha 24 horas por dia.</p>
+                    <ul class="service-features">
+                        <li>Captação de leads qualificados</li>
+                        <li>Atendimento de dúvidas frequentes</li>
+                        <li>Suporte automatizado</li>
+                        <li>Integração com WhatsApp</li>
+                        <li>Redução de tempo de resposta</li>
+                    </ul>
+                    <a href="https://wa.me/5583991816152?text=Quero%20saber%20mais%20sobre%20chatbot" class="btn btn-outline" target="_blank">Saiba mais</a>
+                </div>
+
+                <div class="service-card fade-in stagger-3">
+                    <div class="service-icon-wrapper">
+                        <svg class="animated-icon palette-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Palette shape -->
+                            <path class="palette-shape" d="M 100 50 Q 60 50 40 80 Q 40 120 80 140 Q 120 140 140 110 Q 150 90 140 70 Q 120 50 100 50" fill="none" stroke="url(#grad-palette)" stroke-width="2.5"/>
+                            <!-- Color dots -->
+                            <circle class="palette-color-1" cx="70" cy="80" r="8" fill="#667eea"/>
+                            <circle class="palette-color-2" cx="100" cy="75" r="8" fill="#00bfa5"/>
+                            <circle class="palette-color-3" cx="120" cy="95" r="8" fill="#F97316"/>
+                            <!-- Brush -->
+                            <line class="brush-handle" x1="130" y1="60" x2="150" y2="40" stroke="url(#grad-palette)" stroke-width="3" stroke-linecap="round"/>
+                            <path class="brush-tip" d="M 148 42 L 155 35 L 158 40 L 152 45 Z" fill="#00bfa5"/>
+                            <defs>
+                                <linearGradient id="grad-palette" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#667eea"/>
+                                    <stop offset="100%" style="stop-color:#00bfa5"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Personalização Sazonal</h3>
+                    <p>Atualizações temáticas para campanhas sazonais por R$ 300/mês.</p>
+                    <ul class="service-features">
+                        <li>Natal, Black Friday, Páscoa</li>
+                        <li>Mudanças de layout</li>
+                        <li>Atualização de copywriting</li>
+                        <li>Banners promocionais</li>
+                        <li>Campanhas especiais</li>
+                    </ul>
+                    <a href="https://wa.me/5583991816152?text=Quero%20saber%20mais%20sobre%20personalização" class="btn btn-outline" target="_blank">Saiba mais</a>
+                </div>
+
+                <div class="service-card fade-in stagger-4">
+                    <div class="service-icon-wrapper">
+                        <svg class="animated-icon tools-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Wrench -->
+                            <path class="wrench" d="M 120 50 L 110 60 L 70 100 L 60 90 L 50 100 L 70 120 L 80 110 L 120 70 L 130 80 L 140 70 Z" fill="none" stroke="url(#grad-tools)" stroke-width="2.5" stroke-linejoin="round"/>
+                            <!-- Gear -->
+                            <circle class="gear-circle" cx="100" cy="130" r="25" fill="none" stroke="url(#grad-tools)" stroke-width="2.5"/>
+                            <circle class="gear-center" cx="100" cy="130" r="10" fill="none" stroke="#00bfa5" stroke-width="2"/>
+                            <!-- Gear teeth -->
+                            <line class="gear-tooth-1" x1="100" y1="102" x2="100" y2="95" stroke="#667eea" stroke-width="2.5"/>
+                            <line class="gear-tooth-2" x1="128" y1="130" x2="135" y2="130" stroke="#667eea" stroke-width="2.5"/>
+                            <line class="gear-tooth-3" x1="100" y1="158" x2="100" y2="165" stroke="#667eea" stroke-width="2.5"/>
+                            <line class="gear-tooth-4" x1="72" y1="130" x2="65" y2="130" stroke="#667eea" stroke-width="2.5"/>
+                            <defs>
+                                <linearGradient id="grad-tools" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#667eea"/>
+                                    <stop offset="100%" style="stop-color:#00bfa5"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Manutenção e Suporte</h3>
+                    <p>Correções, atualizações e suporte técnico contínuo.</p>
+                    <ul class="service-features">
+                        <li>Correção de bugs e erros</li>
+                        <li>Ajustes de conteúdo</li>
+                        <li>Mudanças de layout</li>
+                        <li>Otimização de copywriting</li>
+                        <li>Suporte técnico prioritário</li>
+                    </ul>
+                    <a href="https://wa.me/5583991816152?text=Quero%20saber%20mais%20sobre%20manutenção" class="btn btn-outline" target="_blank">Saiba mais</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Benefits Section -->
     <section id="benefits" class="benefits">
         <div class="container">
-            <div class="section-title">
-                <h2>Por que investir em um site profissional?</h2>
-                <p>Conheça os benefícios de ter um site desenvolvido pela Dezain Code.</p>
+            <div class="section-header">
+                <h2 class="section-title fade-in slide-title">Por que investir em um site profissional?</h2>
+                <p class="section-subtitle fade-in slide-text">Conheça os benefícios de ter um site desenvolvido pela Dezain Code</p>
             </div>
-            <div class="benefits-container">
-                <div class="benefits-text">
-                    <h3 class="benefits-title">Transforme visualizações em vendas reais</h3>
-                    <p class="benefits-desc">Um site não é apenas um cartão de visitas digital - é uma máquina de vendas trabalhando 24 horas por dia. </p>
-                    <p class="benefits-desc">Nossos sites são estrategicamente projetados para converter visitantes em clientes, com elementos de persuasão e chamadas para ação eficientes que funcionam enquanto você dorme.</p>
-                    <div class="counter-container">
-                        <div class="counter">
-                            <div class="counter-number">100%</div>
-                            <div class="counter-label">Clientes satisfeitos</div>
-                        </div>
-                        <div class="counter">
-                            <div class="counter-number">20+</div>
-                            <div class="counter-label">Projetos entregues</div>
-                        </div>
-                        <div class="counter">
-                            <div class="counter-number">5.0</div>
-                            <div class="counter-label">Avaliação média</div>
-                        </div>
-                    </div>
-                    <a href="https://wa.me/5583991816152?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20benef%C3%ADcios!" class="btn btn-primary" target="_blank">FALAR COM CONSULTOR <i class="fas fa-arrow-right"></i></a>
+            <div class="benefits-grid">
+                <div class="benefits-text slide-left">
+                    <h3 class="slide-title">Transforme visualizações em vendas reais</h3>
+                    <p>Um site não é apenas um cartão de visitas digital - é uma máquina de vendas trabalhando 24 horas por dia.</p>
+                    <p>Nossos sites são estrategicamente projetados para converter visitantes em clientes, com elementos de persuasão e chamadas para ação eficientes que funcionam enquanto você dorme.</p>
+                    <a href="https://wa.me/5583991816152?text=Gostaria%20de%20mais%20informações!" class="btn btn-primary slide-btn" target="_blank" style="margin-top: 32px;">FALAR COM CONSULTOR</a>
                 </div>
-                <div class="benefits-list">
-                    <div class="benefit-item">
+                <div class="benefits-list slide-right">
+                    <div class="benefit-item stagger-1">
                         <div class="benefit-icon">
-                            <i class="fas fa-rocket"></i>
+                            <svg class="animated-icon chart-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Chart frame -->
+                                <rect class="chart-frame" x="40" y="50" width="120" height="100" rx="4" fill="none" stroke="url(#grad-chart)" stroke-width="2.5"/>
+                                <!-- Ascending line -->
+                                <polyline class="growth-line" points="50,130 70,110 90,90 110,70 130,50 150,40" fill="none" stroke="#00bfa5" stroke-width="3" stroke-linecap="round"/>
+                                <!-- Arrow up -->
+                                <path class="arrow-growth" d="M 145 45 L 150 40 L 155 45" fill="none" stroke="#00bfa5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <!-- Dots -->
+                                <circle class="chart-point-1" cx="50" cy="130" r="4" fill="#667eea"/>
+                                <circle class="chart-point-2" cx="90" cy="90" r="4" fill="#00bfa5"/>
+                                <circle class="chart-point-3" cx="130" cy="50" r="4" fill="#00bfa5"/>
+                                <defs>
+                                    <linearGradient id="grad-chart" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea"/>
+                                        <stop offset="100%" style="stop-color:#00bfa5"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
                         </div>
-                        <div class="benefit-content">
+                        <div>
                             <h4>Aumento das vendas</h4>
-                            <p>Interfaces intuitivas e fluxos de navegação pensados para aumentar as conversões e fazer sua empresa vender mais, mesmo quando você está dormindo.</p>
+                            <p>Interfaces intuitivas e fluxos de navegação pensados para aumentar as conversões.</p>
                         </div>
                     </div>
-                    <div class="benefit-item">
+                    <div class="benefit-item stagger-2">
                         <div class="benefit-icon">
-                            <i class="fas fa-mobile-alt"></i>
+                            <svg class="animated-icon device-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Smartphone -->
+                                <rect class="phone-frame" x="70" y="40" width="60" height="110" rx="8" fill="none" stroke="url(#grad-device)" stroke-width="2.5"/>
+                                <line class="phone-top" x1="85" y1="50" x2="115" y2="50" stroke="#667eea" stroke-width="2"/>
+                                <circle class="phone-btn" cx="100" cy="138" r="5" fill="none" stroke="#00bfa5" stroke-width="2"/>
+                                <!-- Desktop outline -->
+                                <rect class="desktop-outline" x="45" y="80" width="50" height="35" rx="2" fill="none" stroke="#667eea" stroke-width="2" opacity="0.5"/>
+                                <line class="desktop-base" x1="50" y1="115" x2="90" y2="115" stroke="#667eea" stroke-width="2" opacity="0.5"/>
+                                <defs>
+                                    <linearGradient id="grad-device" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea"/>
+                                        <stop offset="100%" style="stop-color:#00bfa5"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
                         </div>
-                        <div class="benefit-content">
+                        <div>
                             <h4>100% Responsivo</h4>
-                            <p>Sites que funcionam perfeitamente em qualquer dispositivo, desde smartphones até desktops, garantindo a melhor experiência para seus clientes.</p>
+                            <p>Sites que funcionam perfeitamente em qualquer dispositivo.</p>
                         </div>
                     </div>
-                    <div class="benefit-item">
+                    <div class="benefit-item stagger-3">
                         <div class="benefit-icon">
-                            <i class="fas fa-headset"></i>
+                            <svg class="animated-icon support-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Headset -->
+                                <path class="headset-band" d="M 60 80 Q 60 50 100 50 Q 140 50 140 80" fill="none" stroke="url(#grad-support)" stroke-width="2.5" stroke-linecap="round"/>
+                                <!-- Left ear -->
+                                <rect class="ear-left" x="50" y="75" width="20" height="30" rx="5" fill="none" stroke="url(#grad-support)" stroke-width="2.5"/>
+                                <!-- Right ear -->
+                                <rect class="ear-right" x="130" y="75" width="20" height="30" rx="5" fill="none" stroke="url(#grad-support)" stroke-width="2.5"/>
+                                <!-- Mic -->
+                                <path class="mic-arm" d="M 150 90 L 165 110" stroke="#00bfa5" stroke-width="2.5" stroke-linecap="round"/>
+                                <circle class="mic-circle" cx="168" cy="113" r="6" fill="none" stroke="#00bfa5" stroke-width="2"/>
+                                <defs>
+                                    <linearGradient id="grad-support" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea"/>
+                                        <stop offset="100%" style="stop-color:#00bfa5"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
                         </div>
-                        <div class="benefit-content">
+                        <div>
                             <h4>Suporte técnico</h4>
-                            <p>Equipe disponível para resolver qualquer problema e garantir que seu site esteja sempre funcionando perfeitamente.</p>
+                            <p>Equipe disponível para garantir que seu site esteja sempre funcionando.</p>
                         </div>
                     </div>
-                    <div class="benefit-item">
+                    <div class="benefit-item stagger-4">
                         <div class="benefit-icon">
-                            <i class="fas fa-paint-brush"></i>
+                            <svg class="animated-icon pen-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Pen -->
+                                <path class="pen-body" d="M 130 50 L 120 60 L 80 100 L 70 90 L 60 100 L 80 120 L 130 70 L 140 60 Z" fill="none" stroke="url(#grad-pen)" stroke-width="2.5" stroke-linejoin="round"/>
+                                <line class="pen-tip" x1="70" y1="90" x2="80" y2="100" stroke="#00bfa5" stroke-width="3" stroke-linecap="round"/>
+                                <!-- Design elements -->
+                                <circle class="design-dot-1" cx="110" cy="130" r="6" fill="#667eea"/>
+                                <circle class="design-dot-2" cx="130" cy="140" r="5" fill="#00bfa5"/>
+                                <path class="design-curve" d="M 95 135 Q 105 145 115 135" fill="none" stroke="#667eea" stroke-width="2" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="grad-pen" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea"/>
+                                        <stop offset="100%" style="stop-color:#00bfa5"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
                         </div>
-                        <div class="benefit-content">
+                        <div>
                             <h4>Design exclusivo</h4>
-                            <p>Visual moderno e profissional que transmite confiança e valoriza sua marca no mercado, criado especificamente para o seu negócio.</p>
+                            <p>Visual moderno e profissional criado especificamente para o seu negócio.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-<!-- Seção de Pagamento -->
-<section id="payment" class="payment">
-    <div class="container">
-        <div class="section-title">
-            <h2>Pagamento</h2>
-            <p>Métodos flexíveis e seguros para a contratação dos nossos serviços.</p>
-        </div>
-        <div class="payment-container">
-            <div class="payment-info">
-                <h3>Vantagens exclusivas</h3>
-                <div class="payment-features">
-                    <div class="payment-feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-check-circle"></i>
+
+    <!-- Plans Section -->
+    <section id="plans" class="plans">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title fade-in slide-title">Planos e Investimento</h2>
+                <p class="section-subtitle fade-in slide-text">Escolha o plano ideal. Pagamento: 50% de entrada + 50% na entrega.</p>
+            </div>
+            <div class="plans-grid">
+                <div class="plan-card scale-in stagger-1">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Site PRO</h3>
+                        <div class="plan-price">R$ 600 <span>/único</span></div>
+                        <p>Entrada de R$ 300 + R$ 300 na entrega</p>
+                    </div>
+                    <div class="plan-features">
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <defs>
+                                    <linearGradient id="grad-check" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea"/>
+                                        <stop offset="100%" style="stop-color:#00bfa5"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <span>Site institucional completo</span>
                         </div>
-                        <div class="feature-text">
-                            <h4>Pague apenas após aprovação</h4>
-                            <p>Pagamento somente após o site ser completamente testado e aprovado por você, garantindo total satisfação com o resultado final.</p>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Design responsivo e moderno</span>
+                        </div>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Até 5 páginas</span>
+                        </div>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Integração com WhatsApp</span>
+                        </div>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>60 dias de manutenção grátis</span>
+                        </div>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Entrega em 7-14 dias</span>
                         </div>
                     </div>
-                    <div class="payment-feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-credit-card"></i>
+                    <div class="plan-footer">
+                        <a href="https://wa.me/5583991816152?text=Quero%20contratar%20o%20Plano%20PRO" class="btn btn-outline" target="_blank" style="width: 100%; justify-content: center;">Escolher Plano</a>
+                    </div>
+                </div>
+
+                <div class="plan-card featured scale-in stagger-2">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Site PREMIUM</h3>
+                        <div class="plan-price">R$ 1.200 <span>/único</span></div>
+                        <p>Entrada de R$ 600 + R$ 600 na entrega</p>
+                    </div>
+                    <div class="plan-features">
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Tudo do Plano PRO +</span>
                         </div>
-                        <div class="feature-text">
-                            <h4>Métodos flexíveis</h4>
-                            <p>Aceitamos pagamentos via PIX ou cartão de crédito em até 12x, proporcionando facilidade e segurança em todas as transações.</p>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Até 10 páginas</span>
+                        </div>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Catálogo de produtos</span>
+                        </div>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Formulários personalizados</span>
+                        </div>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>SEO básico otimizado</span>
+                        </div>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>90 dias de manutenção grátis</span>
+                        </div>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Suporte prioritário</span>
                         </div>
                     </div>
-                    <div class="payment-feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-file-contract"></i>
+                    <div class="plan-footer">
+                        <a href="https://wa.me/5583991816152?text=Quero%20contratar%20o%20Plano%20PREMIUM" class="btn btn-primary" target="_blank" style="width: 100%; justify-content: center;">Escolher Plano</a>
+                    </div>
+                </div>
+
+                <div class="plan-card scale-in stagger-3">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Personalizado</h3>
+                        <div class="plan-price">Sob consulta</div>
+                        <p>Negociamos condições especiais</p>
+                    </div>
+                    <div class="plan-features">
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Páginas ilimitadas</span>
                         </div>
-                        <div class="feature-text">
-                            <h4>Direitos autorais garantidos</h4>
-                            <p>Após a conclusão e pagamento, o cliente recebe todos os direitos autorais do site, incluindo o código fonte HTML e CSS completo.</p>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Funcionalidades customizadas</span>
+                        </div>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Integração com APIs</span>
+                        </div>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Chatbot inteligente</span>
+                        </div>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Dashboard administrativo</span>
+                        </div>
+                        <div class="plan-feature">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="check-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-check)" stroke-width="2"/>
+                                <path class="check-mark" d="M 7 12 L 10 15 L 17 8" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Suporte VIP dedicado</span>
                         </div>
                     </div>
-                    <div class="payment-feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="feature-text">
-                            <h4>Segurança garantida</h4>
-                            <p>Utilizamos sistemas de pagamento com criptografia avançada, garantindo total proteção dos seus dados financeiros.</p>
-                        </div>
+                    <div class="plan-footer">
+                        <a href="https://wa.me/5583991816152?text=Quero%20um%20orçamento%20personalizado" class="btn btn-outline" target="_blank" style="width: 100%; justify-content: center;">Peça Orçamento</a>
                     </div>
                 </div>
             </div>
-            <div class="payment-process">
-                <h3>Como funciona o processo</h3>
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>Aprovação do projeto</h4>
-                            <p>Após a conclusão do desenvolvimento, você recebe o link para testar todas as funcionalidades do site.</p>
-                        </div>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>Confirmação e pagamento</h4>
-                            <p>Depois de aprovar o projeto, você receberá as instruções para realizar o pagamento através do método escolhido.</p>
-                        </div>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>Entrega completa</h4>
-                            <p>Com o pagamento confirmado, você recebe todo o código-fonte e os direitos autorais do site são transferidos para você.</p>
-                        </div>
-                    </div>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section id="showcase" class="showcase">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title fade-in slide-title">Portfolio de Projetos</h2>
+                <p class="section-subtitle fade-in slide-text">Conheça alguns dos sites que desenvolvemos</p>
+            </div>
+            <div class="showcase-content">
+                
+                    <ul class="showcase-features">
+                        <li>
+                            
+                    <a href="https://wa.me/5583991816152?text=Quero%20ver%20mais%20projetos!" class="btn btn-primary slide-btn" target="_blank">Ver Mais Projetos</a>
                 </div>
-                <div class="payment-cta">
-                    <a href="https://wa.me/5583991816152?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20formas%20de%20pagamento!" class="btn btn-primary" target="_blank">FALAR SOBRE PAGAMENTO <i class="fas fa-arrow-right"></i></a>
+                <div class="showcase-images slide-right">
+                    <img src="https://via.placeholder.com/400x500/1a1f3a/00bfa5?text=Projeto+1" alt="Projeto 1" class="parallax-img">
+                    <img src="https://via.placeholder.com/400x500/1a1f3a/667eea?text=Projeto+2" alt="Projeto 2" class="parallax-img">
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Briefing Form Section -->
     <section id="briefing" class="briefing">
         <div class="container">
-            <div class="section-title">
-                <h2>Vamos começar seu projeto?</h2>
-                <p>Preencha o formulário abaixo para que possamos entender melhor as necessidades do seu negócio.</p>
+            <div class="section-header">
+                <h2 class="section-title fade-in slide-title">Vamos começar seu projeto?</h2>
+                <p class="section-subtitle fade-in slide-text">Preencha o formulário para entendermos melhor as necessidades do seu negócio</p>
             </div>
-            <div class="briefing-container">
-                <div class="briefing-info">
-                    <h3>Informações importantes</h3>
-                    <p>Para desenvolvermos o site ideal para o seu negócio, precisamos entender melhor suas necessidades e objetivos. Preencha o formulário e envie diretamente para nosso WhatsApp para iniciarmos seu projeto.</p>
-                    <div class="briefing-steps">
-                        <div class="briefing-step">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <h4>Preencha o formulário</h4>
-                                <p>Responda as perguntas sobre seu negócio e objetivos</p>
-                            </div>
-                        </div>
-                        <div class="briefing-step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <h4>Envie pelo WhatsApp</h4>
-                                <p>Você será redirecionado para finalizar o envio</p>
-                            </div>
-                        </div>
-                        <div class="briefing-step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <h4>Receba sua proposta</h4>
-                                <p>Responderemos com uma proposta personalizada em até 24h</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="briefing-cta">
-                        <div class="urgency-tag">
-                            <i class="fas fa-clock"></i> Preencha agora e ganhe 10% de desconto adicional!
-                        </div>
+            <div class="briefing-grid">
+                <div class="briefing-info slide-left">
+                    <div class="urgency-badge" style="margin-top: 24px;">
+                        <i class="fas fa-gift"></i>
+                        <span>Preencha agora e ganhe 10% de desconto adicional!</span>
                     </div>
                 </div>
-                <div class="briefing-form">
-                    <form id="briefingForm" action="#" method="post">
+                <div class="briefing-form slide-right">
+                    <form id="briefingForm">
                         <div class="form-group">
-                            <label for="name">Nome completo*</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
+                            <label>Nome completo*</label>
+                            <input type="text" class="form-control" name="name" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">E-mail*</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
+                            <label>E-mail*</label>
+                            <input type="email" class="form-control" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">WhatsApp*</label>
-                            <input type="tel" id="phone" name="phone" class="form-control" required>
+                            <label>WhatsApp*</label>
+                            <input type="tel" class="form-control" name="phone" required>
                         </div>
                         <div class="form-group">
-                            <label for="business">Nome do negócio*</label>
-                            <input type="text" id="business" name="business" class="form-control" required>
+                            <label>Nome do negócio*</label>
+                            <input type="text" class="form-control" name="business" required>
                         </div>
                         <div class="form-group">
-                            <label for="segment">Segmento/Nicho*</label>
-                            <input type="text" id="segment" name="segment" class="form-control" required>
+                            <label>Segmento/Nicho*</label>
+                            <input type="text" class="form-control" name="segment" required>
                         </div>
                         <div class="form-group">
-                            <label for="objective">Objetivo principal do site*</label>
-                            <select id="objective" name="objective" class="form-control" required>
+                            <label>Objetivo principal do site*</label>
+                            <select class="form-control" name="objective" required>
                                 <option value="">Selecione...</option>
-                                <option value="Vender produtos/serviços">Vender produtos/serviços</option>
-                                <option value="Captar leads/contatos">Captar leads/contatos</option>
-                                <option value="Apenas informativo">Apenas informativo</option>
-                                <option value="Site institucional">Site institucional</option>
-                                <option value="Outro">Outro</option>
+                                <option>Vender produtos/serviços</option>
+                                <option>Captar leads/contatos</option>
+                                <option>Apenas informativo</option>
+                                <option>Site institucional</option>
+                                <option>Outro</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="plan">Qual plano tem interesse?*</label>
-                            <select id="plan" name="plan" class="form-control" required>
+                            <label>Qual plano tem interesse?*</label>
+                            <select class="form-control" name="plan" required>
                                 <option value="">Selecione...</option>
-                                <option value="Site PRO">Site PRO</option>
-                                <option value="Site PREMIUM">Site PREMIUM</option>
-                                <option value="Projeto Personalizado">Projeto Personalizado</option>
-                                <option value="Não sei ainda">Não sei ainda</option>
+                                <option>Site PRO</option>
+                                <option>Site PREMIUM</option>
+                                <option>Projeto Personalizado</option>
+                                <option>Não sei ainda</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="message">Informações adicionais</label>
-                            <textarea id="message" name="message" class="form-control" rows="4"></textarea>
+                            <label>Informações adicionais</label>
+                            <textarea class="form-control" name="message"></textarea>
                         </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">ENVIAR PARA WHATSAPP <i class="fab fa-whatsapp"></i></button>
-                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                            <span>ENVIAR PARA WHATSAPP</span>
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
                         <div class="form-notice">
-                            <i class="fas fa-shield-alt"></i> Seus dados estão seguros e serão usados apenas para contato.
+                            <i class="fas fa-shield-alt"></i>
+                            Seus dados estão seguros e serão usados apenas para contato.
                         </div>
                     </form>
                 </div>
@@ -300,159 +623,271 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
     <section id="faq" class="faq">
         <div class="container">
-            <div class="section-title">
-                <h2>Dúvidas Frequentes</h2>
-                <p>Respostas para as perguntas mais comuns sobre nossos serviços.</p>
+            <div class="section-header">
+                <h2 class="section-title fade-in slide-title">Dúvidas Frequentes</h2>
+                <p class="section-subtitle fade-in slide-text">Respostas para as perguntas mais comuns sobre nossos serviços</p>
             </div>
             <div class="faq-container">
-                <div class="faq-item active">
-                    <div class="faq-question">
-                        Como editar o catálogo?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer" style="max-height: 300px;">
-                        <div class="faq-answer-content">
-                            Nós enviamos um tutorial rápido de como editar pelo computador ou celular. O processo é simples e intuitivo, permitindo que você atualize seu catálogo quando necessário, sem depender de nossa equipe para pequenas alterações.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Não tenho tempo para atualizar o catálogo do site. Vocês prestam esse serviço?
-                        <i class="fas fa-chevron-down"></i>
+                <div class="faq-item active fade-in stagger-1">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Quanto tempo leva para desenvolver meu site?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="faq-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-faq)" stroke-width="2"/>
+                            <path class="faq-chevron" d="M 8 10 L 12 14 L 16 10" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="grad-faq" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#667eea"/>
+                                    <stop offset="100%" style="stop-color:#00bfa5"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
                     </div>
                     <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Sim! Nós temos uma equipe de suporte pós-entrega que pode assumir a responsabilidade de atualizar o catálogo do seu site. Este serviço está disponível mediante contratação de um plano mensal, cujo valor é definido de acordo com a frequência de atualizações necessárias para o seu negócio.
+                        <p>Sites PRO ficam prontos em 7-14 dias, enquanto sites PREMIUM levam de 14-21 dias. Projetos personalizados têm prazo negociado conforme complexidade.</p>
+                        <div class="faq-cta">
+                            <a href="https://wa.me/5583991816152?text=Tenho%20dúvidas%20sobre%20prazo" target="_blank">
+                                Ainda tem dúvidas? Fale conosco →
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        O layout do meu site vai ser idêntico ao de outras lojas?
-                        <i class="fas fa-chevron-down"></i>
+
+                <div class="faq-item fade-in stagger-2">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Como funciona o pagamento?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="faq-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-faq)" stroke-width="2"/>
+                            <path class="faq-chevron" d="M 8 10 L 12 14 L 16 10" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
                     <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Não! Cada empresa tem um visual exclusivo. Graças a nossa equipe de desenvolvedores que nos entrega um novo visual semanalmente, garantimos que seu site será único e personalizado de acordo com a identidade da sua marca.
+                        <p>Cobramos 50% de sinal para iniciar o projeto e 50% na entrega final após sua aprovação. Aceitamos PIX, transferência e cartão em até 12x.</p>
+                        <div class="faq-cta">
+                            <a href="https://wa.me/5583991816152?text=Tenho%20dúvidas%20sobre%20pagamento" target="_blank">
+                                Ainda tem dúvidas? Fale conosco →
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Quanto tempo leva para desenvolver um site?
-                        <i class="fas fa-chevron-down"></i>
+
+                <div class="faq-item fade-in stagger-3">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>O que inclui a manutenção de 60/90 dias?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="faq-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-faq)" stroke-width="2"/>
+                            <path class="faq-chevron" d="M 8 10 L 12 14 L 16 10" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
                     <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            O tempo de desenvolvimento varia conforme a complexidade do projeto. Sites PRO geralmente ficam prontos em 7 a 14 dias, enquanto sites PREMIUM podem levar de 14 a 21 dias, dependendo das personalizações necessárias.
+                        <p><strong>Inclui:</strong> Correção de bugs, ajustes de texto/imagem, atualizações de conteúdo básico. <strong>Não inclui:</strong> Novas páginas, funcionalidades extras ou redesign. <strong>SLA:</strong> Respondemos em até 24h úteis.</p>
+                        <div class="faq-cta">
+                            <a href="https://wa.me/5583991816152?text=Tenho%20dúvidas%20sobre%20manutenção" target="_blank">
+                                Ainda tem dúvidas? Fale conosco →
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        O site funcionará bem em dispositivos móveis?
-                        <i class="fas fa-chevron-down"></i>
+
+                <div class="faq-item fade-in stagger-4">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Posso adicionar mais WhatsApp sem custo?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="faq-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-faq)" stroke-width="2"/>
+                            <path class="faq-chevron" d="M 8 10 L 12 14 L 16 10" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
                     <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Sim! Todos os nossos sites são desenvolvidos com design responsivo, garantindo uma experiência perfeita em smartphones, tablets e computadores. Na era mobile, isso é essencial para o sucesso do seu negócio online.
+                        <p>Sim! Você pode adicionar quantos números de WhatsApp precisar para diferentes atendentes, sem custo adicional.</p>
+                        <div class="faq-cta">
+                            <a href="https://wa.me/5583991816152?text=Tenho%20dúvidas" target="_blank">
+                                Ainda tem dúvidas? Fale conosco →
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Eu tenho mais de uma atendente, eu preciso pagar para adicionar mais um link de WhatsApp?
-                        <i class="fas fa-chevron-down"></i>
+
+                <div class="faq-item fade-in stagger-5">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>O site vai funcionar bem no celular?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="faq-circle" cx="12" cy="12" r="10" fill="none" stroke="url(#grad-faq)" stroke-width="2"/>
+                            <path class="faq-chevron" d="M 8 10 L 12 14 L 16 10" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
                     <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Não precisa! Você pode escolher a quantidade de redes sociais que você quiser, incluindo WhatsApp, Instagram, Facebook e localização. Adicionamos quantos links de WhatsApp você precisar para cada atendente sem custos adicionais.
+                        <p>Sim! Todos os sites são 100% responsivos e otimizados para proporcionar experiência perfeita em smartphones, tablets e computadores.</p>
+                        <div class="faq-cta">
+                            <a href="https://wa.me/5583991816152?text=Tenho%20dúvidas" target="_blank">
+                                Ainda tem dúvidas? Fale conosco →
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Depois que o site estiver pronto, posso fazer alterações sem custo adicional?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Oferecemos um período de 90 dias após o teste e validação do site para realizar ajustes limitados, como atualização de informações básicas, sem custo adicional. Após este período, você pode contratar nosso serviço de manutenção para continuar fazendo atualizações e modificações no seu site. Isso garante que seu site permaneça sempre atualizado conforme as necessidades do seu negócio.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="faq-cta">
-                <p>Tem mais dúvidas? Fale diretamente com nossa equipe!</p>
-                <a href="https://wa.me/5583991816152?text=Ol%C3%A1%2C%20tenho%20algumas%20d%C3%BAvidas%20sobre%20seus%20servi%C3%A7os!" class="btn btn-primary" target="_blank">FALAR COM ESPECIALISTA <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
-    <footer>
-        <div class="container footer-container">
-            <div class="footer-col">
-                <h3>Dezain Code</h3>
-                <p>Transformando visões em resultados digitais com sites modernos, responsivos e otimizados para vendas.</p>
-                <div class="social-links">
-                    <a href="https://www.instagram.com/arthur.fellp/" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/5583991816152" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <!-- Partner Section -->
+    <section id="partner" class="partner">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title fade-in slide-title">Seja Nosso Parceiro</h2>
+                <p class="section-subtitle fade-in slide-text">Programa especial para agências e profissionais de marketing digital</p>
+            </div>
+            <div class="partner-content">
+                <div class="partner-info slide-left">
+                    <h3 class="slide-title">Como funciona a parceria?</h3>
+                    <p>Você vende nossos serviços com total liberdade de precificação, enquanto cuidamos de toda a parte técnica. É simples, lucrativo e sem complicação.</p>
+                    
+                    <div class="partner-benefits">
+                        <div class="benefit-item stagger-1">
+                            <div class="benefit-icon">
+                                <svg class="animated-icon brand-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Tag/Label shape -->
+                                    <path class="tag-shape" d="M 50 70 L 90 70 L 110 100 L 90 130 L 50 130 L 70 100 Z" fill="none" stroke="url(#grad-brand)" stroke-width="2.5"/>
+                                    <!-- Star inside -->
+                                    <path class="star-brand" d="M 80 90 L 83 98 L 91 98 L 85 103 L 88 111 L 80 106 L 72 111 L 75 103 L 69 98 L 77 98 Z" fill="#00bfa5"/>
+                                    <!-- Megaphone -->
+                                    <path class="megaphone" d="M 110 80 L 135 70 L 135 130 L 110 120 Z" fill="none" stroke="#667eea" stroke-width="2.5"/>
+                                    <path class="sound-wave-1" d="M 145 85 Q 155 95 155 100 Q 155 105 145 115" fill="none" stroke="#00bfa5" stroke-width="2" stroke-linecap="round"/>
+                                    <defs>
+                                        <linearGradient id="grad-brand" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#667eea"/>
+                                            <stop offset="100%" style="stop-color:#00bfa5"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Venda com sua marca</h4>
+                                <p>Você divulga nossos serviços no seu Instagram, feed, stories, destaques e bio. O cliente é seu!</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item stagger-2">
+                            <div class="benefit-icon">
+                                <svg class="animated-icon price-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Price tag -->
+                                    <path class="price-tag" d="M 60 60 L 100 60 L 140 100 L 100 140 L 60 100 Z" fill="none" stroke="url(#grad-price)" stroke-width="2.5"/>
+                                    <circle class="tag-hole" cx="80" cy="80" r="6" fill="none" stroke="#667eea" stroke-width="2"/>
+                                    <!-- Dollar sign -->
+                                    <path class="dollar" d="M 95 80 Q 85 80 85 90 Q 85 95 95 95 Q 105 95 105 105 Q 105 110 95 110" fill="none" stroke="#00bfa5" stroke-width="2.5" stroke-linecap="round"/>
+                                    <line class="dollar-line" x1="95" y1="75" x2="95" y2="115" stroke="#00bfa5" stroke-width="2.5"/>
+                                    <defs>
+                                        <linearGradient id="grad-price" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#667eea"/>
+                                            <stop offset="100%" style="stop-color:#00bfa5"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Defina seu preço</h4>
+                                <p>Converse com o cliente, entenda o que ele precisa e venda pelo preço que achar justo. Você controla sua margem.</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item stagger-3">
+                            <div class="benefit-icon">
+                                <svg class="animated-icon delivery-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Package box -->
+                                    <rect class="box" x="60" y="70" width="80" height="60" rx="4" fill="none" stroke="url(#grad-delivery)" stroke-width="2.5"/>
+                                    <line class="box-line-h" x1="60" y1="100" x2="140" y2="100" stroke="#667eea" stroke-width="2"/>
+                                    <line class="box-line-v" x1="100" y1="70" x2="100" y2="130" stroke="#667eea" stroke-width="2"/>
+                                    <!-- Check mark -->
+                                    <circle class="check-circle" cx="100" cy="100" r="20" fill="none" stroke="#00bfa5" stroke-width="2.5"/>
+                                    <path class="check-mark" d="M 90 100 L 97 107 L 110 93" fill="none" stroke="#00bfa5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <defs>
+                                        <linearGradient id="grad-delivery" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#667eea"/>
+                                            <stop offset="100%" style="stop-color:#00bfa5"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Nós entregamos tudo</h4>
+                                <p>Fornecemos sites profissionais, com qualidade garantida e dentro do prazo. Você só cuida da venda.</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item stagger-4">
+                            <div class="benefit-icon">
+                                <svg class="animated-icon shield-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Shield -->
+                                    <path class="shield" d="M 100 50 L 140 65 L 140 100 Q 140 130 100 145 Q 60 130 60 100 L 60 65 Z" fill="none" stroke="url(#grad-shield)" stroke-width="2.5"/>
+                                    <!-- Check inside -->
+                                    <path class="shield-check" d="M 85 95 L 95 105 L 115 85" fill="none" stroke="#00bfa5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <defs>
+                                        <linearGradient id="grad-shield" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#667eea"/>
+                                            <stop offset="100%" style="stop-color:#00bfa5"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Responsabilidade total</h4>
+                                <p>Assumimos toda a responsabilidade técnica, suporte e garantia. Sua reputação está protegida.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="partner-whatsapp-cta slide-right">
+                    <h3 class="slide-title">Pronto para crescer?</h3>
+                    <a href="https://wa.me/5583991816152?text=Quero%20ser%20um%20parceiro%20da%20Dezain%20Code!" class="btn-whatsapp slide-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>QUERO SER PARCEIRO</span>
+                    </a>
                 </div>
             </div>
-            <div class="footer-col">
-                <h3>Serviços</h3>
-                <ul class="footer-links">
-                    <li><a href="#plans">Site PRO</a></li>
-                    <li><a href="#plans">Site PREMIUM</a></li>
-                    <li><a href="#briefing">Projetos Personalizados</a></li>
-                    <li><a href="#briefing">Consultoria Web</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Links Rápidos</h3>
-                <ul class="footer-links">
-                    <li><a href="#home">Início</a></li>
-                    <li><a href="#showcase">Portfolio</a></li>
-                    <li><a href="#benefits">Benefícios</a></li>
-                    <li><a href="#faq">Dúvidas Frequentes</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Contato</h3>
-                <p><i class="fas fa-map-marker-alt"></i> João Pessoa - Paraíba</p>
-                <p><i class="fas fa-phone"></i> <a href="tel:+5583993690482">(83) 99369-0482</a></p>
-                <p><a href="https://wa.me/5583993690482" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></p>
-            </div>
         </div>
-        <div class="copyright">
-            &copy; 2025 Dezain Cody. Todos os direitos reservados.
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Dezain Code</h3>
+                    <p>Transformando visões em resultados digitais com sites modernos, responsivos e otimizados para vendas.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/arthur.fellp/" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/5583991816152" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Serviços</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Desenvolvimento Web</a></li>
+                        <li><a href="#services">Chatbot Inteligente</a></li>
+                        <li><a href="#services">Manutenção</a></li>
+                        <li><a href="#services">Personalização</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#plans">Planos</a></li>
+                        <li><a href="#showcase">Portfolio</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> João Pessoa - Paraíba</p>
+                    <p><i class="fas fa-phone"></i> (83) 99181-6152</p>
+                    <p><i class="fas fa-envelope"></i> lipdzy@gmail.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 Dezain Code. Todos os direitos reservados.
+            </div>
         </div>
     </footer>
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>portalId</key>
-	<string>50487639</string>
-	<key>hublet</key>
-	<string>na1</string>
-	<key>environment</key>
-	<string>prod</string>
-	<key>defaultChatFlow</key>
-	<string>----</string>
-</dict>
-</plist>
 
-    <!-- JavaScript -->
     <script src="script.js"></script>
-    <!-- Start of HubSpot Embed Code -->
-  <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/50487639.js"></script>
-<!-- End of HubSpot Embed Code -->
 </body>
-
 </html>
-
-
-
