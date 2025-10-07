@@ -191,7 +191,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Highlight Badge */
 .highlight-badge {
     display: table;
-    align-items: flex-start;
+    align-items: center;
     gap: 8px;
     padding: 8px 16px;
     background: var(--gradient-tech);
@@ -2232,4 +2232,5 @@ footer {
     }
 
 }
+
 
