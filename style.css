@@ -2253,14 +2253,33 @@ footer {
         max-width: 100vw !important;
     }
     
-    /* CENTRALIZAÇÃO PADRONIZADA PARA TODAS AS SEÇÕES */
+    /* CENTRALIZAR ELEMENTOS FORA DO CARROSSEL NA SEÇÃO PARCERIA */
+    .partner .partner-content {
+        max-width: 100% !important;
+        padding: 0 20px !important;
+    }
+    
+    .partner .partner-info,
+    .partner .partner-whatsapp-cta {
+        max-width: 340px !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+    }
+    
+    /* GARANTIR QUE BENEFITS FIQUE CENTRALIZADO */
+    .benefits .benefits-grid {
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    /* CENTRALIZAÇÃO PADRONIZADA PARA TODAS AS SEÇÕES - SEM BORDAS */
     .carousel-container {
         position: relative !important;
         width: 100% !important;
         max-width: 100vw !important;
         overflow: hidden !important;
         padding: 0 0 80px 0 !important;
-        margin: 0 !important;
+        margin: 0 auto !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
@@ -2271,10 +2290,11 @@ footer {
         box-sizing: border-box !important;
     }
     
-    /* SEM BORDAS VISÍVEIS - REMOVER GRADIENTES */
+    /* REMOVER COMPLETAMENTE QUALQUER BORDA VISÍVEL */
     .carousel-container::before,
     .carousel-container::after {
         display: none !important;
+        content: none !important;
     }
     
     .carousel-track {
@@ -2290,6 +2310,8 @@ footer {
         border: none !important;
         outline: none !important;
         overflow: visible !important;
+        background: transparent !important;
+        box-shadow: none !important;
     }
     
     .carousel-track:active {
@@ -2309,6 +2331,8 @@ footer {
         justify-content: center !important;
         border: none !important;
         outline: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
     }
     
     .carousel-slide.active {
@@ -2330,6 +2354,8 @@ footer {
         max-width: 340px !important;
         margin: 0 auto !important;
         display: block !important;
+        border: none !important;
+        outline: none !important;
     }
     
     .carousel-slide .service-card,
@@ -2344,6 +2370,36 @@ footer {
     .carousel-slide .plan-card:hover,
     .carousel-slide .benefit-item:hover {
         transform: none !important;
+    }
+    
+    /* REMOVER QUALQUER OUTLINE/BORDA DE FOCUS */
+    .carousel-container,
+    .carousel-container *,
+    .carousel-track,
+    .carousel-track *,
+    .carousel-slide,
+    .carousel-slide * {
+        outline: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+    
+    /* FORÇAR REMOÇÃO DE QUALQUER BORDA EM TODOS OS ELEMENTOS DO CARROSSEL */
+    .services .carousel-container,
+    .benefits .carousel-container,
+    .plans .carousel-container,
+    .partner .carousel-container {
+        border: 0 !important;
+        outline: 0 !important;
+        box-shadow: none !important;
+    }
+    
+    .services .carousel-track,
+    .benefits .carousel-track,
+    .plans .carousel-track,
+    .partner .carousel-track {
+        border: 0 !important;
+        outline: 0 !important;
+        box-shadow: none !important;
     }
     
     /* ============================================
