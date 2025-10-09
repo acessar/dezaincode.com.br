@@ -2232,5 +2232,116 @@ footer {
     }
 
 }
+/* ESTILOS DE CARROSSEL MOBILE */
+@media (max-width: 768px) {
+    .carousel-wrapper {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        padding-bottom: 48px;
+    }
+    
+    .mobile-carousel {
+        display: flex !important;
+        overflow-x: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        gap: 0 !important;
+        cursor: grab;
+    }
+    
+    .mobile-carousel:active {
+        cursor: grabbing;
+    }
+    
+    .mobile-carousel > * {
+        flex: 0 0 100%;
+        scroll-snap-align: start;
+        padding: 0 8px;
+        box-sizing: border-box;
+    }
+    
+    /* Dots de navegação */
+    .carousel-dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 24px;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .carousel-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--border-subtle);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .carousel-dot.active {
+        width: 24px;
+        border-radius: 4px;
+        background: var(--gradient-tech);
+        box-shadow: 0 0 10px var(--accent-glow);
+    }
+    
+    /* Ajustes específicos para cada seção */
+    .services-grid.mobile-carousel .service-card,
+    .plans-grid.mobile-carousel .plan-card,
+    .benefits-list.mobile-carousel .benefit-item,
+    .partner-benefits.mobile-carousel .benefit-item {
+        margin-bottom: 0;
+    }
+    
+    /* Remover transformações de hover em mobile carousel */
+    .mobile-carousel .service-card:hover,
+    .mobile-carousel .plan-card:hover,
+    .mobile-carousel .benefit-item:hover {
+        transform: none !important;
+    }
+    
+    /* Indicador visual de swipe */
+    .carousel-wrapper::after {
+        content: '← Arraste →';
+        position: absolute;
+        bottom: -24px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        color: var(--text-muted);
+        font-weight: 600;
+        opacity: 0.5;
+        animation: fadeInOut 3s ease-in-out infinite;
+    }
+    
+    @keyframes fadeInOut {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 0.7; }
+    }
+}
 
+/* Remover indicador após primeira interação */
+.carousel-wrapper.interacted::after {
+    display: none;
+}
 
+/* Garantir que no desktop o carrossel não seja ativado */
+@media (min-width: 769px) {
+    .carousel-wrapper {
+        display: contents;
+    }
+    
+    .carousel-dots {
+        display: none !important;
+    }
+    
+    .mobile-carousel {
+        display: grid !important;
+    }
+}
