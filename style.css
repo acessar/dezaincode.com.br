@@ -2244,18 +2244,21 @@ footer {
         max-width: 100vw !important;
     }
     
-    /* GARANTIR QUE SECTION PARTNER NÃO CAUSE OVERFLOW */
+    /* GARANTIR QUE TODAS AS SECTIONS NÃO CAUSEM OVERFLOW */
+    .services,
+    .benefits,
+    .plans,
     .partner {
         overflow-x: hidden !important;
         max-width: 100vw !important;
     }
     
-    /* FORÇAR CENTRALIZAÇÃO TOTAL - SEM BORDAS */
+    /* CENTRALIZAÇÃO PADRONIZADA PARA TODAS AS SEÇÕES */
     .carousel-container {
         position: relative !important;
         width: 100% !important;
         max-width: 100vw !important;
-        overflow: visible !important;
+        overflow: hidden !important;
         padding: 0 0 80px 0 !important;
         margin: 0 !important;
         display: flex !important;
@@ -2268,9 +2271,10 @@ footer {
         box-sizing: border-box !important;
     }
     
-    .partner .carousel-container {
-        overflow: hidden !important;
-        padding: 0 0 70px 0 !important;
+    /* SEM BORDAS VISÍVEIS - REMOVER GRADIENTES */
+    .carousel-container::before,
+    .carousel-container::after {
+        display: none !important;
     }
     
     .carousel-track {
@@ -2292,6 +2296,7 @@ footer {
         cursor: grabbing !important;
     }
     
+    /* SLIDES PADRONIZADOS - MESMA CONFIGURAÇÃO PARA TODAS AS SEÇÕES */
     .carousel-slide {
         flex: 0 0 100% !important;
         width: 100% !important;
@@ -2319,7 +2324,7 @@ footer {
         pointer-events: none !important;
     }
     
-    /* FORÇAR LARGURA E CENTRALIZAÇÃO DOS CARDS */
+    /* LARGURA PADRONIZADA DOS CARDS - TODAS AS SEÇÕES */
     .carousel-slide > * {
         width: 100% !important;
         max-width: 340px !important;
@@ -2342,25 +2347,19 @@ footer {
     }
     
     /* ============================================
-       SEÇÃO PARCERIA - FORÇAR DENTRO DA TELA
+       SEÇÃO PARCERIA - MESMA LÓGICA DAS OUTRAS
     ============================================ */
     
-    .partner .carousel-track {
-        max-width: 100vw !important;
-    }
-    
+    /* Usar exatamente o mesmo padding e largura das outras seções */
     .partner .carousel-slide {
-        padding: 0 15px !important;
-        max-width: 100vw !important;
-        box-sizing: border-box !important;
+        padding: 0 20px !important;
     }
     
     .partner .carousel-slide > * {
-        max-width: 85vw !important;
-        width: 100% !important;
-        margin: 0 auto !important;
+        max-width: 340px !important;
     }
     
+    /* Ajustar apenas o conteúdo interno do card */
     .partner .carousel-slide .benefit-item {
         padding: 10px !important;
         gap: 10px !important;
@@ -2370,9 +2369,6 @@ footer {
         align-items: center !important;
         justify-content: flex-start !important;
         border-radius: 14px !important;
-        width: 100% !important;
-        max-width: 85vw !important;
-        box-sizing: border-box !important;
     }
     
     .partner .carousel-slide .benefit-icon {
@@ -2480,10 +2476,6 @@ footer {
     
     .benefits .carousel-controls {
         display: none !important;
-    }
-    
-    .partner .carousel-controls {
-        padding: 0 5px !important;
     }
     
     .carousel-btn {
@@ -2622,43 +2614,6 @@ footer {
     }
     
     /* ============================================
-       GRADIENTES NAS BORDAS - MAIS SUAVES
-    ============================================ */
-    
-    .carousel-container::before,
-    .carousel-container::after {
-        content: '' !important;
-        position: absolute !important;
-        top: 0 !important;
-        bottom: 80px !important;
-        width: 20px !important;
-        pointer-events: none !important;
-        z-index: 5 !important;
-    }
-    
-    .carousel-container::before {
-        left: 0 !important;
-        background: linear-gradient(to right, var(--bg-dark), transparent) !important;
-    }
-    
-    .carousel-container::after {
-        right: 0 !important;
-        background: linear-gradient(to left, var(--bg-dark), transparent) !important;
-    }
-    
-    .benefits .carousel-container::before,
-    .plans .carousel-container::before,
-    .partner .carousel-container::before {
-        background: linear-gradient(to right, var(--bg-elevated), transparent) !important;
-    }
-    
-    .benefits .carousel-container::after,
-    .plans .carousel-container::after,
-    .partner .carousel-container::after {
-        background: linear-gradient(to left, var(--bg-elevated), transparent) !important;
-    }
-    
-    /* ============================================
        ANIMAÇÕES
     ============================================ */
     
@@ -2702,21 +2657,22 @@ footer {
 ============================================ */
 
 @media (max-width: 380px) {
+    /* MANTER PADDING IGUAL EM TODAS AS SEÇÕES */
     .carousel-slide {
-        padding: 0 12px !important;
+        padding: 0 15px !important;
     }
     
     .carousel-slide > * {
-        max-width: 280px !important;
+        max-width: 300px !important;
     }
     
-    /* PARCERIA AINDA MENOR EM TELAS PEQUENAS */
+    /* PARCERIA - MESMOS AJUSTES, SÓ ÍCONES MENORES */
     .partner .carousel-slide {
-        padding: 0 10px !important;
+        padding: 0 15px !important;
     }
     
     .partner .carousel-slide > * {
-        max-width: 90vw !important;
+        max-width: 300px !important;
     }
     
     .partner .carousel-slide .benefit-item {
@@ -2753,11 +2709,7 @@ footer {
     }
     
     .carousel-controls {
-        padding: 0 4px !important;
-    }
-    
-    .partner .carousel-controls {
-        padding: 0 2px !important;
+        padding: 0 6px !important;
     }
 }
 
@@ -2766,10 +2718,6 @@ footer {
 ============================================ */
 
 @media (min-width: 381px) and (max-width: 480px) {
-    .partner .carousel-slide > * {
-        max-width: 88vw !important;
-    }
-    
     .partner .carousel-slide .benefit-item {
         padding: 9px !important;
         max-height: 95px !important;
