@@ -28,121 +28,294 @@ function typeWriter() {
     setTimeout(typeBlue, 500);
 }
 
-// CARROSSEL MOBILE PARA CARDS
-function initMobileCarousels() {
-    // Só ativa em telas mobile (max-width: 768px)
-    if (window.innerWidth > 768) return;
-    
-    const carouselSections = [
-        { selector: '.services-grid', dotsClass: 'services-dots' },
-        { selector: '.benefits-list', dotsClass: 'benefits-dots' },
-        { selector: '.plans-grid', dotsClass: 'plans-dots' },
-        { selector: '.partner-benefits', dotsClass: 'partner-dots' }
-    ];
-    
-    carouselSections.forEach(section => {
-        const container = document.querySelector(section.selector);
-        if (!container) return;
+// CARROSSEL MOBILE MODERNO COM AUTOPLAY
+class MobileCarousel {
+    constructor(containerSelector, options = {}) {
+        this.container = document.querySelector(containerSelector);
+        if (!this.container) return;
         
-        // Adicionar classe carousel
-        container.classList.add('mobile-carousel');
+        this.options = {
+            autoplay: true,
+            autoplaySpeed: 4000,
+            ...options
+        };
         
-        // Criar wrapper se não existir
-        if (!container.parentElement.classList.contains('carousel-wrapper')) {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'carousel-wrapper';
-            container.parentElement.insertBefore(wrapper, container);
-            wrapper.appendChild(container);
-            
-            // Criar indicadores de dots
-            const dotsContainer = document.createElement('div');
-            dotsContainer.className = `carousel-dots ${section.dotsClass}`;
-            wrapper.appendChild(dotsContainer);
+        this.wrapper = null;
+        this.track = null;
+        this.slides = [];
+        this.currentIndex = 0;
+        this.isTransitioning = false;
+        this.autoplayInterval = null;
+        this.startX = 0;
+        this.currentX = 0;
+        this.isDragging = false;
+        
+        this.init();
+    }
+    
+    init() {
+        // Só ativa em mobile
+        if (window.innerWidth > 768) return;
+        
+        this.createStructure();
+        this.setupEventListeners();
+        this.updateSlides();
+        
+        if (this.options.autoplay) {
+            this.startAutoplay();
         }
+    }
+    
+    createStructure() {
+        // Pegar todos os cards originais
+        this.slides = Array.from(this.container.children);
         
-        const cards = Array.from(container.children);
-        let currentIndex = 0;
-        let startX = 0;
-        let isDragging = false;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
+        // Criar estrutura do carrossel
+        this.wrapper = document.createElement('div');
+        this.wrapper.className = 'carousel-container';
+        
+        this.track = document.createElement('div');
+        this.track.className = 'carousel-track';
+        
+        // Mover slides para o track
+        this.slides.forEach(slide => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'carousel-slide';
+            wrapper.appendChild(slide);
+            this.track.appendChild(wrapper);
+        });
+        
+        this.wrapper.appendChild(this.track);
+        
+        // Criar controles
+        const controls = this.createControls();
+        this.wrapper.appendChild(controls);
         
         // Criar dots
-        const dotsContainer = container.parentElement.querySelector('.carousel-dots');
-        dotsContainer.innerHTML = '';
-        cards.forEach((_, index) => {
-            const dot = document.createElement('span');
+        const dots = this.createDots();
+        this.wrapper.appendChild(dots);
+        
+        // Substituir container original
+        this.container.parentElement.insertBefore(this.wrapper, this.container);
+        this.container.remove();
+    }
+    
+    createControls() {
+        const controls = document.createElement('div');
+        controls.className = 'carousel-controls';
+        controls.innerHTML = `
+            <button class="carousel-btn carousel-prev">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="carousel-btn carousel-next">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        `;
+        return controls;
+    }
+    
+    createDots() {
+        const dotsContainer = document.createElement('div');
+        dotsContainer.className = 'carousel-dots';
+        
+        this.slides.forEach((_, index) => {
+            const dot = document.createElement('button');
             dot.className = 'carousel-dot';
             if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(index));
+            dot.addEventListener('click', () => this.goToSlide(index));
             dotsContainer.appendChild(dot);
         });
         
-        function updateDots() {
-            const dots = dotsContainer.querySelectorAll('.carousel-dot');
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentIndex);
-            });
-        }
+        return dotsContainer;
+    }
+    
+    setupEventListeners() {
+        // Navegação por botões
+        const prevBtn = this.wrapper.querySelector('.carousel-prev');
+        const nextBtn = this.wrapper.querySelector('.carousel-next');
         
-        function goToSlide(index) {
-            currentIndex = Math.max(0, Math.min(index, cards.length - 1));
-            const offset = -currentIndex * 100;
-            container.style.transform = `translateX(${offset}%)`;
-            updateDots();
-        }
+        prevBtn.addEventListener('click', () => this.prev());
+        nextBtn.addEventListener('click', () => this.next());
         
-        function handleTouchStart(e) {
-            isDragging = true;
-            startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-            container.style.transition = 'none';
-        }
+        // Touch/Mouse events
+        this.track.addEventListener('touchstart', (e) => this.handleDragStart(e), { passive: true });
+        this.track.addEventListener('touchmove', (e) => this.handleDragMove(e), { passive: false });
+        this.track.addEventListener('touchend', () => this.handleDragEnd());
         
-        function handleTouchMove(e) {
-            if (!isDragging) return;
-            
-            const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-            const diff = currentX - startX;
-            const containerWidth = container.offsetWidth;
-            const movePercent = (diff / containerWidth) * 100;
-            
-            currentTranslate = prevTranslate + movePercent;
-            const maxTranslate = -(cards.length - 1) * 100;
-            currentTranslate = Math.max(maxTranslate, Math.min(0, currentTranslate));
-            
-            container.style.transform = `translateX(${currentTranslate}%)`;
-        }
+        this.track.addEventListener('mousedown', (e) => this.handleDragStart(e));
+        this.track.addEventListener('mousemove', (e) => this.handleDragMove(e));
+        this.track.addEventListener('mouseup', () => this.handleDragEnd());
+        this.track.addEventListener('mouseleave', () => this.handleDragEnd());
         
-        function handleTouchEnd() {
-            if (!isDragging) return;
-            isDragging = false;
-            
-            container.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            
-            const movedBy = currentTranslate - prevTranslate;
-            
-            if (movedBy < -10 && currentIndex < cards.length - 1) {
-                currentIndex++;
-            } else if (movedBy > 10 && currentIndex > 0) {
-                currentIndex--;
+        // Pausar autoplay no hover/touch
+        this.wrapper.addEventListener('mouseenter', () => this.stopAutoplay());
+        this.wrapper.addEventListener('mouseleave', () => {
+            if (this.options.autoplay) this.startAutoplay();
+        });
+        
+        this.wrapper.addEventListener('touchstart', () => this.stopAutoplay(), { once: true });
+    }
+    
+    handleDragStart(e) {
+        this.isDragging = true;
+        this.startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        this.track.style.cursor = 'grabbing';
+        this.stopAutoplay();
+    }
+    
+    handleDragMove(e) {
+        if (!this.isDragging) return;
+        
+        e.preventDefault();
+        this.currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        const diff = this.currentX - this.startX;
+        
+        // Visual feedback durante o drag
+        const offset = -(this.currentIndex * 100) + (diff / this.track.offsetWidth * 100);
+        this.track.style.transform = `translateX(${offset}%)`;
+    }
+    
+    handleDragEnd() {
+        if (!this.isDragging) return;
+        
+        this.isDragging = false;
+        this.track.style.cursor = 'grab';
+        
+        const diff = this.currentX - this.startX;
+        const threshold = 50;
+        
+        if (Math.abs(diff) > threshold) {
+            if (diff > 0 && this.currentIndex > 0) {
+                this.prev();
+            } else if (diff < 0 && this.currentIndex < this.slides.length - 1) {
+                this.next();
+            } else {
+                this.updateSlides();
             }
-            
-            goToSlide(currentIndex);
-            prevTranslate = -currentIndex * 100;
+        } else {
+            this.updateSlides();
         }
         
-        // Event listeners para touch e mouse
-        container.addEventListener('touchstart', handleTouchStart);
-        container.addEventListener('touchmove', handleTouchMove);
-        container.addEventListener('touchend', handleTouchEnd);
+        if (this.options.autoplay) {
+            setTimeout(() => this.startAutoplay(), 2000);
+        }
+    }
+    
+    goToSlide(index) {
+        if (this.isTransitioning || index === this.currentIndex) return;
         
-        container.addEventListener('mousedown', handleTouchStart);
-        container.addEventListener('mousemove', handleTouchMove);
-        container.addEventListener('mouseup', handleTouchEnd);
-        container.addEventListener('mouseleave', handleTouchEnd);
+        this.currentIndex = index;
+        this.updateSlides();
+        this.resetAutoplay();
+    }
+    
+    next() {
+        if (this.isTransitioning) return;
         
-        // Prevenir seleção de texto durante arrasto
-        container.addEventListener('dragstart', (e) => e.preventDefault());
+        this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+        this.updateSlides();
+    }
+    
+    prev() {
+        if (this.isTransitioning) return;
+        
+        this.currentIndex = this.currentIndex === 0 ? this.slides.length - 1 : this.currentIndex - 1;
+        this.updateSlides();
+    }
+    
+    updateSlides() {
+        this.isTransitioning = true;
+        
+        // Animar track
+        const offset = -(this.currentIndex * 100);
+        this.track.style.transform = `translateX(${offset}%)`;
+        
+        // Atualizar dots
+        const dots = this.wrapper.querySelectorAll('.carousel-dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === this.currentIndex);
+        });
+        
+        // Atualizar classes dos slides para efeitos visuais
+        const slideElements = this.wrapper.querySelectorAll('.carousel-slide');
+        slideElements.forEach((slide, index) => {
+            slide.classList.remove('active', 'prev', 'next');
+            
+            if (index === this.currentIndex) {
+                slide.classList.add('active');
+            } else if (index === this.currentIndex - 1 || (this.currentIndex === 0 && index === this.slides.length - 1)) {
+                slide.classList.add('prev');
+            } else if (index === this.currentIndex + 1 || (this.currentIndex === this.slides.length - 1 && index === 0)) {
+                slide.classList.add('next');
+            }
+        });
+        
+        setTimeout(() => {
+            this.isTransitioning = false;
+        }, 500);
+    }
+    
+    startAutoplay() {
+        if (!this.options.autoplay) return;
+        
+        this.stopAutoplay();
+        this.autoplayInterval = setInterval(() => {
+            this.next();
+        }, this.options.autoplaySpeed);
+    }
+    
+    stopAutoplay() {
+        if (this.autoplayInterval) {
+            clearInterval(this.autoplayInterval);
+            this.autoplayInterval = null;
+        }
+    }
+    
+    resetAutoplay() {
+        if (this.options.autoplay) {
+            this.stopAutoplay();
+            this.startAutoplay();
+        }
+    }
+    
+    destroy() {
+        this.stopAutoplay();
+        if (this.wrapper && this.wrapper.parentElement) {
+            this.wrapper.remove();
+        }
+    }
+}
+
+// Inicializar carrosséis
+let carousels = [];
+
+function initMobileCarousels() {
+    // Destruir carrosséis existentes
+    carousels.forEach(carousel => carousel.destroy());
+    carousels = [];
+    
+    // Só ativa em mobile
+    if (window.innerWidth > 768) return;
+    
+    const carouselConfigs = [
+        { selector: '.services-grid', speed: 5000 },
+        { selector: '.benefits-list', speed: 4500 },
+        { selector: '.plans-grid', speed: 5500 },
+        { selector: '.partner-benefits', speed: 4000 }
+    ];
+    
+    carouselConfigs.forEach(config => {
+        const carousel = new MobileCarousel(config.selector, {
+            autoplay: true,
+            autoplaySpeed: config.speed
+        });
+        if (carousel.container !== null) {
+            carousels.push(carousel);
+        }
     });
 }
 
@@ -164,7 +337,7 @@ function initSlideAnimations() {
     slideElements.forEach(element => observer.observe(element));
 }
 
-// Create particles with enhanced animation
+// Create particles
 function createParticles() {
     const container = document.getElementById('particles');
     const numParticles = 25;
@@ -195,7 +368,7 @@ function createParticles() {
     }
 }
 
-// Enhanced Scroll Reveal Animation with Parallax
+// Scroll Reveal Animation
 function revealOnScroll() {
     const elements = document.querySelectorAll('.fade-in, .slide-left, .slide-right, .scale-in');
     const windowHeight = window.innerHeight;
@@ -208,24 +381,9 @@ function revealOnScroll() {
             element.classList.add('visible');
         }
     });
-    
-    // Parallax effect for images
-    const parallaxImages = document.querySelectorAll('.parallax-img');
-    parallaxImages.forEach(img => {
-        const speed = 0.05;
-        const rect = img.getBoundingClientRect();
-        const scrolled = window.pageYOffset;
-        const offset = rect.top + scrolled;
-        const diff = scrolled - offset;
-        const yPos = -(diff * speed);
-        
-        if (rect.top < windowHeight && rect.bottom > 0) {
-            img.style.transform = `translateY(${yPos}px)`;
-        }
-    });
 }
 
-// Counter Animation with enhanced easing
+// Counter Animation
 function animateCounters() {
     const counters = document.querySelectorAll('.counter-number');
     
@@ -245,9 +403,7 @@ function animateCounters() {
             function updateCounter(currentTime) {
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
-                
                 const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-                
                 const current = Math.floor(target * easeOutQuart);
                 counter.textContent = current;
                 
@@ -263,7 +419,7 @@ function animateCounters() {
     });
 }
 
-// FAQ Toggle with smooth animation
+// FAQ Toggle
 function toggleFaq(element) {
     const faqItem = element.parentElement;
     const allItems = document.querySelectorAll('.faq-item');
@@ -282,7 +438,7 @@ function toggleFaq(element) {
     }
 }
 
-// Enhanced Briefing Form Submission
+// Form Submission
 document.addEventListener('DOMContentLoaded', function() {
     typeWriter();
     initSlideAnimations();
@@ -330,22 +486,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.reset();
             }, 3000);
         });
-        
-        const formControls = briefingForm.querySelectorAll('.form-control');
-        formControls.forEach(control => {
-            control.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'scale(1.02)';
-                this.parentElement.style.transition = 'transform 0.3s ease';
-            });
-            
-            control.addEventListener('blur', function() {
-                this.parentElement.style.transform = 'scale(1)';
-            });
-        });
     }
 });
 
-// Smooth Scroll with offset for sticky header
+// Smooth Scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -365,10 +509,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Enhanced Header Scroll Effect
-let lastScroll = 0;
+// Header Scroll Effect
 const header = document.querySelector('header');
-
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
@@ -379,58 +521,28 @@ window.addEventListener('scroll', () => {
         header.style.padding = '20px 0';
         header.style.boxShadow = 'none';
     }
-    
-    lastScroll = currentScroll;
 });
 
-// Reinicializar carrosséis ao redimensionar
+// Reinicializar ao redimensionar
+let resizeTimeout;
 window.addEventListener('resize', function() {
-    const carousels = document.querySelectorAll('.mobile-carousel');
-    carousels.forEach(carousel => {
-        if (window.innerWidth > 768) {
-            carousel.classList.remove('mobile-carousel');
-            carousel.style.transform = '';
-        }
-    });
-    
-    if (window.innerWidth <= 768) {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
         initMobileCarousels();
-    }
+    }, 250);
 });
 
-// Main Event Listeners
+// Event Listeners
 window.addEventListener('scroll', () => {
     revealOnScroll();
     animateCounters();
 });
 
-let ticking = false;
-window.addEventListener('scroll', () => {
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            revealOnScroll();
-            animateCounters();
-            ticking = false;
-        });
-        ticking = true;
-    }
-});
-
-// Initialize on DOM Load
 document.addEventListener('DOMContentLoaded', () => {
     createParticles();
     revealOnScroll();
-    
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        setTimeout(() => {
-            heroContent.style.opacity = '1';
-            heroContent.style.transform = 'translateY(0)';
-        }, 300);
-    }
 });
 
-// Page Load Animation
 window.addEventListener('load', () => {
     document.body.style.opacity = '1';
     revealOnScroll();
