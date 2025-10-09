@@ -2232,7 +2232,29 @@ footer {
     }
 
 }
-/* ========================================
+/* CENTRALIZAR ELEMENTOS FORA DO CARROSSEL NA SEÇÃO PARCERIA */
+    .partner .partner-content {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 32px !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+        align-items: center !important;
+    }
+    
+    .partner .partner-info {
+        max-width: 340px !important;
+        width: calc(100% - 40px) !important;
+        margin: 0 auto !important;
+        padding: 20px !important;
+        box-sizing: border-box !important;
+    }
+    
+    .partner .partner-whatsapp-cta {
+        max-width: 340px !important;
+        width: calc(100% - 40px) !important;
+        margin/* ========================================
    CARROSSEL MOBILE - ADICIONAR NO FINAL DO STYLE.CSS
 ======================================== */
 
@@ -2255,21 +2277,54 @@ footer {
     
     /* CENTRALIZAR ELEMENTOS FORA DO CARROSSEL NA SEÇÃO PARCERIA */
     .partner .partner-content {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 32px !important;
         max-width: 100% !important;
         padding: 0 20px !important;
+        margin: 0 auto !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
     }
     
-    .partner .partner-info,
+    .partner .partner-info {
+        max-width: 340px !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+    }
+    
     .partner .partner-whatsapp-cta {
         max-width: 340px !important;
-        margin: 0 auto !important;
         width: 100% !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
     }
     
     /* GARANTIR QUE BENEFITS FIQUE CENTRALIZADO */
     .benefits .benefits-grid {
         max-width: 100% !important;
         padding: 0 !important;
+    }
+    
+    /* INVISIBILIDADE TOTAL DAS BORDAS DO CARROSSEL */
+    .carousel-container {
+        border: 0 !important;
+        box-shadow: none !important;
+        outline: 0 !important;
+        background: transparent !important;
+    }
+    
+    .carousel-container::before,
+    .carousel-container::after,
+    .carousel-track::before,
+    .carousel-track::after,
+    .carousel-slide::before,
+    .carousel-slide::after {
+        display: none !important;
+        content: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
     }
     
     /* CENTRALIZAÇÃO PADRONIZADA PARA TODAS AS SEÇÕES - SEM BORDAS */
@@ -2290,11 +2345,40 @@ footer {
         box-sizing: border-box !important;
     }
     
-    /* REMOVER COMPLETAMENTE QUALQUER BORDA VISÍVEL */
+    /* REMOVER COMPLETAMENTE QUALQUER BORDA VISÍVEL EM TODAS AS SEÇÕES */
+    .services .carousel-container,
+    .benefits .carousel-container,
+    .plans .carousel-container,
+    .partner .carousel-container {
+        border: 0 !important;
+        outline: 0 !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+    
     .carousel-container::before,
     .carousel-container::after {
         display: none !important;
         content: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+    
+    /* REMOVER BORDAS ESPECÍFICAS DE SERVIÇOS E PLANOS */
+    .services .carousel-container::before,
+    .services .carousel-container::after,
+    .services .carousel-track::before,
+    .services .carousel-track::after,
+    .plans .carousel-container::before,
+    .plans .carousel-container::after,
+    .plans .carousel-track::before,
+    .plans .carousel-track::after {
+        display: none !important;
+        content: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
     }
     
     .carousel-track {
@@ -2312,6 +2396,25 @@ footer {
         overflow: visible !important;
         background: transparent !important;
         box-shadow: none !important;
+    }
+    
+    /* REMOVER BORDAS DO TRACK EM TODAS AS SEÇÕES */
+    .services .carousel-track,
+    .benefits .carousel-track,
+    .plans .carousel-track,
+    .partner .carousel-track {
+        border: 0 !important;
+        outline: 0 !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+    
+    .carousel-track::before,
+    .carousel-track::after {
+        display: none !important;
+        content: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
     }
     
     .carousel-track:active {
@@ -2333,6 +2436,25 @@ footer {
         outline: none !important;
         background: transparent !important;
         box-shadow: none !important;
+    }
+    
+    /* REMOVER BORDAS DOS SLIDES EM TODAS AS SEÇÕES */
+    .services .carousel-slide,
+    .benefits .carousel-slide,
+    .plans .carousel-slide,
+    .partner .carousel-slide {
+        border: 0 !important;
+        outline: 0 !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+    
+    .carousel-slide::before,
+    .carousel-slide::after {
+        display: none !important;
+        content: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
     }
     
     .carousel-slide.active {
@@ -2400,6 +2522,41 @@ footer {
         border: 0 !important;
         outline: 0 !important;
         box-shadow: none !important;
+    }
+    
+    /* REMOVER QUALQUER PSEUDO-ELEMENTO QUE POSSA CRIAR BORDAS */
+    .services .carousel-container::before,
+    .services .carousel-container::after,
+    .services .carousel-track::before,
+    .services .carousel-track::after,
+    .services .carousel-slide::before,
+    .services .carousel-slide::after,
+    .plans .carousel-container::before,
+    .plans .carousel-container::after,
+    .plans .carousel-track::before,
+    .plans .carousel-track::after,
+    .plans .carousel-slide::before,
+    .plans .carousel-slide::after,
+    .benefits .carousel-container::before,
+    .benefits .carousel-container::after,
+    .benefits .carousel-track::before,
+    .benefits .carousel-track::after,
+    .benefits .carousel-slide::before,
+    .benefits .carousel-slide::after,
+    .partner .carousel-container::before,
+    .partner .carousel-container::after,
+    .partner .carousel-track::before,
+    .partner .carousel-track::after,
+    .partner .carousel-slide::before,
+    .partner .carousel-slide::after {
+        display: none !important;
+        content: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        width: 0 !important;
+        height: 0 !important;
+        border: 0 !important;
+        background: transparent !important;
     }
     
     /* ============================================
@@ -2720,6 +2877,21 @@ footer {
     
     .carousel-slide > * {
         max-width: 300px !important;
+    }
+    
+    /* PARCERIA - CENTRALIZAR MELHOR EM TELAS PEQUENAS */
+    .partner .partner-content {
+        padding: 0 15px !important;
+    }
+    
+    .partner .partner-info {
+        max-width: 300px !important;
+        width: 100% !important;
+    }
+    
+    .partner .partner-whatsapp-cta {
+        max-width: 300px !important;
+        width: 100% !important;
     }
     
     /* PARCERIA - MESMOS AJUSTES, SÓ ÍCONES MENORES */
