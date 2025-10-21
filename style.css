@@ -2,15 +2,19 @@
     --bg-dark: #0a0e27;
     --bg-card: #1a1f3a;
     --bg-elevated: #252b48;
-    --accent-primary: #00bfa5;
-    --accent-secondary: #667eea;
-    --accent-glow: rgba(0, 191, 165, 0.4);
+    --accent-primary: #a855f7;
+    --accent-secondary: #7c3aed;
+    --accent-glow: rgba(168, 85, 247, 0.6);
     --text-primary: #f5f5f5;
     --text-secondary: #b8c5d6;
     --text-muted: #7b8a9e;
-    --border-subtle: rgba(255, 255, 255, 0.1);
-    --gradient-tech: linear-gradient(135deg, #667eea 0%, #00bfa5 100%);
-    --gradient-card: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(0, 191, 165, 0.1) 100%);
+    --border-subtle: rgb(162 56 243);
+    --gradient-tech: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+    --gradient-card: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(124, 58, 237, 0.15) 100%);
+    --gradient-popular: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #7c3aed 100%);
+    --gradient-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    --purple-dark: #6b21a8;
+    --purple-neon: #c084fc;
 }
 
 * {
@@ -19,37 +23,88 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg-dark);
-    color: var(--text-primary);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
+.best-seller-badge { display: none; }
+    .best-seller-banner { display: none; }
+    .best-seller-flag { display: none; }
 
-html {
-    overflow-x: hidden;
-}
+    /* Folded ribbon/banner cobrindo topo do card estilo 'laço' */
+    .best-seller-folded {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 32px; /* ainda mais fino */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        color: white;
+        font-weight: 800;
+        font-size: 12px;
+        letter-spacing: 0.4px;
+        z-index: 30;
+        box-shadow: 0 5px 14px rgba(16, 13, 40, 0.14);
+        border-top-left-radius: 18px;
+        border-top-right-radius: 18px;
+        overflow: visible;
+        /* animação de slide-in */
+        opacity: 0;
+        transform: translateY(-12px);
+        animation: ribbonSlideIn 420ms cubic-bezier(0.2, 0.9, 0.2, 1) 200ms forwards;
+    }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-}
+    /* Dobra esquerda */
+    .best-seller-folded::before {
+        content: '';
+        position: absolute;
+        left: -12px;
+        top: 22px;
+        width: 26px;
+        height: 26px;
+        background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        transform: rotate(-45deg);
+        border-bottom-left-radius: 5px;
+        box-shadow: 0 4px 10px rgba(16,13,40,0.12);
+        z-index: 29;
+    }
 
-.bg-pattern {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.03;
-    background-image: 
-        repeating-linear-gradient(0deg, transparent, transparent 2px, var(--text-primary) 2px, var(--text-primary) 3px),
-        repeating-linear-gradient(90deg, transparent, transparent 2px, var(--text-primary) 2px, var(--text-primary) 3px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-}
+    /* Dobra direita */
+    .best-seller-folded::after {
+        content: '';
+        position: absolute;
+        right: -12px;
+        top: 22px;
+        width: 26px;
+        height: 26px;
+        background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        transform: rotate(45deg);
+        border-bottom-right-radius: 5px;
+        box-shadow: 0 4px 10px rgba(16,13,40,0.12);
+        z-index: 29;
+    }
+
+    /* Ajuste para que o laço não seja cortado pelo card */
+    .plan-card.featured {
+        overflow: visible;
+        padding-top: 32px; /* ajustar conforme nova altura do ribbon */
+    }
+
+    @media (max-width: 768px) {
+        .best-seller-folded {
+            height: 28px; /* ainda mais fino em mobile */
+            font-size: 11px;
+        }
+        .best-seller-folded::before,
+        .best-seller-folded::after {
+            width: 22px;
+            height: 22px;
+            left: -10px;
+            right: -10px;
+            top: 20px;
+        }
+        .plan-card.featured { padding-top: 28px; }
+    }
+    
 
 .container {
     max-width: 1200px;
@@ -213,21 +268,46 @@ h1, h2, h3, h4, h5, h6 {
     display: table;
     align-items: center;
     gap: 8px;
-    padding: 8px 16px;
-    background: var(--gradient-tech);
+    padding: 10px 20px;
+    background: linear-gradient(135deg, var(--purple-dark) 0%, #4c1d95 100%);
+    border: 2px solid var(--purple-neon);
     border-radius: 50px;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     color: white;
     animation: glow-pulse 2s infinite;
+    box-shadow: 0 0 20px rgba(192, 132, 252, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.highlight-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: badgeShimmer 3s ease-in-out infinite;
+}
+
+@keyframes badgeShimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
 }
 
 @keyframes glow-pulse {
     0%, 100% {
-        box-shadow: 0 0 20px rgba(0, 191, 165, 0.5);
+        box-shadow: 0 0 20px rgba(192, 132, 252, 0.6), 0 0 40px rgba(168, 85, 247, 0.3);
     }
     50% {
-        box-shadow: 0 0 30px rgba(0, 191, 165, 0.8);
+        box-shadow: 0 0 30px rgba(192, 132, 252, 0.9), 0 0 60px rgba(168, 85, 247, 0.5);
     }
 }
 
@@ -255,6 +335,7 @@ header {
     font-weight: 700;
     background: var(--gradient-tech);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     display: flex;
     align-items: center;
@@ -386,11 +467,126 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(rgba(0, 194, 255, 0.05) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(0, 112, 243, 0.05) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(168, 85, 247, 0.1) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(192, 132, 252, 0.1) 1px, transparent 1px);
     background-size: 30px 30px;
     z-index: 3;
     pointer-events: none;
+    animation: gridPulse 4s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Floating Tech Elements */
+.floating-tech {
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.tech-orb {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.4), rgba(192, 132, 252, 0.2), transparent);
+    animation: floatOrb 8s ease-in-out infinite;
+}
+
+.tech-orb:nth-child(1) {
+    width: 60px;
+    height: 60px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.tech-orb:nth-child(2) {
+    width: 40px;
+    height: 40px;
+    top: 60%;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+.tech-orb:nth-child(3) {
+    width: 80px;
+    height: 80px;
+    bottom: 30%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+.tech-orb:nth-child(4) {
+    width: 30px;
+    height: 30px;
+    top: 40%;
+    right: 30%;
+    animation-delay: 6s;
+}
+
+@keyframes floatOrb {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.4;
+    }
+    25% {
+        transform: translateY(-20px) rotate(90deg);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(-10px) rotate(180deg);
+        opacity: 0.6;
+    }
+    75% {
+        transform: translateY(-30px) rotate(270deg);
+        opacity: 0.9;
+    }
+}
+
+/* Tech Lines */
+.tech-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-primary), var(--purple-neon), transparent);
+    animation: lineFlow 6s ease-in-out infinite;
+}
+
+.tech-line:nth-child(1) {
+    width: 200px;
+    top: 25%;
+    left: 5%;
+    animation-delay: 1s;
+}
+
+.tech-line:nth-child(2) {
+    width: 150px;
+    top: 70%;
+    right: 10%;
+    animation-delay: 3s;
+}
+
+.tech-line:nth-child(3) {
+    width: 100px;
+    bottom: 20%;
+    left: 30%;
+    animation-delay: 5s;
+}
+
+@keyframes lineFlow {
+    0%, 100% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
 }
 
 .particles-container {
@@ -468,9 +664,11 @@ nav {
 }
 
 .hero h1 .title-blue {
-    background: linear-gradient(135deg, #4da6ff 0%, #0080ff 100%);
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 .hero h1 .title-white {
@@ -575,6 +773,26 @@ nav {
 .services {
     padding: 100px 0;
     position: relative;
+    overflow: hidden;
+    background: #252b48;
+}
+
+.services::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 50%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(192, 132, 252, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.services .container {
+    position: relative;
+    z-index: 2;
 }
 
 .section-header {
@@ -602,6 +820,60 @@ nav {
     height: 5px;
     background: var(--gradient-tech);
     border-radius: 3px;
+}
+
+.plans-title {
+    /* Neon roxo apenas no título: gradiente + glow discreto */
+    background: var(--gradient-popular);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    position: relative;
+    animation: titleGlow 3s ease-in-out infinite;
+    text-shadow: 0 0 28px rgba(139, 92, 246, 0.55);
+}
+
+.plans-title::before {
+    content: '✨';
+    position: absolute;
+    left: -36px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    opacity: 0.6;
+    animation: sparkle 2.2s ease-in-out infinite;
+}
+
+.plans-title::after {
+    content: '✨';
+    position: absolute;
+    right: -36px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    opacity: 0.6;
+    animation: sparkle 2.2s ease-in-out infinite 1s;
+}
+
+@keyframes titleGlow {
+    0%, 100% {
+        text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 50px rgba(139, 92, 246, 0.8), 0 0 80px rgba(139, 92, 246, 0.3);
+    }
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0.5;
+        transform: translateY(-50%) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.2);
+    }
 }
 
 .section-subtitle {
@@ -640,7 +912,7 @@ nav {
 
 .service-card:hover {
     transform: translateY(-16px) scale(1.02);
-    box-shadow: 0 25px 50px rgba(0, 191, 165, 0.35);
+    box-shadow: 0 25px 50px rgba(168, 85, 247, 0.4), 0 0 30px rgba(192, 132, 252, 0.3);
     border-color: var(--accent-primary);
 }
 
@@ -666,7 +938,81 @@ nav {
 .animated-icon {
     width: 100%;
     height: 100%;
-    filter: drop-shadow(0 10px 20px rgba(0, 191, 165, 0.4));
+    filter: drop-shadow(0 10px 20px rgba(168, 85, 247, 0.4));
+}
+
+/* Animações específicas para benefit icons */
+.benefit-icon .animated-icon {
+    animation: benefitIconFloat 3s ease-in-out infinite;
+}
+
+.benefit-icon .chart-icon .growth-line {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: drawLine 2s ease-in-out infinite;
+}
+
+.benefit-icon .device-icon .phone-frame {
+    animation: devicePulse 2s ease-in-out infinite;
+}
+
+.benefit-icon .support-icon .headset-band {
+    animation: supportWave 2s ease-in-out infinite;
+}
+
+.benefit-icon .pen-icon .pen-tip {
+    animation: penWrite 2s ease-in-out infinite;
+}
+
+@keyframes benefitIconFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(2deg);
+    }
+}
+
+@keyframes drawLine {
+    0% {
+        stroke-dashoffset: 100;
+    }
+    50% {
+        stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dashoffset: 100;
+    }
+}
+
+@keyframes devicePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes supportWave {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(2deg);
+    }
+    75% {
+        transform: rotate(-2deg);
+    }
+}
+
+@keyframes penWrite {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(5deg);
+    }
 }
 
 .service-card h3 {
@@ -772,7 +1118,7 @@ nav {
 .benefit-item:hover {
     transform: translateX(12px) scale(1.03);
     border-color: var(--accent-primary);
-    box-shadow: 0 15px 40px rgba(0, 191, 165, 0.25);
+    box-shadow: 0 15px 40px rgba(168, 85, 247, 0.3), 0 0 25px rgba(192, 132, 252, 0.2);
 }
 
 .benefit-icon {
@@ -806,6 +1152,36 @@ nav {
 .plans {
     padding: 100px 0;
     background: var(--bg-elevated);
+    position: relative;
+    overflow: hidden;
+}
+
+.plans::before {
+    /* Removido brilhos neon do background da seção */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: none;
+    pointer-events: none;
+    z-index: 1;
+    animation: none;
+}
+
+.plans .container {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes plansBgPulse {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.6;
+    }
 }
 
 .plans-grid {
@@ -822,34 +1198,216 @@ nav {
 }
 
 .plan-card.featured {
-    border-color: var(--accent-primary);
-    transform: scale(1.05);
-    box-shadow: 0 20px 50px rgba(0, 191, 165, 0.3);
+    /* Agora segue o mesmo padrão dos outros cards: sem escala/neon/pills por padrão.
+       Destaque sutil será aplicado via borda/hover para manter contraste. */
+    border: 2px solid var(--border-subtle);
+    background: var(--bg-card);
+    transform: none; /* sem escala por padrão */
+    box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+    position: relative;
+    overflow: hidden;
+    animation: none;
 }
 
 .plan-card.featured::before {
-    content: 'MAIS POPULAR';
+    /* Badge escondido para manter alinhamento com os demais cards (pode ser reativado no HTML se desejado) */
+    display: none;
+}
+
+/* Badge 'MAIS VENDIDO' inserido diretamente no HTML para controle total */
+.best-seller-badge { display: none; }
+
+/* Banner centralizado no topo do card (pill horizontal com pequeno triângulo) */
+.best-seller-banner {
     position: absolute;
-    top: 20px;
-    right: -35px;
-    background: var(--gradient-tech);
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-primary);
     color: white;
-    padding: 6px 40px;
+    padding: 8px 20px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    box-shadow: 0 8px 20px rgba(168,85,247,0.18);
+    z-index: 12;
+}
+
+.best-seller-banner::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid var(--accent-primary);
+}
+
+@media (max-width: 768px) {
+    .best-seller-banner {
+        top: 10px;
+        padding: 6px 16px;
+        font-size: 12px;
+    }
+}
+
+@keyframes ribbonSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Respeitar preferências de animação reduzida */
+@media (prefers-reduced-motion: reduce) {
+    .best-seller-folded {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Animação alternativa: wiggle (pequena vibração) */
+@keyframes ribbonWiggle {
+    0% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-2px) rotate(-1deg); }
+    50% { transform: translateY(0) rotate(0.6deg); }
+    75% { transform: translateY(-1px) rotate(-0.4deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+.ribbon-wiggle {
+    animation: ribbonWiggle 700ms ease-in-out 0s 2;
+}
+
+/* Classe aplicada quando o ribbon está na viewport — garante transições suaves
+   (o JS controla transform/opacity para parallax) */
+.ribbon-in-view {
+    transition: transform 220ms cubic-bezier(0.2,0.9,0.2,1), opacity 220ms ease;
+}
+
+/* Espaço extra no topo do card para o banner em telas pequenas */
+.plan-card.featured {
+    padding-top: 28px;
+    /* permitir elementos posicionados fora do card (ex.: flag) */
+    overflow: visible;
+}
+
+/* Novo banner 'flag' vertical no canto superior esquerdo */
+.best-seller-flag {
+    position: absolute;
+    top: 12px;
+    left: -12px; /* menor deslocamento negativo para não ser cortado */
+    background: var(--accent-primary);
+    color: white;
+    padding: 10px 12px;
+    font-weight: 800;
     font-size: 12px;
-    font-weight: 700;
-    transform: rotate(45deg);
-    z-index: 10;
-    letter-spacing: 1px;
-    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.6px;
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    box-shadow: 0 6px 18px rgba(168,85,247,0.14);
+    border-radius: 4px 4px 0 0;
+    z-index: 20;
+}
+
+@media (max-width: 768px) {
+    .best-seller-flag {
+        left: -8px;
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+}
+
+.plan-card.featured::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: none;
+    border-radius: 26px;
+    z-index: -1;
+    animation: none;
+}
+
+@keyframes featuredPulse {
+    0%, 100% {
+        box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+    }
+    50% {
+        box-shadow: 0 20px 44px rgba(0,0,0,0.13);
+    }
+}
+
+@keyframes badgeFloat {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0px);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+@keyframes borderGlow {
+    0%, 100% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 .plan-card:hover {
     transform: translateY(-16px) scale(1.02);
-    box-shadow: 0 30px 60px rgba(0, 191, 165, 0.35);
+    box-shadow: 0 24px 50px rgba(0,0,0,0.12);
 }
 
 .plan-card.featured:hover {
-    transform: translateY(-16px) scale(1.07);
+    /* Hover alinhado com outros cards, mas com borda roxa para destacar */
+    transform: translateY(-16px) scale(1.02);
+    box-shadow: 0 24px 50px rgba(0,0,0,0.12);
+    border-color: var(--accent-primary);
+    animation: none;
+}
+
+/* Subtle purple style for a specific plan card state requested by user
+   Targets: .plan-card.scale-in.stagger-3.carousel-item.visible
+   Uses theme purple variables with low opacity to avoid harsh colors */
+.plan-card.scale-in.stagger-3.carousel-item.visible,
+.plan-card.scale-in.stagger-3.visible {
+    /* Sem neon: borda azul muito suave, fundo padrão de card e sombra neutra (sem brilho colorido) */
+    border-color: rgba(13,110,253,0.04); /* borda azul bem sutil */
+    box-shadow: 0 6px 14px rgba(0,0,0,0.10); /* sombra neutra, sem cor */
+    background: var(--bg-card); /* manter mesmo fundo dos cards, sem tint */
+}
+
+/* Garantir que no hover desse card não apareça sombra neon — usar sombra neutra */
+.plan-card.scale-in.stagger-3.carousel-item.visible:hover,
+.plan-card.scale-in.stagger-3.visible:hover {
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12); /* sombra levemente maior, ainda neutra */
+}
+
+@keyframes featuredHover {
+    0% {
+        transform: translateY(-16px) scale(1.08);
+    }
+    50% {
+        transform: translateY(-25px) scale(1.15);
+    }
+    100% {
+        transform: translateY(-20px) scale(1.12);
+    }
 }
 
 .plan-header {
@@ -860,7 +1418,20 @@ nav {
 }
 
 .plan-card.featured .plan-header {
-    background: var(--gradient-tech);
+    background: var(--bg-card);
+    position: relative;
+    overflow: hidden;
+}
+
+.plan-card.featured .plan-header::before {
+    /* remover shimmer */
+    content: '';
+    display: none;
+}
+
+@keyframes shimmer {
+    0% { left: 0; }
+    100% { left: 0; }
 }
 
 .plan-name {
@@ -869,6 +1440,45 @@ nav {
     font-weight: 700;
     margin-bottom: 8px;
     letter-spacing: -0.8px;
+}
+
+/* Texto dentro do featured card: garantir legibilidade em fundo roxo */
+.plan-card.featured .plan-name,
+.plan-card.featured .plan-price,
+.plan-card.featured .plan-header p {
+    /* Usar cor padrão dos cards para consistência; destaque ficará na borda/hover */
+    color: var(--text-primary);
+}
+
+.plan-card.featured .plan-features,
+.plan-card.featured .plan-feature,
+.plan-card.featured .plan-price span {
+    color: var(--text-secondary);
+}
+
+.plan-card.featured .btn {
+    /* manter botão neutro para contraste */
+    background: var(--btn-bg, white);
+    color: var(--btn-color, var(--bg-card));
+    box-shadow: none;
+}
+
+.plan-card.featured .plan-name.pill,
+.plan-card.featured .plan-price.pill,
+.plan-card.featured .plan-header p.pill {
+    /* Neutralizar possíveis 'pills' aplicadas sem alterar o HTML. */
+    background: transparent;
+    color: var(--text-primary);
+    padding: 0;
+    border-radius: 0;
+    font-weight: 700;
+}
+
+/* Garantir background-clip padrão sem efeitos adicionais */
+.plan-card.featured .plan-name,
+.plan-card.featured .plan-price,
+.plan-card.featured .plan-header p {
+    background-clip: padding-box;
 }
 
 .plan-price {
@@ -999,7 +1609,7 @@ nav {
 }
 
 .briefing-form:hover {
-    box-shadow: 0 10px 30px rgba(0, 191, 165, 0.15);
+    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2), 0 0 20px rgba(192, 132, 252, 0.1);
 }
 
 .form-group {
@@ -1086,7 +1696,7 @@ select.form-control {
 .faq-item:hover {
     border-color: var(--accent-primary);
     transform: translateX(10px) scale(1.01);
-    box-shadow: 0 10px 30px rgba(0, 191, 165, 0.2);
+    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.25), 0 0 20px rgba(192, 132, 252, 0.15);
 }
 
 .faq-question {
@@ -1173,7 +1783,7 @@ select.form-control {
 }
 
 .partner-info:hover {
-    box-shadow: 0 15px 40px rgba(0, 191, 165, 0.2);
+    box-shadow: 0 15px 40px rgba(168, 85, 247, 0.25), 0 0 25px rgba(192, 132, 252, 0.15);
 }
 
 .partner-info h3 {
@@ -1183,6 +1793,7 @@ select.form-control {
     margin-bottom: 24px;
     background: var(--gradient-tech);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -1.2px;
 }
@@ -1301,7 +1912,7 @@ select.form-control {
     right: 24px;
     width: 64px;
     height: 64px;
-    background: #25d366;
+    background: #9007eb;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1394,6 +2005,7 @@ footer {
     border-color: transparent;
     color: white;
     transform: translateY(-6px) rotate(10deg) scale(1.15);
+    box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4), 0 0 15px rgba(192, 132, 252, 0.3);
 }
 
 .social-link i {
@@ -1477,6 +2089,26 @@ footer {
     /* MOBILE ADJUSTMENTS */
     .services {
         padding: 60px 0;
+    }
+    
+    .services::before {
+        opacity: 0.5;
+    }
+    
+    .plans::before {
+        opacity: 0.3;
+    }
+    
+    .floating-tech {
+        display: none;
+    }
+    
+    .tech-orb {
+        display: none;
+    }
+    
+    .tech-line {
+        display: none;
     }
 
     .section-header {

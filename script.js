@@ -64,16 +64,61 @@ function createParticles() {
         particle.style.left = `${posX}%`;
         particle.style.top = `${posY}%`;
         
-        const blueHue = Math.floor(Math.random() * 40) + 200;
-        const brightness = Math.floor(Math.random() * 40) + 60;
-        particle.style.backgroundColor = `hsla(${blueHue}, 100%, ${brightness}%, 0.7)`;
-        particle.style.boxShadow = `0 0 ${size * 3}px hsla(${blueHue}, 100%, ${brightness}%, 0.9)`;
+        const purpleHue = Math.floor(Math.random() * 30) + 260;
+        const brightness = Math.floor(Math.random() * 30) + 70;
+        particle.style.backgroundColor = `hsla(${purpleHue}, 100%, ${brightness}%, 0.8)`;
+        particle.style.boxShadow = `0 0 ${size * 4}px hsla(${purpleHue}, 100%, ${brightness}%, 1)`;
         
         particle.style.animationDelay = `${Math.random() * 10}s`;
         particle.style.animationDuration = `${15 + Math.random() * 10}s`;
         particle.style.opacity = Math.random() * 0.8 + 0.3;
         
         container.appendChild(particle);
+    }
+}
+
+// Create floating tech elements
+function createFloatingTech() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+    
+    // Create additional floating orbs
+    for (let i = 0; i < 6; i++) {
+        const orb = document.createElement('div');
+        orb.classList.add('tech-orb');
+        
+        const size = Math.random() * 40 + 20;
+        orb.style.width = `${size}px`;
+        orb.style.height = `${size}px`;
+        
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        orb.style.left = `${posX}%`;
+        orb.style.top = `${posY}%`;
+        
+        orb.style.animationDelay = `${Math.random() * 8}s`;
+        orb.style.animationDuration = `${8 + Math.random() * 4}s`;
+        
+        hero.appendChild(orb);
+    }
+    
+    // Create floating lines
+    for (let i = 0; i < 4; i++) {
+        const line = document.createElement('div');
+        line.classList.add('tech-line');
+        
+        const width = Math.random() * 150 + 100;
+        line.style.width = `${width}px`;
+        
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        line.style.left = `${posX}%`;
+        line.style.top = `${posY}%`;
+        
+        line.style.animationDelay = `${Math.random() * 6}s`;
+        line.style.animationDuration = `${6 + Math.random() * 3}s`;
+        
+        hero.appendChild(line);
     }
 }
 
@@ -547,9 +592,12 @@ window.addEventListener('scroll', () => {
 // Initialize on DOM Load
 document.addEventListener('DOMContentLoaded', () => {
     createParticles();
+    createFloatingTech();
     revealOnScroll();
     initIntersectionObserver();
     lazyLoadImages();
+    // Ribbon scroll + hover animations
+    initRibbonScrollAnimations();
     
     const heroContent = document.querySelector('.hero-content');
     if (heroContent) {
@@ -559,6 +607,77 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     }
 });
+
+// Ribbon: animação ligada ao scroll + animação alternativa (wiggle) no hover
+function initRibbonScrollAnimations() {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    const ribbons = document.querySelectorAll('.best-seller-folded');
+    if (!ribbons || ribbons.length === 0) return;
+
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const el = entry.target;
+            if (entry.isIntersecting) {
+                el.dataset.inView = 'true';
+                el.classList.add('ribbon-in-view');
+            } else {
+                el.dataset.inView = 'false';
+                el.classList.remove('ribbon-in-view');
+                // limpar transform/opacity quando fora de vista
+                el.style.transform = '';
+                el.style.opacity = '';
+            }
+        });
+    }, { threshold: [0, 0.1, 0.5, 1] });
+
+    ribbons.forEach(r => io.observe(r));
+
+    let ticking = false;
+
+    function onScroll() {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                ribbons.forEach(el => {
+                    if (el.dataset.inView !== 'true' || el.dataset.pauseScroll === 'true') return;
+
+                    const rect = el.getBoundingClientRect();
+                    const windowH = window.innerHeight || document.documentElement.clientHeight;
+                    const progress = Math.min(Math.max((windowH - rect.top) / (windowH + rect.height), 0), 1);
+
+                    // translateY vai de -12px (fora) para 0 (no centro) — adaptável
+                    const translateY = -12 + (progress * 12);
+                    const opacity = Math.min(1, 0.6 + progress * 0.4);
+
+                    el.style.transform = `translateY(${translateY}px)`;
+                    el.style.opacity = opacity;
+                });
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // hover / pointer interactions: aplicar wiggle e pausar scroll-driven transform
+    ribbons.forEach(el => {
+        el.addEventListener('pointerenter', () => {
+            el.dataset.pauseScroll = 'true';
+            el.classList.add('ribbon-wiggle');
+        });
+        el.addEventListener('pointerleave', () => {
+            delete el.dataset.pauseScroll;
+            el.classList.remove('ribbon-wiggle');
+            // recalcular posição imediatamente
+            setTimeout(onScroll, 20);
+        });
+    });
+
+    // inicial run
+    onScroll();
+}
 
 // Page Load Animation
 window.addEventListener('load', () => {
