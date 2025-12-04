@@ -808,7 +808,6 @@ nav {
     position: relative;
     display: inline-block;
     letter-spacing: -1.5px;
-    color: #ffffff;
 }
 
 .section-title::after {
@@ -879,7 +878,7 @@ nav {
 
 .section-subtitle {
     font-size: 18px;
-    color: #ffffff;
+    color: var(--text-secondary);
     max-width: 600px;
     margin: 24px auto 0;
     font-weight: 500;
@@ -1388,7 +1387,7 @@ nav {
 .plan-card.scale-in.stagger-3.carousel-item.visible,
 .plan-card.scale-in.stagger-3.visible {
     /* Sem neon: borda azul muito suave, fundo padrão de card e sombra neutra (sem brilho colorido) */
-    border-color: rgba(162, 56, 243, 1); /* borda azul bem sutil */
+    border-color: rgba(13,110,253,0.04); /* borda azul bem sutil */
     box-shadow: 0 6px 14px rgba(0,0,0,0.10); /* sombra neutra, sem cor */
     background: var(--bg-card); /* manter mesmo fundo dos cards, sem tint */
 }
@@ -1412,14 +1411,14 @@ nav {
 }
 
 .plan-header {
-    background: #511891;
+    background: var(--gradient-card);
     padding: 40px 32px;
     text-align: center;
     border-bottom: 1px solid var(--border-subtle);
 }
 
 .plan-card.featured .plan-header {
-    background: #511891;
+    background: var(--bg-card);
     position: relative;
     overflow: hidden;
 }
@@ -1436,7 +1435,6 @@ nav {
 }
 
 .plan-name {
-    color: #ffffff;
     font-family: 'Space Grotesk', sans-serif;
     font-size: 26px;
     font-weight: 700;
@@ -1449,7 +1447,7 @@ nav {
 .plan-card.featured .plan-price,
 .plan-card.featured .plan-header p {
     /* Usar cor padrão dos cards para consistência; destaque ficará na borda/hover */
-    color: #ffffff;
+    color: var(--text-primary);
 }
 
 .plan-card.featured .plan-features,
@@ -1460,10 +1458,9 @@ nav {
 
 .plan-card.featured .btn {
     /* manter botão neutro para contraste */
-    background: transparent ;
-    color: #a855f7;
+    background: var(--btn-bg, white);
+    color: var(--btn-color, var(--bg-card));
     box-shadow: none;
-    border: 2px solid #a855f7;
 }
 
 .plan-card.featured .plan-name.pill,
@@ -1490,7 +1487,6 @@ nav {
     margin: 16px 0;
     font-family: 'Space Grotesk', sans-serif;
     letter-spacing: -2px;
-    color: #ffffff;
 }
 
 .plan-price span {
@@ -1582,7 +1578,12 @@ nav {
     background: var(--bg-elevated);
 }
 
-
+.briefing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    margin-top: 48px;
+}
 
 .briefing-info h3 {
     font-family: 'Space Grotesk', sans-serif;
@@ -1599,8 +1600,6 @@ nav {
     font-weight: 500;
 }
 
-
-
 .briefing-form {
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
@@ -1608,31 +1607,6 @@ nav {
     padding: 40px;
     transition: all 0.3s ease;
 }
-
-/* CENTRALIZAR FORMULÁRIO DE BRIEFING */
-.briefing-grid {
-    display: flex !important;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 32px;
-}
-
-.briefing-info {
-    display: none !important;
-}
-
-.briefing-form {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-    .briefing-form {
-        max-width: 100%;
-    }
-}
-
 
 .briefing-form:hover {
     box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2), 0 0 20px rgba(192, 132, 252, 0.1);
@@ -1938,12 +1912,12 @@ select.form-control {
     right: 24px;
     width: 64px;
     height: 64px;
-    background: #128c7e;
+    background: #9007eb;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 24px rgba(18, 140, 126, 0.4);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
     z-index: 999;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     animation: pulse-whatsapp 2s infinite;
@@ -1951,12 +1925,12 @@ select.form-control {
 
 .whatsapp-btn:hover {
     transform: scale(1.2) rotate(10deg);
-    box-shadow: 0 15px 40px rgba(18, 140, 126, 0.7);
+    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.7);
 }
 
 @keyframes pulse-whatsapp {
-    0%, 100% { box-shadow: 0 8px 24px rgba(18, 140, 126, 0.4); }
-    50% { box-shadow: 0 8px 24px rgba(18, 140, 126, 0.8), 0 0 0 16px rgba(18, 140, 126, 0.1); }
+    0%, 100% { box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4); }
+    50% { box-shadow: 0 8px 24px rgba(37, 211, 102, 0.8), 0 0 0 16px rgba(37, 211, 102, 0.1); }
 }
 
 .whatsapp-btn i {
@@ -2564,136 +2538,4 @@ footer {
     #partnerDots {
         max-width: 330px;
     }
-}
-/* CORREÇÃO: Cores brancas para todos os títulos e textos */
-h1, h2, h3, h4, h5, h6 {
-    color: #ffffff !important;
-}
-
-.service-card h3 {
-    color: #ffffff !important;
-}
-
-.benefits-text h3 {
-    color: #ffffff !important;
-}
-
-.benefit-item h4 {
-    color: #ffffff !important;
-}
-
-.showcase-description h3 {
-    color: #ffffff !important;
-}
-
-.briefing-info h3 {
-    color: #ffffff !important;
-}
-
-.partner-info h3 {
-    color: #ffffff !important;
-}
-
-.partner-whatsapp-cta h3 {
-    color: #ffffff !important;
-}
-
-.footer-col h3 {
-    color: #ffffff !important;
-}
-
-.plan-name {
-    color: #ffffff !important;
-}
-
-.faq-question span {
-    color: #ffffff !important;
-}
-
-/* CORREÇÃO: Garantir que TODOS os planos tenham texto branco */
-.plan-card .plan-name {
-    color: #ffffff !important;
-}
-
-.plan-card .plan-price {
-    color: #ffffff !important;
-}
-
-.plan-card .plan-header p {
-    color: #ffffff !important;
-}
-
-.plan-card h3 {
-    color: #ffffff !important;
-}
-
-/* CORREÇÃO: Garantir que TODOS os textos do footer sejam brancos */
-.footer-col p {
-    color: #ffffff !important;
-}
-
-.footer-links a {
-    color: #ffffff !important;
-}
-
-.copyright {
-    color: #ffffff !important;
-}
-
-/* CORREÇÃO: Garantir que todos os textos de FAQ sejam brancos */
-.faq-question {
-    color: #ffffff !important;
-}
-
-.faq-answer p {
-    color: #ffffff !important;
-}
-
-.faq-cta a {
-    color: #ffffff !important;
-}
-
-/* CORREÇÃO: Garantir que todos os textos de benefícios sejam brancos */
-.benefit-item p {
-    color: #ffffff !important;
-}
-
-/* CORREÇÃO: Garantir que todos os textos de serviços sejam brancos */
-.service-card p {
-    color: #ffffff !important;
-}
-
-.service-features li {
-    color: #ffffff !important;
-}
-
-/* CORREÇÃO: Garantir que todos os textos de planos sejam brancos */
-.plan-feature span {
-    color: #ffffff !important;
-}
-
-/* CORREÇÃO: Garantir que todos os textos de formulário sejam brancos */
-.form-group label {
-    color: #ffffff !important;
-}
-
-.form-notice {
-    color: #ffffff !important;
-}
-
-/* CORREÇÃO: Garantir que todos os textos de seções sejam brancos */
-.section-subtitle {
-    color: #ffffff !important;
-}
-
-.hero p {
-    color: #ffffff !important;
-}
-
-.urgency-badge {
-    color: #ffffff !important;
-}
-
-.highlight-badge {
-    color: #ffffff !important;
 }
